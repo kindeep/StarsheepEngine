@@ -1,4 +1,5 @@
 package Engine;
 
-public class Game {
+public interface Game {
+
 }
