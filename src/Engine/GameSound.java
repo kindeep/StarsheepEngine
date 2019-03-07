@@ -1,4 +1,5 @@
 package Engine;
 
-public class GameSound {
+interface GameSound {
+
 }
