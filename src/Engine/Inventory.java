@@ -1,5 +1,5 @@
 package Engine;
 
-interface Inventory {
+class Inventory {
 
 }
