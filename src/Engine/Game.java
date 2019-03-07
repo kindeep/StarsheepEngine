@@ -10,8 +10,9 @@ public class Game {
      *
      *
      */
-    public Game(View display) {
+    public Game(View display, Player player) {
 
     }
+
 
 }
