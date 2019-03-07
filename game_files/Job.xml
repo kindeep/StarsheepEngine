@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file stores a single job. 
+There will be a Job file for every job. -->
+<Job name="RBC" id="0">
+	<Choices>
+		<Choice id="0">
+			<Children>
+				<Child id="2"></Child>
+				<Child id="4"></Child>
+				<Child id="5"></Child>
+			</Children>
+			<Description>Welcome to RBC, make your first move.</Description>
+			<TraitDependencies>
+				<Trait name="strength" weight="10"></Trait>
+				<Trait name="intelligence" weight="20"></Trait>
+				<Trait name="dexterity" weight="15"></Trait>
+			</TraitDependencies>
+		</Choice>
+		<Choice id="1"></Choice>
+		<Choice id="2"></Choice>
+		<Choice id="3"></Choice>
+		<Choice id="4"></Choice>
+		<Choice id="5"></Choice>
+	</Choices>
+</Job>

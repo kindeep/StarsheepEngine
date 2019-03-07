@@ -14,5 +14,8 @@ public class Game {
 
     }
 
-
+	public static void main(String[] args) {
+		StarTest test = new StarTest();
+		test.testFileReading();
+	}
 }
