@@ -1,6 +1,5 @@
 package Engine;
 
-public interface Inventory {
+interface Inventory {
 
 }
-     

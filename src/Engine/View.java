@@ -5,6 +5,8 @@ package Engine;
  *
  *
  */
-public interface View {
+interface View {
+
+
 
 }

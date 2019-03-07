@@ -1,5 +1,5 @@
 package Engine;
 
-public interface Player {
+interface Player {
 
 }
