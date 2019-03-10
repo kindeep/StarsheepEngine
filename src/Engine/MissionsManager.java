@@ -7,6 +7,7 @@ import java.util.List;
  * This is a singleton class that holds all data regarding all missions.
  * Use to get any any data on any mission.
  * 
+ * @see Mission
  */
 public class MissionsManager {
 	private static MissionsManager instance;

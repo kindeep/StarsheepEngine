@@ -7,6 +7,8 @@ package Engine;
  * class does not contain the Choices for the specified Job.
  * 
  * Use a JobFlyer to display Job information to the user (to list the jobs).
+ * 
+ * @see JobFlyerBuilder
  */
 public class JobFlyer {
 	private Integer jobId;

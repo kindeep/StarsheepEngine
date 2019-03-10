@@ -2,6 +2,9 @@ package Engine;
 
 import java.util.HashMap;
 
+/**
+ * @see JobBuilder
+ */
 public class Job {
 	private Choice head;
 	private String name;

@@ -1,5 +1,8 @@
 package Engine;
 
+/**
+ * @see JobFlyer
+ */
 public class JobFlyerBuilder {
 	private Integer jobId = null;
 	private String name = null;

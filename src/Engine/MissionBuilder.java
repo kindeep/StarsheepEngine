@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * @see Mission
+ * @see JobFlyer
+ */
 public class MissionBuilder {
 	private List<JobFlyer> jobFlyers;
 	private String name = null;

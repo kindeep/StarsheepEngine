@@ -6,7 +6,9 @@ import java.util.List;
 /**
  * 
  * A Mission holds all data contained within a single mission.
- *
+ * 
+ * @see MisionBuilder
+ * @see JobFlyer
  */
 public class Mission {
 	private List<JobFlyer> jobFlyers;
