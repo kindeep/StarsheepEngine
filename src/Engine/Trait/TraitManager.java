@@ -1,4 +1,4 @@
-package Engine;
+package Engine.Trait;
 
 import java.util.ArrayList;
 import java.util.Collections;

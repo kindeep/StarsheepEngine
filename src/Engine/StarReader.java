@@ -13,6 +13,14 @@ import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 
 import javax.xml.stream.events.XMLEvent;
+
+import Engine.Job.Choice;
+import Engine.Job.ChoiceBuilder;
+import Engine.Job.Job;
+import Engine.Job.JobBuilder;
+import Engine.Job.JobFlyerBuilder;
+import Engine.Job.TraitDependency;
+
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;

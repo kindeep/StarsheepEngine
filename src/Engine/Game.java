@@ -2,6 +2,10 @@ package Engine;
 
 import java.util.List;
 
+import Engine.Job.Choice;
+import Engine.Job.TraitDependency;
+import Engine.Trait.TraitManager;
+
 public class Game {
 
 	private MissionsManager missionsManager;
