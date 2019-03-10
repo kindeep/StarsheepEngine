@@ -20,7 +20,7 @@ public class TraitManager {
 		 */
 	}
 
-	public TraitManager getInstance() {
+	static public TraitManager getInstance() {
 		if (instance == null)
 			instance = new TraitManager();
 		return instance;

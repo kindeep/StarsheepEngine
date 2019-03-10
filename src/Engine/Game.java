@@ -4,7 +4,10 @@ import java.util.List;
 
 public class Game {
 
-	MissionsManager missionsManager;
+	private MissionsManager missionsManager;
+	private TraitManager traitManager;
+	private Mission currentMission;
+	private Choice currentChoice;
 
 	/**
 	 * Need some way to read the game state from XML files. Possibly another class
@@ -16,6 +19,31 @@ public class Game {
 	 */
 	public Game(View display, Player player) {
 		missionsManager = MissionsManager.getInstance();
+		traitManager = TraitManager.getInstance();
+		currentMission = null;
+		currentChoice = null;
+	}
+	
+	public void setMission(Mission m) {
+		currentMission = m;
+	}
+	
+	public void setChoice(Choice c) {
+		currentChoice = c;
+	}
+	
+	public boolean calculateSuccess(List<TraitDependency> traitDependencies) {
+		
+		/*
+		 * todo: computer calculations.
+		 */
+		for (int i = 0; i < traitDependencies.size(); i++) {
+			TraitDependency td = traitDependencies.get(i);
+			int weight = td.getWeight();
+			
+			
+		}
+		return true;
 	}
 
 	public static void main(String[] args) {
