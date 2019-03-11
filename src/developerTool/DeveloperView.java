@@ -67,4 +67,10 @@ public class DeveloperView extends JFrame implements StarGameView{
 	private void viewMission() {
 		
 	}
+
+	@Override
+	public void log(Object toPrint) {
+		// TODO Auto-generated method stub
+		
+	}
 }

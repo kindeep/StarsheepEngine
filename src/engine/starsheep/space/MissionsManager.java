@@ -1,5 +1,6 @@
 package engine.starsheep.space;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -12,14 +13,15 @@ import java.util.List;
 public class MissionsManager {
 	private static MissionsManager instance;
 	private List<Mission> missions; //a list of all missions.
-	
-	private MissionsManager() {
+  
+  private MissionsManager() {
 		missions = StarReader.readMissions(); //read the missions xml.
 	}
 	
 	public static MissionsManager getInstance() {
-		if (instance == null)
-			instance = new MissionsManager();
+		if (instance == null) {
+            instance = new MissionsManager();
+        }
 		return instance;
 	}
 	

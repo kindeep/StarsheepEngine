@@ -7,4 +7,9 @@ package engine.starsheep.space;
  */
 public interface StarGameView {
 
+    /**
+     * Similar to working of System.out.println, log implementations can differ.
+     */
+    public void log(Object toPrint);
+
 }

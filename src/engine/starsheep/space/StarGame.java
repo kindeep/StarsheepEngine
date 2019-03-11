@@ -2,66 +2,93 @@ package engine.starsheep.space;
 
 import java.util.List;
 
+import engine.starsheep.space.Job.Job;
+import engine.starsheep.space.Job.JobFlyer;
 import engine.starsheep.space.Job.TraitDependency;
 import engine.starsheep.space.Trait.TraitManager;
 
 public class StarGame {
+    private MissionsManager missionsManager;
+    private TraitManager traitManager;
+    private Mission currentMission;
+    private Choice currentChoice;
 
-	private Controller controller;
-	private MissionsManager missionsManager;
-	private TraitManager traitManager;
-	private Mission currentMission;
-	private Choice currentChoice;
+    private StarGameView display;
+    private StarPlayer player;
+    private StarFileManager fileManager;
 
-	/**
-	 * Need some way to read the game state from XML files. Possibly another class
-	 * to read data from save files, which would be xml files.
-	 *
-	 * @param display a display for the game, should implement StarGameView. swap it out for
-	 *                different enviornments.
-	 *
-	 */
+    /**
+     * Need some way to read the game state from XML files. Possibly another class
+     * to read data from save files, which would be xml files.
+     * <p>
+     * represents model in MVC
+     *
+     * @param display a display for the game, should implement StarGameView. swap it out for
+     *                different enviornments.
+     */
+    public StarGame(StarGameView display, StarPlayer player, StarFileManager fileManager) {
+    	
+    	StarReader.setFileManager(fileManager); //give StarReader class the filemanager.
+    	Controller.setGame(this);
+    	
+        this.traitManager = TraitManager.getInstance();
+        this.missionsManager = MissionsManager.getInstance();
+        
+        this.currentMission = null;
+        this.currentChoice = null;
+        this.display = display;
+        this.player = player;
+        
 
-	public StarGame(StarGameView display, StarPlayer player) {
-		Controller.setGame(this);
-		missionsManager = MissionsManager.getInstance();
-		traitManager = TraitManager.getInstance();
-		currentMission = null;
-		currentChoice = null;
-	}
+        Job j = StarReader.readJob(999);
+        System.out.println(j.toString());
+//        List<Mission> missions = missionsManager.getMissions();
+//        missions.forEach(m -> {
+//            List<JobFlyer> flyers = m.getJobFlyers();
+//            flyers.forEach(flyer -> {
+//                display.log(flyer.getName());
+//                display.log(flyer.getDescription());
+//                display.log(flyer.getJobId());
+//                display.log(flyer.getStaminaCost());
+//            });
+//        });
+    }
 
-	public void setMission(Mission m) {
-		currentMission = m;
-	}
+    public void setMission(Mission m) {
+        currentMission = m;
+    }
 
-	public void setChoice(Choice c) {
-		currentChoice = c;
-	}
+    public void setChoice(Choice c) {
+        currentChoice = c;
+    }
+    
+    public List<Mission> getMissions(){
+    	return this.missionsManager.getMissions();
+    }
+    
+    //this method is used to expose the controller outside of the engine. to be connected with the view.
+    public Controller getController() {
+    	return Controller.getInstance();
+    }
 
-	public List<Mission> getMissions() {
-		return missionsManager.getMissions();
-	}
+    public boolean calculateSuccess(List<TraitDependency> traitDependencies) {
 
-	// give game runner access to controller.
-	public Controller getController() {
-		return Controller.getInstance();
-	}
+        /*
+         * todo: computer calculations.
+         */
+        for (int i = 0; i < traitDependencies.size(); i++) {
+            TraitDependency td = traitDependencies.get(i);
+            int weight = td.getWeight();
 
-	public boolean calculateSuccess(List<TraitDependency> traitDependencies) {
 
-		/*
-		 * todo: compute calculations.
-		 */
-		for (int i = 0; i < traitDependencies.size(); i++) {
-			TraitDependency td = traitDependencies.get(i);
-			int weight = td.getWeight();
+        }
+        return true;
+    }
 
-		}
-		return true;
-	}
-
-	public static void main(String[] args) {
-		StarTest test = new StarTest(); // use StarTest to run unit tests.
-		test.testReadingMissions();
-	}
+//    public static void main(String[] args) {
+////		StarTest test = new StarTest(); //use StarTest to test anything.
+////		test.testReadingMissions();
+//
+//    }
 }
+
