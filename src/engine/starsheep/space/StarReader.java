@@ -43,7 +43,7 @@ public class StarReader {
 		 */
 		XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 		InputStream in;
-		File configFile = new File("game_files/Missions.xml");
+		File configFile = new File("res/game_files/Missions.xml");
 		
 		ArrayList<Mission> missions = new ArrayList<Mission>();
 		MissionBuilder missionBuilder = null;
