@@ -27,6 +27,8 @@ import javax.xml.stream.events.StartElement;
 
 /**
  * This class reads StarSheep XML files.
+ * <p>
+ * possibly pass in File instead. We can't assume where the files are located.
  */
 public class StarReader {
 	private static StarFileManager fileManager;
