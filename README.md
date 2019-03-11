@@ -22,8 +22,6 @@ for the enviornment.
 - Do we need to worry about naming conflitcs? as in maybe some other engine might have
 a sound manager called GameSoundManager
 
-#UML
-
-image
+# UML
 
 ![UML](notes/UML.png)

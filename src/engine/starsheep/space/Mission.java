@@ -9,7 +9,7 @@ import engine.starsheep.space.Job.JobFlyer;
  * 
  * A Mission holds all data contained within a single mission.
  * 
- * @see MisionBuilder
+ * @see MissionBuilder
  * @see JobFlyer
  */
 public class Mission {

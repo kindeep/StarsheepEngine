@@ -2,7 +2,6 @@ package engine.starsheep.space;
 
 import java.util.List;
 
-import engine.starsheep.space.Job.Choice;
 import engine.starsheep.space.Job.TraitDependency;
 import engine.starsheep.space.Trait.TraitManager;
 

@@ -14,7 +14,6 @@ import javax.xml.stream.XMLInputFactory;
 
 import javax.xml.stream.events.XMLEvent;
 
-import engine.starsheep.space.Job.Choice;
 import engine.starsheep.space.Job.ChoiceBuilder;
 import engine.starsheep.space.Job.Job;
 import engine.starsheep.space.Job.JobBuilder;

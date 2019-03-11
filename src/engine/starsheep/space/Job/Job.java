@@ -1,5 +1,7 @@
 package engine.starsheep.space.Job;
 
+import engine.starsheep.space.Choice;
+
 import java.util.HashMap;
 
 /**

@@ -1,8 +1,9 @@
-package engine.starsheep.space.Job;
+package engine.starsheep.space;
+
+import engine.starsheep.space.Job.ChoiceBuilder;
+import engine.starsheep.space.Job.TraitDependency;
 
 import java.util.List;
-
-import engine.Player;
 
 import java.util.ArrayList;
 import java.util.Collections;
