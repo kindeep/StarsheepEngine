@@ -5,7 +5,7 @@ import java.util.List;
 import engine.starsheep.space.Job.TraitDependency;
 import engine.starsheep.space.Trait.TraitManager;
 
-public class Game {
+public class StarGame {
 
 	private MissionsManager missionsManager;
 	private TraitManager traitManager;
@@ -16,11 +16,11 @@ public class Game {
 	 * Need some way to read the game state from XML files. Possibly another class
 	 * to read data from save files, which would be xml files.
 	 *
-	 * @param display a display for the game, should implement View. swap it out for
+	 * @param display a display for the game, should implement StarGameView. swap it out for
 	 *                different enviornments.
 	 *
 	 */
-	public Game(View display, Player player) {
+	public StarGame(StarGameView display, StarPlayer player) {
 		missionsManager = MissionsManager.getInstance();
 		traitManager = TraitManager.getInstance();
 		currentMission = null;

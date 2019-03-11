@@ -64,7 +64,7 @@ public class Choice {
 	 *
 	 * @return if the choice can be made
 	 */
-	boolean canMakeChoice(Player player) {
+	boolean canMakeChoice(StarPlayer player) {
 		return false;
 	}
 }

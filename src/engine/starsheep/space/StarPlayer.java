@@ -1,5 +1,5 @@
 package engine.starsheep.space;
 
-class Player {
+public class StarPlayer {
 
 }
