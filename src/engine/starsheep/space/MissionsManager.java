@@ -13,14 +13,15 @@ import java.util.List;
 public class MissionsManager {
 	private static MissionsManager instance;
 	private List<Mission> missions; //a list of all missions.
-	
-	private MissionsManager() {
-		missions = StarReader.readMissions(new File("/Users/kindeep/Projects/StarsheepEngine/StarsheepEngine/res/game_files/Missions.xml")); //read the missions xml.
+	private StarFileManager fileManager;
+	private MissionsManager(StarFileManager fileManager) {
+		missions = StarReader.readMissions(fileManager.getMissionsFile()); //read the missions xml.
 	}
 	
-	public static MissionsManager getInstance() {
-		if (instance == null)
-			instance = new MissionsManager();
+	public static MissionsManager getInstance(StarFileManager fileManager) {
+		if (instance == null) {
+            instance = new MissionsManager(fileManager);
+        }
 		return instance;
 	}
 	

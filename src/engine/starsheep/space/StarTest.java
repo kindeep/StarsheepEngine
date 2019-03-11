@@ -12,21 +12,21 @@ import engine.starsheep.space.Job.JobFlyer;
 public class StarTest {
 
     public void testFileReading() {
-        Job j = StarReader.readJob(new File("/Users/kindeep/Projects/StarsheepEngine/StarsheepEngine/res/game_files/Job.xml"), 999);
+        Job j = StarReader.readJob(new File("/Users/kindeep/Projects/StarsheepEngine/StarsheepEngine/res/sample_config/Job.xml"), 999);
         System.out.println(j.toString());
     }
 
     public void testReadingMissions() {
-        MissionsManager missionsManager = MissionsManager.getInstance();
-        List<Mission> missions = missionsManager.getMissions();
-        missions.forEach(m -> {
-            List<JobFlyer> flyers = m.getJobFlyers();
-            flyers.forEach(flyer -> {
-                System.out.println(flyer.getName());
-                System.out.println(flyer.getDescription());
-                System.out.println(flyer.getJobId());
-                System.out.println(flyer.getStaminaCost());
-            });
-        });
+//        MissionsManager missionsManager = MissionsManager.getInstance();
+//        List<Mission> missions = missionsManager.getMissions();
+//        missions.forEach(m -> {
+//            List<JobFlyer> flyers = m.getJobFlyers();
+//            flyers.forEach(flyer -> {
+//                System.out.println(flyer.getName());
+//                System.out.println(flyer.getDescription());
+//                System.out.println(flyer.getJobId());
+//                System.out.println(flyer.getStaminaCost());
+//            });
+//        });
     }
 }

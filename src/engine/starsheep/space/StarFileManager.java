@@ -2,7 +2,7 @@ package engine.starsheep.space;
 
 import java.io.File;
 
-public interface StarFileMangaer {
+public interface StarFileManager {
 
     File getMissionsFile();
     File getJobFile();

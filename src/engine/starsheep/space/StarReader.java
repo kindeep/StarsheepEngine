@@ -45,7 +45,7 @@ public class StarReader {
          */
         XMLInputFactory inputFactory = XMLInputFactory.newInstance();
         InputStream in;
-//        File configFile = new File("game_files/Missions.xml");
+//        File configFile = new File("sample_config/Missions.xml");
 
         ArrayList<Mission> missions = new ArrayList();
         MissionBuilder missionBuilder = null;
@@ -105,7 +105,7 @@ public class StarReader {
     public static Job readJob(File configFile, int jobId) { //this method needs to be worked on.
         XMLInputFactory inputFactory = XMLInputFactory.newInstance();
         InputStream in;
-//        File configFile = new File("game_files/Job.xml");
+//        File configFile = new File("sample_config/Job.xml");
         try {
             in = new FileInputStream(configFile);
             XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
