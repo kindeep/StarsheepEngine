@@ -15,23 +15,19 @@ public class Trait implements BaseTrait{
 		this.id = id;
 		this.baseLevel = baseLevel;
 	}
-	
-	@Override
+
 	public String getName() {
 		return this.name;
 	}
-	
-	@Override
+
 	public int getId() {
 		return this.id;
 	}
-	
-	@Override
+
 	public int getLevel() {
 		return this.baseLevel;
 	}
-	
-	@Override //used for equiping items.
+
 	public void addLevels(int levels) {
 		this.baseLevel += levels;
 	}
