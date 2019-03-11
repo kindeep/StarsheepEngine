@@ -1,5 +1,6 @@
 package engine.starsheep.space;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ public class MissionsManager {
 	private List<Mission> missions; //a list of all missions.
 	
 	private MissionsManager() {
-		missions = StarReader.readMissions(); //read the missions xml.
+		missions = StarReader.readMissions(new File("/Users/kindeep/Projects/StarsheepEngine/StarsheepEngine/res/game_files/Missions.xml")); //read the missions xml.
 	}
 	
 	public static MissionsManager getInstance() {

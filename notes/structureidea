@@ -1,0 +1,6 @@
+
+Handling xml files
+
+Our xml files only define player instances.
+
+xml files need to be somehow passed in from SaveFilesManager without loading them into ram.

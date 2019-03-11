@@ -1,4 +1,9 @@
 package engine.starsheep.space;
 
-public interface StarFilesMangaer {
+import java.io.File;
+
+public interface StarFileMangaer {
+
+    File getMissionsFile();
+    File getJobFile();
 }

@@ -16,11 +16,13 @@ public class StarGame {
 	 * Need some way to read the game state from XML files. Possibly another class
 	 * to read data from save files, which would be xml files.
 	 *
+	 * represents model in MVC
+	 *
 	 * @param display a display for the game, should implement StarGameView. swap it out for
 	 *                different enviornments.
 	 *
 	 */
-	public StarGame(StarGameView display, StarPlayer player) {
+	public StarGame(StarGameView display, StarPlayer player, StarFileMangaer filesMangaer) {
 		missionsManager = MissionsManager.getInstance();
 		traitManager = TraitManager.getInstance();
 		currentMission = null;
