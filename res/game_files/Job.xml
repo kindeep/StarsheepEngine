@@ -5,21 +5,21 @@ There will be a Job file for every job. -->
 	<Choices>
 		<Choice id="0">
 			<Children>
-				<Child id="2"></Child>
-				<Child id="4"></Child>
-				<Child id="5"></Child>
+				<Child id="2"/>
+				<Child id="4"/>
+				<Child id="5"/>
 			</Children>
 			<Description>Welcome to RBC, make your first move.</Description>
 			<TraitDependencies>
-				<Trait name="strength" weight="10"></Trait>
-				<Trait name="intelligence" weight="20"></Trait>
-				<Trait name="dexterity" weight="15"></Trait>
+				<Trait name="strength" weight="10"/>
+				<Trait name="intelligence" weight="20"/>
+				<Trait name="dexterity" weight="15"/>
 			</TraitDependencies>
 		</Choice>
-		<Choice id="1"></Choice>
-		<Choice id="2"></Choice>
-		<Choice id="3"></Choice>
-		<Choice id="4"></Choice>
-		<Choice id="5"></Choice>
+		<Choice id="1"/>
+		<Choice id="2"/>
+		<Choice id="3"/>
+		<Choice id="4"/>
+		<Choice id="5"/>
 	</Choices>
 </Job>
