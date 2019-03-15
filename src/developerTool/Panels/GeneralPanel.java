@@ -5,22 +5,26 @@ import java.awt.BorderLayout;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import developerTool.XMLBuilder.GameModel;
+
 import javax.swing.JLabel;
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JTextField;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class GeneralPanel extends JPanel {
 	private static final long serialVersionUID = -4856608278305715159L;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField titleTxtField;
+	private JTextField creatorTxtField;
+	private JTextField currencyTxtField;
+	private JTextField staminaTxtField;
 
 	/**
 	 * Create the panel.
 	 */
-	public GeneralPanel() {
+	public GeneralPanel(GameModel gameModel) {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel info = new JPanel();
@@ -42,36 +46,53 @@ public class GeneralPanel extends JPanel {
 		JLabel lblNewLabel = new JLabel("Title");
 		info.add(lblNewLabel, "1, 1");
 		
-		textField = new JTextField();
-		info.add(textField, "2, 1, fill, default");
-		textField.setColumns(10);
-		
-		JLabel lblNewLabel_1 = new JLabel("SubTitle");
-		info.add(lblNewLabel_1, "1, 3");
-		
-		textField_1 = new JTextField();
-		info.add(textField_1, "2, 3, fill, default");
-		textField_1.setColumns(10);
+		titleTxtField = new JTextField();
+		titleTxtField.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				gameModel.setTitle(titleTxtField.getText());
+			}
+		});
+		info.add(titleTxtField, "2, 1, fill, default");
+		titleTxtField.setColumns(10);
 		
 		JLabel lblCreator = new JLabel("Creator");
-		info.add(lblCreator, "1, 5");
+		info.add(lblCreator, "1, 3");
 		
-		textField_2 = new JTextField();
-		info.add(textField_2, "2, 5, fill, default");
-		textField_2.setColumns(10);
+		creatorTxtField = new JTextField();
+		creatorTxtField.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				gameModel.setCreator(creatorTxtField.getText());
+			}
+		});
+		info.add(creatorTxtField, "2, 3, fill, default");
+		creatorTxtField.setColumns(10);
 		
 		JLabel lblCurrency = new JLabel("Currency");
-		info.add(lblCurrency, "1, 7");
+		info.add(lblCurrency, "1, 5");
 		
-		textField_3 = new JTextField();
-		info.add(textField_3, "2, 7, fill, default");
-		textField_3.setColumns(10);
+		currencyTxtField = new JTextField();
+		currencyTxtField.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				gameModel.setCurrency(currencyTxtField.getText());
+			}
+		});
+		info.add(currencyTxtField, "2, 5, fill, default");
+		currencyTxtField.setColumns(10);
 		
 		JLabel lblStamina = new JLabel("Stamina");
-		info.add(lblStamina, "1, 9");
+		info.add(lblStamina, "1, 7");
 		
-		textField_4 = new JTextField();
-		info.add(textField_4, "2, 9, fill, default");
-		textField_4.setColumns(10);
+		staminaTxtField = new JTextField();
+		staminaTxtField.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				gameModel.setCurrency(staminaTxtField.getText());
+			}
+		});
+		info.add(staminaTxtField, "2, 7, fill, default");
+		staminaTxtField.setColumns(10);
 	}
 }
