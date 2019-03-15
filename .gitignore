@@ -3,9 +3,11 @@
 # Eclipse files
 .project
 .classpath
+.settings/
 
 # IntelliJ files
 .idea/
 
 # Gradle files
-./gradle/
+/.gradle/
+build/

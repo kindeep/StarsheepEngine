@@ -4,7 +4,7 @@ package engine.starsheep.space.Job;
  * @see JobFlyer
  */
 public class JobFlyerBuilder {
-	private Integer jobId = null;
+	private String jobId = null;
 	private String name = null;
 	private String description = null;
 	private Integer staminaCost = null;
@@ -15,7 +15,7 @@ public class JobFlyerBuilder {
 	}
 	
 	//getter
-	public Integer getJobId() {
+	public String getJobId() {
 		return jobId;
 	}
 	public String getName() {
@@ -30,7 +30,7 @@ public class JobFlyerBuilder {
 	}
 	
 	//setter
-	public void setJobId(Integer jobId) {
+	public void setJobId(String jobId) {
 		this.jobId = jobId;
 	}
 	public void setName(String name) {

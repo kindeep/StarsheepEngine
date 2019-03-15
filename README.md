@@ -1,11 +1,16 @@
 # StarsheepEngine
 
-A game engine for choice based story games. 
+A game engine for creating decision based games.
 
 The engine is designed to be portable to any Java based OS.
 
 The engine uses MVC: Model View Controller structure. The model remains the same, the 
 controller and the View can be implemented differently for different Enviornments.
+
+# Running DevTool
+```
+./gradlew rundev
+```
 
 # Interface: View
 
