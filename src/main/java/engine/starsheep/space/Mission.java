@@ -5,6 +5,11 @@ import engine.starsheep.space.Job.JobFlyer;
 import java.util.Collections;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
 /**
  * 
  * A Mission holds all data contained within a single mission.
@@ -12,29 +17,51 @@ import java.util.List;
  * @see MissionBuilder
  * @see JobFlyer
  */
+
+//@XmlSeeAlso({EditableMission.class})
+@XmlRootElement(name = "mission")
+@XmlType(propOrder={"title", "description" , "id", "staminaCost", "jobFlyers"})
 public class Mission {
-	private List<JobFlyer> jobFlyers;
-	private String name;
-	private String description;
-	private Integer id;
+	protected String title;
+	protected String description;
+	protected String id;
+	protected List<JobFlyer> jobFlyers;
 	
+	//no-arg constructor required for XML marshalling.
+	public Mission() {}
+
 	public Mission(MissionBuilder builder) {
-		jobFlyers = builder.getjobFlyerList();
+		if (builder != null)
+			jobFlyers = builder.getJobFlyerList();
+
+		this.id = builder.getId();
+		this.title = builder.getName();
+		this.description = builder.getDescription();
 	}
-	
-	public List<JobFlyer> getJobFlyers(){
+
+	@XmlElementWrapper(name = "jobs")
+	@XmlElement(name = "job")
+	public List<JobFlyer> getJobFlyers() {
 		return Collections.unmodifiableList(this.jobFlyers);
 	}
-	
-	public String getName() {
-		return this.name;
+
+	@XmlElement(name = "id")
+	public String getId() {
+		return this.id;
 	}
-	
+
+	@XmlElement(name = "title")
+	public String getTitle() {
+		return this.title;
+	}
+
+	@XmlElement(name = "description")
 	public String getDescription() {
 		return this.description;
 	}
-	
-	public Integer getId() {
-		return this.id;
+
+	@XmlElement(name = "staminaCost")
+	public Integer getStaminaCost() {
+		return 999;
 	}
 }
