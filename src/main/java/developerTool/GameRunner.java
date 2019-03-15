@@ -10,8 +10,8 @@ import java.awt.*;
  * This starts the developer tool.
  *
  */
-public class GameRunner {
-	
+public class GameRunner{
+
 	public static void main(String args[]) {
 		EventQueue.invokeLater(() -> {
 			StarGame game = new StarGame(null, null, new FileManager());
