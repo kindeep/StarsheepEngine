@@ -13,6 +13,7 @@ import java.awt.FlowLayout;
 
 import developerTool.Panels.*;
 import developerTool.XMLBuilder.GameModel;
+import developerTool.XMLBuilder.MissionsModel;
 import developerTool.XMLBuilder.XMLBuilder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -21,6 +22,7 @@ public class ApplicationWindow {
 
 	private JFrame frmStarsheepDeveloperTool;
 	private GameModel gameModel;
+	private MissionsModel missionsModel;
 
 	/**
 	 * Launch the application.
@@ -51,6 +53,7 @@ public class ApplicationWindow {
 	private void initialize() {
 
 		gameModel = new GameModel();
+		missionsModel = new MissionsModel();
 
 		frmStarsheepDeveloperTool = new JFrame();
 		frmStarsheepDeveloperTool.setTitle("Starsheep Developer Tool");
@@ -68,7 +71,7 @@ public class ApplicationWindow {
 		tabbedPane.addTab("Missions", null, Missions, null);
 		Missions.setLayout(new BorderLayout(0, 0));
 
-		MissionsPanel missionsPanel = new MissionsPanel();
+		MissionsPanel missionsPanel = new MissionsPanel(missionsModel);
 		Missions.add(missionsPanel);
 
 		JPanel Traits = new JPanel();
