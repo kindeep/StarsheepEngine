@@ -2,7 +2,7 @@ package developerTool.XMLBuilder;
 
 import javax.xml.bind.annotation.*;
 
-@XmlRootElement(name = "GameModel")
+@XmlRootElement(name = "gameModel")
 public class GameModel {
 	
 	@XmlElement(name = "title")
@@ -40,6 +40,4 @@ public class GameModel {
 		this.currency = currency;
 		return this;
 	}
-	
-
 }
