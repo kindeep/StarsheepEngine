@@ -1,6 +1,8 @@
 package developerTool.XMLBuilder;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -26,11 +28,13 @@ public class MissionModel {
 	private Integer staminaCost;
 	
 	@XmlElement(name = "missions")
-	private ArrayList<Integer> jobIds;
+	private LinkedList<Integer> jobIds;
 	
-	public MissionModel(String id) {
-		jobIds = new ArrayList<Integer>();
-		this.id = id;
+	public MissionModel() {
+		jobIds = new LinkedList<Integer>();
+		
+		this.id = UUID.randomUUID().toString();
+		System.out.println(this.id);
 		
 	}
 
@@ -66,7 +70,7 @@ public class MissionModel {
 		return currency;
 	}
 
-	public ArrayList<Integer> getJobIds() {
+	public LinkedList<Integer> getJobIds() {
 		return jobIds;
 	}
 	
@@ -90,11 +94,16 @@ public class MissionModel {
 		this.currency = currency;
 	}
 
-	public void setJobIds(ArrayList<Integer> jobIds) {
+	public void setJobIds(LinkedList<Integer> jobIds) {
 		this.jobIds = jobIds;
 	}
 	
 	public void setStaminaCost(int staminaCost) {
 		this.staminaCost = staminaCost;
+	}
+	
+	@Override
+	public String toString() {
+		return this.title;
 	}
 }
