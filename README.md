@@ -9,7 +9,6 @@ controller and the View can be implemented differently for different Enviornment
 
 # Running DevTool
 ```
-./gradlew build
 ./gradlew rundev
 ```
 
