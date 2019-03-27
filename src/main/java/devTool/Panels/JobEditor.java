@@ -1,4 +1,4 @@
-package developerTool.Panels;
+package devTool.Panels;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;

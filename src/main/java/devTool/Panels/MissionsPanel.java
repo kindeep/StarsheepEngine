@@ -1,4 +1,4 @@
-package developerTool.Panels;
+package devTool.Panels;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -13,8 +13,8 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
-import developerTool.XMLBuilder.MissionModel;
-import developerTool.XMLBuilder.MissionsModel;
+import devTool.XMLBuilder.MissionModel;
+import devTool.XMLBuilder.MissionsModel;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JTextField;

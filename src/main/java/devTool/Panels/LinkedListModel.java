@@ -1,4 +1,4 @@
-package developerTool.Panels;
+package devTool.Panels;
 
 import java.util.LinkedList;
 

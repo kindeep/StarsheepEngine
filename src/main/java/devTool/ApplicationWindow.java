@@ -9,12 +9,13 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
-import java.awt.FlowLayout;
 
-import developerTool.Panels.*;
-import developerTool.XMLBuilder.GameModel;
-import developerTool.XMLBuilder.MissionsModel;
-import developerTool.XMLBuilder.XMLBuilder;
+import devTool.Panels.*;
+import devTool.XMLBuilder.GameModel;
+import devTool.XMLBuilder.MissionsModel;
+import devTool.XMLBuilder.XMLBuilder;
+
+import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 

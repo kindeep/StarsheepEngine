@@ -1,4 +1,4 @@
-package developerTool.XMLBuilder;
+package devTool.XMLBuilder;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
