@@ -1,0 +1,8 @@
+/bin/
+
+#eclipse files
+.project
+.classpath
+
+# IntelliJ files
+.idea/
