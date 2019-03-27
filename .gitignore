@@ -3,6 +3,7 @@
 # Eclipse files
 .project
 .classpath
+.settings/
 
 # IntelliJ files
 .idea/
@@ -13,3 +14,4 @@
 
 # Binary files
 out/
+/build/
