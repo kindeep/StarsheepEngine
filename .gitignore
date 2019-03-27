@@ -1,8 +1,11 @@
 /bin/
 
-#eclipse files
+# Eclipse files
 .project
 .classpath
 
 # IntelliJ files
 .idea/
+
+# Gradle files
+./gradle/
