@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/StarsheepEngine.iml" filepath="$PROJECT_DIR$/.idea/StarsheepEngine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/StarsheepEngine_main.iml" filepath="$PROJECT_DIR$/.idea/modules/StarsheepEngine_main.iml" group="StarsheepEngine" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/StarsheepEngine_test.iml" filepath="$PROJECT_DIR$/.idea/modules/StarsheepEngine_test.iml" group="StarsheepEngine" />
+    </modules>
+  </component>
+</project>
