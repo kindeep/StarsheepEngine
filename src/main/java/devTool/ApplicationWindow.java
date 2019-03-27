@@ -1,4 +1,4 @@
-package developerTool;
+package devTool;
 
 import java.awt.EventQueue;
 

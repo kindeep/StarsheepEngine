@@ -14,7 +14,7 @@ repositories {
 
 //starsheep custom task
 task(rundev, dependsOn: 'classes', type: JavaExec) {
-   main = 'developerTool.ApplicationWindow'
+   main = 'devTool.ApplicationWindow'
    classpath = sourceSets.main.runtimeClasspath
    //args 'mrhaki'
    //systemProperty 'simple.message', 'Hello '
