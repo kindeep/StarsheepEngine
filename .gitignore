@@ -6,6 +6,10 @@
 
 # IntelliJ files
 .idea/
+*.iml
 
 # Gradle files
-./gradle/
+.gradle/
+
+# Binary files
+out/
