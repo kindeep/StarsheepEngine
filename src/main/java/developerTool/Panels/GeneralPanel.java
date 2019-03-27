@@ -5,11 +5,11 @@ import java.awt.BorderLayout;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.layout.FormSpecs;
 
 import developerTool.XMLBuilder.GameModel;
 
 import javax.swing.JLabel;
-import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JTextField;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
