@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file lists all the jobs for a single mission. Used to display a 
+	list of jobs for the player without loading all jobs into memory. There will 
+	be a JobList file for every mission. -->
+<Missions>
+	<Mission>
+		<!-- <id>0</id>
+		<name>New York City</name>
+		<imageId>272895958</imageId> -->
+		<Jobs>
+			<Job>
+				<id>0</id>
+				<name>RBC</name>
+				<description>Lets get some money.</description>
+				<imageId>5858693</imageId>
+			</Job>
+			<Job>
+				<id>1</id>
+				<name>CIBC</name>
+				<description>cibc, the oldest bank in canada.</description>
+				<imageId>87987987</imageId>
+			</Job>
+			<Job>
+				<id>2</id>
+				<name>TD Canada Trust</name>
+				<description>lets rob this green bank.</description>
+				<imageId>0909090898</imageId>
+			</Job>
+		</Jobs>
+	</Mission>
+	<Mission>
+		<id>1</id>
+		<name>Boston</name>
+		<imageId>2222222</imageId>
+		<Jobs>
+			<Job>
+				<id>0</id>
+				<name>boston-rbc</name>
+				<description>lets get this american money</description>
+				<imageId>1111111</imageId>
+			</Job>
+			<Job>
+				<id>1</id>
+				<name>boston-cibc</name>
+				<description>lets rob this boston cibc.</description>
+				<imageId>3333333</imageId>
+			</Job>
+			<Job>
+				<id>2</id>
+				<name>boston-general-bank</name>
+				<description>lets rob this boston bank</description>
+				<imageId>444444</imageId>
+			</Job>
+		</Jobs>
+	</Mission>
+</Missions>
