@@ -15,6 +15,7 @@ public class StarGame {
     private StarGameView display;
     private StarPlayer player;
     private StarSaveFilesReader fileManager;
+    private GameSoundManager soundManager;
 
     /**
      * Need some way to read the game state from XML files. Possibly another class
@@ -25,14 +26,13 @@ public class StarGame {
      * @param display a display for the game, should implement StarGameView. swap it out for
      *                different enviornments.
      */
-    public StarGame(StarGameView display, StarPlayer player, StarSaveFilesReader saveFilesReader) {
+    public StarGame(StarGameView display, StarPlayer player, StarSaveFilesReader saveFilesReader, GameSoundManager soundManager) {
     	this.fileManager = saveFilesReader;
     	StarReader.setFileManager(fileManager); //give StarReader class the filemanager.
     	Controller.setGame(this);
-    	
+    	this.soundManager = soundManager;
         this.traitManager = TraitManager.getInstance();
         this.missionsManager = MissionsManager.getInstance();
-        
         this.currentMission = null;
         this.currentChoice = null;
         this.display = display;

@@ -1,6 +1,7 @@
 package developerTool;
 
 import cmdTest.FileManager;
+import cmdTest.SampleSoundManager;
 import engine.starsheep.space.StarGame;
 
 import java.awt.*;
@@ -14,7 +15,7 @@ public class GameRunner {
 	
 	public static void main(String args[]) {
 		EventQueue.invokeLater(() -> {
-			StarGame game = new StarGame(null, null, new FileManager());
+			StarGame game = new StarGame(null, null, new FileManager(), new SampleSoundManager());
 			DeveloperView devView = new DeveloperView(game.getController());
 			devView.setVisible(true);
 		});
