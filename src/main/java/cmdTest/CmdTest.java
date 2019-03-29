@@ -3,7 +3,6 @@ package cmdTest;
 import engine.starsheep.space.*;
 
 public class CmdTest {
-
     /**
      * Testing needs to be isolated from the paakge.
      * <p>
@@ -20,5 +19,8 @@ public class CmdTest {
         SampleSoundManager soundManager = new SampleSoundManager();
         view.log("Sample out");
         StarGame game = new StarGame(view, player, saveFilesReader, soundManager);
+        StarGame game1 = new StarGame(view, player, saveFilesReader, soundManager);
+        new Thread(game).start();
+        new Thread(game1).start();
     }
 }

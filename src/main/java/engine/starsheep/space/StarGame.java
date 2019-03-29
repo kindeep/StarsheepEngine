@@ -6,7 +6,7 @@ import engine.starsheep.space.Trait.TraitManager;
 
 import java.util.List;
 
-public class StarGame {
+public class StarGame implements Runnable {
     private MissionsManager missionsManager;
     private TraitManager traitManager;
     private Mission currentMission;
@@ -27,30 +27,18 @@ public class StarGame {
      *                different enviornments.
      */
     public StarGame(StarGameView display, StarPlayer player, StarSaveFilesReader saveFilesReader, GameSoundManager soundManager) {
-    	this.fileManager = saveFilesReader;
-    	StarReader.setFileManager(fileManager); //give StarReader class the filemanager.
-    	Controller.setGame(this);
-    	this.soundManager = soundManager;
+        this.fileManager = saveFilesReader;
+        StarReader.setFileManager(fileManager); //give StarReader class the filemanager.
+        Controller.setGame(this);
+        this.soundManager = soundManager;
         this.traitManager = TraitManager.getInstance();
         this.missionsManager = MissionsManager.getInstance();
         this.currentMission = null;
         this.currentChoice = null;
         this.display = display;
         this.player = player;
-        
-
         Job j = StarReader.readJob(999);
         System.out.println(j.toString());
-//        List<Mission> missions = missionsManager.getMissions();
-//        missions.forEach(m -> {
-//            List<JobFlyer> flyers = m.getJobFlyers();
-//            flyers.forEach(flyer -> {
-//                display.log(flyer.getName());
-//                display.log(flyer.getDescription());
-//                display.log(flyer.getJobId());
-//                display.log(flyer.getStaminaCost());
-//            });
-//        });
     }
 
     public void setMission(Mission m) {
@@ -60,14 +48,14 @@ public class StarGame {
     public void setChoice(Choice c) {
         currentChoice = c;
     }
-    
-    public List<Mission> getMissions(){
-    	return this.missionsManager.getMissions();
+
+    public List<Mission> getMissions() {
+        return this.missionsManager.getMissions();
     }
-    
+
     //this method is used to expose the controller outside of the engine. to be connected with the view.
     public Controller getController() {
-    	return Controller.getInstance();
+        return Controller.getInstance();
     }
 
     public boolean calculateSuccess(List<TraitDependency> traitDependencies) {
@@ -84,10 +72,18 @@ public class StarGame {
         return true;
     }
 
-//    public static void main(String[] args) {
-////		StarTest test = new StarTest(); //use StarTest to test anything.
-////		test.testReadingMissions();
-//
-//    }
+    @Override
+    public void run() {
+        String name = "StarSheep";
+        try {
+            for (int i = 5; i > 0; i--) {
+                System.out.println(name + ": " + i);
+                Thread.sleep(1000);
+            }
+        } catch (InterruptedException e) {
+            System.out.println(name + "Interrupted");
+        }
+        System.out.println(name + " exiting.");
+    }
 }
 
