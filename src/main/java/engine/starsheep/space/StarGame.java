@@ -14,7 +14,6 @@ public class StarGame {
 
     private StarGameView display;
     private StarPlayer player;
-    private StarSaveFilesReader fileManager;
     private GameSoundManager soundManager;
 
     /**
@@ -26,8 +25,7 @@ public class StarGame {
      * @param display a display for the game, should implement StarGameView. swap it out for
      *                different enviornments.
      */
-    public StarGame(StarGameView display, StarPlayer player, StarSaveFilesReader saveFilesReader, GameSoundManager soundManager) {
-    	this.fileManager = saveFilesReader;
+    public StarGame(StarGameView display, StarPlayer player, StarFileManager fileManager, GameSoundManager soundManager) {
     	StarReader.setFileManager(fileManager); //give StarReader class the filemanager.
     	Controller.setGame(this);
     	this.soundManager = soundManager;
@@ -37,22 +35,8 @@ public class StarGame {
         this.currentChoice = null;
         this.display = display;
         this.player = player;
-        
-
-        Job j = StarReader.readJob(999);
-        System.out.println(j.toString());
-//        List<Mission> missions = missionsManager.getMissions();
-//        missions.forEach(m -> {
-//            List<JobFlyer> flyers = m.getJobFlyers();
-//            flyers.forEach(flyer -> {
-//                display.log(flyer.getName());
-//                display.log(flyer.getDescription());
-//                display.log(flyer.getJobId());
-//                display.log(flyer.getStaminaCost());
-//            });
-//        });
     }
-
+        
     public void setMission(Mission m) {
         currentMission = m;
     }
@@ -78,16 +62,8 @@ public class StarGame {
         for (int i = 0; i < traitDependencies.size(); i++) {
             TraitDependency td = traitDependencies.get(i);
             int weight = td.getWeight();
-
-
         }
         return true;
     }
-
-//    public static void main(String[] args) {
-////		StarTest test = new StarTest(); //use StarTest to test anything.
-////		test.testReadingMissions();
-//
-//    }
 }
 

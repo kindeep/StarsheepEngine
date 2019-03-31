@@ -23,9 +23,9 @@ import java.util.List;
  * possibly pass in File instead. We can't assume where the files are located.
  */
 public class StarReader {
-	private static StarSaveFilesReader fileManager;
+	private static StarFileManager fileManager;
 
-	public static void setFileManager(StarSaveFilesReader manager) {
+	public static void setFileManager(StarFileManager manager) {
 		StarReader.fileManager = manager;
 	}
 
@@ -36,10 +36,8 @@ public class StarReader {
      */
     public static List<Mission> readMissions() {
 
-        /* todo:
-         *
+        /* TODO:
          * read id, name and imageID for every mission.
-         *
          */
         XMLInputFactory inputFactory = XMLInputFactory.newInstance();
         InputStream in;
@@ -101,7 +99,7 @@ public class StarReader {
      * @param jobId - The job id.
      * @return job object.
      */
-    public static Job readJob(int jobId) { //this method needs to be worked on.
+    public static Job readJob(int jobId) {
         XMLInputFactory inputFactory = XMLInputFactory.newInstance();
         InputStream in;
 //        File configFile = fileManager.getJobFile();
