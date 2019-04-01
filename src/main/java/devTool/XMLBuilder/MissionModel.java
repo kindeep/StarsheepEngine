@@ -1,6 +1,5 @@
 package devTool.XMLBuilder;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.UUID;
 
@@ -8,30 +7,21 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "mission")
+/*
+ * TODO: remove LinkedList<Integer> jobIds;
+ */
 public class MissionModel {
-	@XmlElement(name = "title")
-	private String title;
-	
-	@XmlElement(name = "description")
-	private String description;
-	
-	@XmlElement(name = "id")
 	private String id;
-	
-	@XmlElement(name = "creator")
+	private String title;
+	private String description;
 	private String creator;
-	
-	@XmlElement(name = "currency")
 	private String currency;
-	
-	@XmlElement(name = "staminaCost")
 	private Integer staminaCost;
-	
-	@XmlElement(name = "missions")
+	private LinkedList<JobFlyerModel> jobFlyers;
 	private LinkedList<Integer> jobIds;
-	
 	public MissionModel() {
 		jobIds = new LinkedList<Integer>();
+		jobFlyers = new LinkedList<JobFlyerModel>();
 		
 		this.id = UUID.randomUUID().toString();
 		System.out.println(this.id);
@@ -50,22 +40,27 @@ public class MissionModel {
 	
 	//setters and getters.
 	
+	@XmlElement(name = "id")
 	public String getId() {
 		return this.id;
 	}
 	
+	@XmlElement(name = "title")
 	public String getTitle() {
 		return title;
 	}
 
+	@XmlElement(name = "description")
 	public String getDescription() {
 		return description;
 	}
 
+	@XmlElement(name = "creator")
 	public String getCreator() {
 		return creator;
 	}
 
+	@XmlElement(name = "currency")
 	public String getCurrency() {
 		return currency;
 	}
@@ -73,9 +68,15 @@ public class MissionModel {
 	public LinkedList<Integer> getJobIds() {
 		return jobIds;
 	}
-	
+
+	@XmlElement(name = "staminaCost")
 	public Integer getStaminaCost() {
 		return this.staminaCost;
+	}
+	
+	@XmlElement(name = "jobs")
+	public LinkedList<JobFlyerModel> getJobFlyers(){
+		return this.jobFlyers;
 	}
 
 	public void setTitle(String title) {
@@ -98,8 +99,16 @@ public class MissionModel {
 		this.jobIds = jobIds;
 	}
 	
+	public void getJobFlyers(LinkedList<JobFlyerModel> jobFlyers){
+		this.jobFlyers = jobFlyers;
+	}
+	
 	public void setStaminaCost(int staminaCost) {
 		this.staminaCost = staminaCost;
+	}
+	
+	public void addJobFlyer(JobFlyerModel jobFlyer) {
+		this.jobFlyers.add(jobFlyer);
 	}
 	
 	@Override

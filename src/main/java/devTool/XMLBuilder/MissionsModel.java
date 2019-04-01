@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "missions")
 public class MissionsModel {
-	@XmlElement(name = "wtf do i put here lol")
 	private LinkedList<MissionModel> missions;
 
 	public MissionsModel() {
@@ -28,9 +27,8 @@ public class MissionsModel {
 	}
 
 	// getter
+	@XmlElement(name = "mission")
 	public LinkedList<MissionModel> getMissions() {
-		
 		return this.missions;
-
 	}
 }

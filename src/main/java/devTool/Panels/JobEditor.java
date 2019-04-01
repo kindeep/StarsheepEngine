@@ -1,102 +1,163 @@
 package devTool.Panels;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.util.LinkedList;
+import java.util.UUID;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.JLabel;
+import com.jgoodies.forms.layout.RowSpec;
+
+import devTool.XMLBuilder.JobFlyerModel;
+import devTool.XMLBuilder.MissionsModel;
+import devTool.XMLBuilder.MissionModel;
+import devTool.XMLBuilder.ChoiceModel;
+import devTool.XMLBuilder.XMLBuilder;
+import devTool.XMLBuilder.JobModel;
+
 import javax.swing.JTextField;
+import javax.swing.JToolBar;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.border.LineBorder;
+import javax.swing.BoxLayout;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JobEditor extends JFrame {
-
-	private JPanel contentPane;
-	private JTextField txtField_jobName;
-	private JTextField txtField_description;
-	private JTextField txtField_staminaCost;
+	private MissionModel currMission;
+	private String jobTitle;
+	private String jobDescription;
+	private String jobOrder;
+	private String id;
+	private LinkedList<ChoiceModel> choices;
+	private LinkedListModel<JobFlyerModel> jobList;
+	private MissionsModel missionsModel;
+	
+	
+	private JTextField txtFieldJobTItle;
+	private JTextField textField;
+	private JTextField txtFieldDescription;
 
 	/**
 	 * Create the frame.
+	 * @wbp.parser.constructor
 	 */
-	public JobEditor() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
+	public JobEditor(LinkedListModel<JobFlyerModel> jobList, MissionsModel mm) {
+		this.missionsModel = mm;
+		this.jobList = jobList;
+		initalize();
+		jobTitle = "unnamed job";
+		jobDescription = "no description.";
+		jobOrder = "0";
+		id = UUID.randomUUID().toString();
+		choices = new LinkedList<ChoiceModel>();
+	}
+	
+	/*TODO: complete constructor for editing existing jobs.
+	 */
+	public JobEditor(LinkedListModel<JobFlyerModel> jobList, MissionsModel mm, String jobId) {
+		this.missionsModel = mm;
+		this.jobList = jobList;
+		initalize();
+	}
+	
+	private void saveBtnPressed() {
+		//save to xml file.
+		JobModel jobModel = new JobModel();
+		jobModel.setId(this.id);
+		jobModel.setTitle(this.jobTitle);
+		jobModel.setDescription(this.jobDescription);
+		jobModel.setChoices(this.choices);
+		XMLBuilder.buildJobFile(jobModel);
 		
-		JPanel choiceEditorPanel = new JPanel();
-		contentPane.add(choiceEditorPanel, BorderLayout.CENTER);
-		choiceEditorPanel.setLayout(new BorderLayout(0, 0));
+		///create job flyer and add to job list.
+		JobFlyerModel flyer = new JobFlyerModel();
+		flyer.setDescription(this.jobDescription);
+		flyer.setId(this.id);
+		flyer.setImageId("image id missing");
+		flyer.setName(this.jobTitle);
+		this.jobList.push(flyer);
 		
-		JPanel choicesListPanel = new JPanel();
-		choiceEditorPanel.add(choicesListPanel, BorderLayout.NORTH);
+		//update Missions xml.
+		XMLBuilder.buildMissionsFile(this.missionsModel);
+	}
+	
+	private void initalize() {
+		getContentPane().setLayout(new BorderLayout(0, 0));
+		this.setSize(500, 220);
 		
 		JPanel jobInfoPanel = new JPanel();
-		contentPane.add(jobInfoPanel, BorderLayout.WEST);
-		FormLayout fl_jobInfoPanel = new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("default:grow"),
-				FormSpecs.RELATED_GAP_COLSPEC,
+		getContentPane().add(jobInfoPanel, BorderLayout.CENTER);
+		jobInfoPanel.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.DEFAULT_COLSPEC,
 				ColumnSpec.decode("default:grow"),},
 			new RowSpec[] {
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,});
-		fl_jobInfoPanel.setColumnGroup(new int[] {2});
-		fl_jobInfoPanel.setRowGroup(new int[] {3});
-		jobInfoPanel.setLayout(fl_jobInfoPanel);
+				FormSpecs.DEFAULT_ROWSPEC,}));
 		
-		JLabel lblJobName = new JLabel("Job Name:");
-		jobInfoPanel.add(lblJobName, "1, 1, left, default");
+		JLabel lblJobTitle = new JLabel("Job Title");
+		jobInfoPanel.add(lblJobTitle, "1, 1, right, default");
 		
-		txtField_jobName = new JTextField();
-		jobInfoPanel.add(txtField_jobName, "3, 1, fill, default");
-		txtField_jobName.setColumns(10);
+		txtFieldJobTItle = new JTextField();
+		jobInfoPanel.add(txtFieldJobTItle, "2, 1, fill, default");
+		txtFieldJobTItle.setColumns(10);
+		txtFieldJobTItle.setText(this.jobTitle);
+		
+		JLabel lblId = new JLabel("id:");
+		jobInfoPanel.add(lblId, "1, 3, right, default");
+		
+		textField = new JTextField();
+		textField.setEditable(false);
+		jobInfoPanel.add(textField, "2, 3, fill, default");
+		textField.setColumns(10);
+		textField.setText(this.id);
 		
 		JLabel lblDescription = new JLabel("description:");
-		jobInfoPanel.add(lblDescription, "1, 3, left, default");
+		jobInfoPanel.add(lblDescription, "1, 5, right, default");
 		
-		txtField_description = new JTextField();
-		jobInfoPanel.add(txtField_description, "3, 3, fill, default");
-		txtField_description.setColumns(10);
+		txtFieldDescription = new JTextField();
+		jobInfoPanel.add(txtFieldDescription, "2, 5, fill, default");
+		txtFieldDescription.setColumns(10);
+		txtFieldDescription.setText(this.jobDescription);
 		
-		JLabel lblImage = new JLabel("primary image:");
-		jobInfoPanel.add(lblImage, "1, 5");
+		JPanel choiceInfoPanel = new JPanel();
+		choiceInfoPanel.setBorder(new LineBorder(Color.CYAN));
+		getContentPane().add(choiceInfoPanel, BorderLayout.EAST);
+		choiceInfoPanel.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnBrowse = new JButton("Browse");
-		jobInfoPanel.add(btnBrowse, "3, 5");
+		JList<JobModel> choicesList = new JList<JobModel>();
 		
-		JLabel lblSecondaryImage = new JLabel("secondary image:");
-		jobInfoPanel.add(lblSecondaryImage, "1, 7");
+		choiceInfoPanel.add(choicesList, BorderLayout.NORTH);
 		
-		JButton btnBrowse_1 = new JButton("Browse");
-		jobInfoPanel.add(btnBrowse_1, "3, 7");
+		JPanel choicesBtnsPanel = new JPanel();
+		choiceInfoPanel.add(choicesBtnsPanel, BorderLayout.SOUTH);
+		choicesBtnsPanel.setLayout(new BoxLayout(choicesBtnsPanel, BoxLayout.Y_AXIS));
 		
-		JLabel lblStaminaCost = new JLabel("stamina cost:");
-		jobInfoPanel.add(lblStaminaCost, "1, 9, right, default");
+		JButton newChoiceBtn = new JButton("New Choice");
+		choicesBtnsPanel.add(newChoiceBtn);
 		
-		txtField_staminaCost = new JTextField();
-		jobInfoPanel.add(txtField_staminaCost, "3, 9, fill, default");
-		txtField_staminaCost.setColumns(10);
+		JButton editChoiceBtn = new JButton("Edit Choice");
+		choicesBtnsPanel.add(editChoiceBtn);
 		
-		JPanel choiceListPanel = new JPanel();
-		contentPane.add(choiceListPanel, BorderLayout.EAST);
+		JToolBar toolBar = new JToolBar();
+		getContentPane().add(toolBar, BorderLayout.NORTH);
 		
-		JList choicesList = new JList();
-		choiceListPanel.add(choicesList);
+		JButton btnSaveJob = new JButton("Save Job");
+		btnSaveJob.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				saveBtnPressed();
+			}
+		});
+		toolBar.add(btnSaveJob);
 	}
 }

@@ -8,20 +8,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "choice")
 public class ChoiceModel {
-
-	@XmlElement(name = "title")
 	private String title;
-	
-	@XmlElement(name = "description")
 	private String description;
-	
-	@XmlAttribute(name = "id")
 	private String id;
-	
-	@XmlElement(name = "imageId")
 	private String imageId;
-	
-	@XmlElement(name = "children")
 	private ArrayList<Integer> children;
 	
 	@XmlElement(name = "traitDependency")
@@ -50,22 +40,27 @@ public class ChoiceModel {
 	}
 	
 	//setters and getters.
+	@XmlElement(name = "title")
 	public String getTitle() {
 		return title;
 	}
 
+	@XmlElement(name = "description")
 	public String getDescription() {
 		return description;
 	}
 
+	@XmlAttribute(name = "id")
 	public String getId() {
 		return id;
 	}
 
+	@XmlElement(name = "imageId")
 	public String getImageId() {
 		return imageId;
 	}
 
+	@XmlElement(name = "children")
 	public ArrayList<Integer> getChildren() {
 		return children;
 	}

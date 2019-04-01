@@ -1,17 +1,17 @@
 package devTool.Panels;
 
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import devTool.XMLBuilder.GameModel;
 
-import com.jgoodies.forms.layout.FormSpecs;
-
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import java.awt.BorderLayout;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
