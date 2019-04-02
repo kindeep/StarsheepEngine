@@ -47,4 +47,9 @@ public class JobFlyerModel {
 	public void setImageId(String imageId) {
 		this.imageId = imageId;
 	}
+	
+	@Override
+	public String toString() {
+		return this.name;
+	}
 }
