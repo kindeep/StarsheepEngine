@@ -7,6 +7,7 @@ import java.awt.BorderLayout;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
@@ -21,7 +22,7 @@ import java.awt.event.MouseEvent;
 
 public class ApplicationWindow {
 
-	private JFrame frmStarsheepDeveloperTool;
+	private JFrame frame;
 	private GameModel gameModel;
 	private MissionsModel missionsModel;
 
@@ -33,7 +34,7 @@ public class ApplicationWindow {
 			public void run() {
 				try {
 					ApplicationWindow window = new ApplicationWindow();
-					window.frmStarsheepDeveloperTool.setVisible(true);
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -56,14 +57,14 @@ public class ApplicationWindow {
 		gameModel = new GameModel();
 		missionsModel = new MissionsModel();
 
-		frmStarsheepDeveloperTool = new JFrame();
-		frmStarsheepDeveloperTool.setTitle("Starsheep Developer Tool");
-		frmStarsheepDeveloperTool.setBounds(100, 100, 700, 450);
-		frmStarsheepDeveloperTool.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmStarsheepDeveloperTool.getContentPane().setLayout(new BorderLayout(0, 0));
+		frame = new JFrame();
+		frame.setTitle("Starsheep Developer Tool");
+		frame.setBounds(100, 100, 700, 450);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		frmStarsheepDeveloperTool.getContentPane().add(tabbedPane, BorderLayout.CENTER);
+		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
 		GeneralPanel generalPanel = new GeneralPanel(gameModel);
 		tabbedPane.addTab("General", null, generalPanel, null);
@@ -79,7 +80,7 @@ public class ApplicationWindow {
 		tabbedPane.addTab("Traits", null, Traits, null);
 
 		JToolBar toolBar = new JToolBar();
-		frmStarsheepDeveloperTool.getContentPane().add(toolBar, BorderLayout.NORTH);
+		frame.getContentPane().add(toolBar, BorderLayout.NORTH);
 
 		JButton newGameBtn = new JButton("New Game");
 		toolBar.add(newGameBtn);
