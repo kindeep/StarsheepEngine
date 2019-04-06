@@ -1,0 +1,8 @@
+devTool
+devTool.Panels
+devTool.XMLBuilder
+devTool.models
+engine.starsheep.space
+engine.starsheep.space.Item
+engine.starsheep.space.Job
+engine.starsheep.space.Trait

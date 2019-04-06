@@ -54,6 +54,4 @@ public abstract class StarFileManager {
 
 
     public abstract InputStream getJobsStream();
-
-
 }

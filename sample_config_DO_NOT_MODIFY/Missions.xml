@@ -4,12 +4,12 @@
 	be a JobList file for every mission. -->
 <Missions>
 	<Mission>
-		<!-- <id>0</id>
+		<id>0</id>
 		<name>New York City</name>
-		<imageId>272895958</imageId> -->
+		<imageId>272895958</imageId>
 		<Jobs>
 			<Job>
-				<id>0</id>
+				<id>247847a0-eeed-41bb-a941-32e45684ae40</id>
 				<name>RBC</name>
 				<description>Lets get some money.</description>
 				<imageId>5858693</imageId>
