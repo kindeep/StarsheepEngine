@@ -1,4 +1,3 @@
-# StarsheepEngine
 <p align="center">
   <img src="src/main/java/devTool/sheep.jpg" alt="Starsheep Engine" width="226">
   <br>
@@ -7,7 +6,7 @@
 
 <p align="center">One small step for man, one giant leap for mankind.</p>
 
-# Overview
+# StarsheepEngine
 StarsheepEngine is a game engine for creating static decision-based games.
 This engine is designed to be portable to any Java based OS.
 
