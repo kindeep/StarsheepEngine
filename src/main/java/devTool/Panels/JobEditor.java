@@ -3,14 +3,17 @@ package devTool.Panels;
 import java.util.LinkedList;
 import java.util.UUID;
 
-import devTool.XMLBuilder.JobFlyerModel;
 import devTool.XMLBuilder.MissionsModel;
-import devTool.XMLBuilder.MissionModel;
-import devTool.XMLBuilder.ChoiceModel;
 import devTool.XMLBuilder.XMLBuilder;
-import devTool.XMLBuilder.JobModel;
+import devTool.models.EditableChoice;
+import devTool.models.EditableJobBuilder;
+import devTool.models.EditableMission;
+
+import engine.starsheep.space.Job.JobFlyer;
+import engine.starsheep.space.Job.JobFlyerBuilder;
 
 import javax.swing.JTextField;
+import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,16 +21,15 @@ import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JTabbedPane;
 
 public class JobEditor extends JFrame {
-	private MissionModel currMission;
+	private EditableMission currMission;
 	private String jobTitle;
 	private String jobDescription;
 	private String jobOrder;
 	private String id;
-	private LinkedList<ChoiceModel> choices;
-	private LinkedListModel<JobFlyerModel> jobList;
+	private LinkedList<EditableChoice> choices;
+	private LinkedListModel<JobFlyer> jobList;
 	private MissionsModel missionsModel;
 	
 	
@@ -39,20 +41,20 @@ public class JobEditor extends JFrame {
 	 * Create the frame.
 	 * @wbp.parser.constructor
 	 */
-	public JobEditor(LinkedListModel<JobFlyerModel> jobList, MissionsModel mm) {
+	public JobEditor(LinkedListModel<JobFlyer> jobListModel, MissionsModel mm) {
 		this.missionsModel = mm;
-		this.jobList = jobList;
+		this.jobList = jobListModel;
 		initalize();
 		jobTitle = "unnamed job";
 		jobDescription = "no description.";
 		jobOrder = "0";
 		id = UUID.randomUUID().toString();
-		choices = new LinkedList<ChoiceModel>();
+		choices = new LinkedList<EditableChoice>();
 	}
 	
 	/*TODO: complete constructor for editing existing jobs.
 	 */
-	public JobEditor(LinkedListModel<JobFlyerModel> jobList, MissionsModel mm, String jobId) {
+	public JobEditor(LinkedListModel<JobFlyer> jobList, MissionsModel mm, String jobId) {
 		this.missionsModel = mm;
 		this.jobList = jobList;
 		initalize();
@@ -60,29 +62,30 @@ public class JobEditor extends JFrame {
 	
 	private void saveBtnPressed() {
 		//save to xml file.
-		JobModel jobModel = new JobModel();
-		jobModel.setId(this.id);
-		jobModel.setTitle(this.jobTitle);
-		jobModel.setDescription(this.jobDescription);
-		jobModel.setChoices(this.choices);
-		XMLBuilder.buildJobFile(jobModel);
+		EditableJobBuilder jobBuilder = new EditableJobBuilder();
+		jobBuilder.setId(this.id);
+		jobBuilder.setName(this.jobTitle);
+		jobBuilder.setDescription(this.jobDescription);
+		jobBuilder.setChoices(this.choices);
+		//update this job xml.
+		XMLBuilder.getInstance().buildJobFile(jobBuilder.build());
 		
 		///create job flyer and add to job list.
-		JobFlyerModel flyer = new JobFlyerModel();
-		flyer.setDescription(this.jobDescription);
-		flyer.setId(this.id);
-		flyer.setImageId("image id missing");
-		flyer.setName(this.jobTitle);
-		this.jobList.push(flyer);
+		JobFlyerBuilder flyerBuilder = new JobFlyerBuilder();
+		flyerBuilder.setDescription(this.jobDescription);
+		flyerBuilder.setJobId(this.id);
+		flyerBuilder.setName(this.jobTitle);
+		flyerBuilder.setName(this.jobTitle);
+		this.jobList.push(flyerBuilder.build());
 		
 		//update Missions xml.
-		XMLBuilder.buildMissionsFile(this.missionsModel);
+		XMLBuilder.getInstance().buildMissionsFile(this.missionsModel);
 	}
 	
 	private void initalize() {
 		this.setTitle("Job Editor");
 		getContentPane().setLayout(new BorderLayout(0, 0));
-		this.setSize(500, 220);
+		this.setSize(725, 455);
 		
 		JToolBar toolBar = new JToolBar();
 		getContentPane().add(toolBar, BorderLayout.NORTH);
@@ -96,7 +99,7 @@ public class JobEditor extends JFrame {
 		toolBar.add(btnSaveJob);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		getContentPane().add(tabbedPane, BorderLayout.NORTH);
+		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
 		JobInfoPanel jobInfoPanel = new JobInfoPanel();
 		tabbedPane.addTab("jobInfoPanel", null, jobInfoPanel, null);

@@ -52,6 +52,4 @@ public abstract class StarSaveFilesReader {
 
 
     public abstract InputStream getJobsStream();
-
-
 }

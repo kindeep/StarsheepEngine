@@ -1,5 +1,7 @@
 package engine.starsheep.space.Job;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * This class contains all metadata for a single job. 
@@ -10,11 +12,16 @@ package engine.starsheep.space.Job;
  * 
  * @see JobFlyerBuilder
  */
+
+@XmlType(propOrder={"name", "description" , "jobId", "staminaCost" })
 public class JobFlyer {
-	private Integer jobId;
-	private String name;
-	private String description;
-	private Integer staminaCost;
+	protected String jobId;
+	protected String name;
+	protected String description;
+	protected Integer staminaCost;
+	
+	//no-arg constructor required for XML marshalling.
+	public JobFlyer() {}
 	
 	public JobFlyer(JobFlyerBuilder builder) {
 		this.jobId = builder.getJobId();
@@ -23,19 +30,28 @@ public class JobFlyer {
 		this.staminaCost = builder.getStaminaCost();
 	}
 	
-	public Integer getJobId() {
+	@XmlElement(name = "id")
+	public String getJobId() {
 		return jobId;
 	}
 
+	@XmlElement(name = "name")
 	public String getName() {
 		return name;
 	}
 
+	@XmlElement(name = "description")
 	public String getDescription() {
 		return description;
 	}
 	
+	@XmlElement(name = "stamina_cost")
 	public Integer getStaminaCost() {
 		return staminaCost;
+	}
+	
+	@Override 
+	public String toString(){
+		return this.name;
 	}
 }

@@ -1,6 +1,14 @@
 package devTool.Panels;
 
-import java.util.LinkedList;
+import devTool.XMLBuilder.MissionsModel;
+import devTool.models.EditableMission;
+import devTool.models.EditableMissionBuilder;
+import engine.starsheep.space.Job.JobFlyer;
+
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
 
 import javax.swing.border.LineBorder;
 import javax.swing.JPanel;
@@ -11,19 +19,11 @@ import javax.swing.BoxLayout;
 import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
 
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
-
-import devTool.XMLBuilder.JobFlyerModel;
-import devTool.XMLBuilder.MissionModel;
-import devTool.XMLBuilder.MissionsModel;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.util.LinkedList;
 import java.awt.Color;
 import java.awt.BorderLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.ActionListener;
@@ -34,19 +34,24 @@ public class MissionsPanel extends JPanel {
 	private JTextField txtField_missionTitle;
 	private JTextField txtField_missionDescription;
 	private JTextField txtField_staminaCost;
-	private MissionModel currMission;
-	private LinkedList<JobFlyerModel> jobList;
-	private LinkedListModel<JobFlyerModel> jobListModel;
+	private EditableMission currMission;
+	private LinkedList<JobFlyer> jobList;
+	private LinkedListModel<JobFlyer> jobListModel;
 	private JTextField txtField_missionId;
-	private MissionsModel missionsModel;
 
+	LinkedListModel<EditableMission> missionsList = null;
 	/**
 	 * Create the panel.
 	 */
+	
+	public void updateMissions(LinkedList<EditableMission> missions) {
+		missionsList.changeList(missions);
+		
+	}
+	
 	public MissionsPanel(MissionsModel missionsModel) {
-		this.missionsModel = missionsModel;
 		setLayout(new BorderLayout(0, 0));
-		LinkedListModel<MissionModel> missionsList = new LinkedListModel<MissionModel>(missionsModel.getMissions());
+		missionsList = new LinkedListModel<EditableMission>(missionsModel.getMissions());
 		JPanel listPanel = new JPanel();
 		listPanel.setBorder(new LineBorder(Color.MAGENTA));
 		add(listPanel, BorderLayout.WEST);
@@ -62,7 +67,7 @@ public class MissionsPanel extends JPanel {
 		JButton btn_deleteMission = new JButton("Delete Mission");
 		missionBtns.add(btn_deleteMission);
 
-		LinkedList<MissionModel> missions = missionsModel.getMissions();
+		LinkedList<EditableMission> missions = missionsModel.getMissions();
 		for (int i = 0; i < missions.size(); i++) {
 			missionsList.push(missions.get(i));
 		}
@@ -92,7 +97,7 @@ public class MissionsPanel extends JPanel {
 
 		JLabel lbl_missionTitle = new JLabel("Mission title:");
 		centerPanel.add(lbl_missionTitle, "1, 3, center, default");
-		JList<MissionModel> list = new JList<MissionModel>();
+		JList<EditableMission> list = new JList<EditableMission>();
 		txtField_missionTitle = new JTextField();
 		
 		centerPanel.add(txtField_missionTitle, "2, 3, fill, default");
@@ -119,8 +124,8 @@ public class MissionsPanel extends JPanel {
 		centerPanel.add(btnBrowse, "2, 9");
 
 		if (currMission != null)
-			jobList = currMission.getJobFlyers();
-		jobListModel = new LinkedListModel<JobFlyerModel>(jobList);
+			jobList = (LinkedList<JobFlyer>) currMission.getJobFlyers();
+		jobListModel = new LinkedListModel<JobFlyer>(jobList);
 
 		listPanel.add(list);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -132,7 +137,7 @@ public class MissionsPanel extends JPanel {
 		rightPanel.setBorder(new LineBorder(Color.ORANGE));
 		rightPanel.setLayout(new BorderLayout(0, 0));
 
-		JList<JobFlyerModel> jList_jobList = new JList<JobFlyerModel>();
+		JList<JobFlyer> jList_jobList = new JList<JobFlyer>();
 		jList_jobList.setModel(jobListModel);
 		rightPanel.add(jList_jobList);
 
@@ -187,7 +192,7 @@ public class MissionsPanel extends JPanel {
 				txtField_staminaCost.setText(String.valueOf(currMission.getStaminaCost()));
 				txtField_missionId.setText(currMission.getId());
 
-				jobListModel.changeList(currMission.getJobFlyers());
+				jobListModel.changeList((LinkedList<JobFlyer>) currMission.getJobFlyers());
 				btn_editJob.setEnabled(true);
 				btn_newJob.setEnabled(true);
 			}
@@ -196,16 +201,16 @@ public class MissionsPanel extends JPanel {
 		btn_newMission.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				MissionModel mission = new MissionModel();
-				mission.setTitle("unnamed mission");
-				missionsList.push(mission);
+				EditableMissionBuilder mb = new EditableMissionBuilder();
+				mb.setName("unnamed mission");
+				missionsList.push(mb.build());
 			}
 		});
 		
 		txtField_missionTitle.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				currMission.setTitle(txtField_missionTitle.getText());
+				currMission.setName(txtField_missionTitle.getText());
 				list.updateUI();
 			}
 		});

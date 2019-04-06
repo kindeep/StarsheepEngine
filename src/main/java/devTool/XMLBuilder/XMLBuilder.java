@@ -6,7 +6,24 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
+import engine.starsheep.space.Job.Job;
+
 public class XMLBuilder {
+	private static XMLBuilder instance;
+	private String baseDir;
+	
+	private XMLBuilder() {
+	}
+	
+	public static XMLBuilder getInstance() {
+		if (instance == null)
+			instance = new XMLBuilder();
+		return instance;
+	}
+	
+	public void setBaseDir(File f) {
+		this.baseDir = f.getAbsolutePath() + "/";
+	}
 
 	public static void buildGameModelData(GameModel gm) {
 		JAXBContext jaxbContext;
@@ -20,26 +37,26 @@ public class XMLBuilder {
 		}
 	}
 	
-	public static void buildJobFile(JobModel jm) {
+	public void buildJobFile(Job job) {
 		JAXBContext jaxbContext;
 		try {
-			jaxbContext = JAXBContext.newInstance(JobModel.class);
+			jaxbContext = JAXBContext.newInstance(Job.class);
 			Marshaller marshaller = jaxbContext.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			String fileName = "j_" + jm.getId() + ".xml";
-			marshaller.marshal(jm, new File(fileName));
+			String fileName = "j_" + job.getId() + ".xml";
+			marshaller.marshal(job, new File(this.baseDir + "/jobs/" + fileName));
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public static void buildMissionsFile(MissionsModel mm) {
+	public void buildMissionsFile(MissionsModel mm) {
 		JAXBContext jaxbContext;
 		try {
 			jaxbContext = JAXBContext.newInstance(MissionsModel.class);
 			Marshaller marshaller = jaxbContext.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			marshaller.marshal(mm, new File("Missions"));
+			marshaller.marshal(mm, new File(this.baseDir + "missions"));
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
