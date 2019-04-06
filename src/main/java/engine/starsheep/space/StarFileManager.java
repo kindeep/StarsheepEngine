@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-public abstract class StarSaveFilesReader {
+public abstract class StarFileManager {
+	
+	//TODO: this class needs comments.
 
     public final String JOBS = "xml/jobs.xml";
     public final String MISSIONS = "xml/missions.xml";
 
-    public StarSaveFilesReader() {
+    public StarFileManager() {
 
     }
 

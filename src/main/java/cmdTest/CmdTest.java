@@ -17,7 +17,8 @@ public class CmdTest {
         StarGameView view = new SampleCmdView();
         StarPlayer player = new StarPlayer();
         FileManager saveFilesReader = new FileManager();
+        SampleSoundManager soundManager = new SampleSoundManager();
         view.log("Sample out");
-        StarGame game = new StarGame(view, player, saveFilesReader);
+        StarGame game = new StarGame(view, player, saveFilesReader, soundManager);
     }
 }

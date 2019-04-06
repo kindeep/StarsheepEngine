@@ -5,9 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-import engine.starsheep.space.StarSaveFilesReader;
+import engine.starsheep.space.StarFileManager;
 
-public class DevFileManager extends StarSaveFilesReader {
+public class DevFileManager extends StarFileManager {
 	File baseDir;
 
 	public DevFileManager(File baseDir) {

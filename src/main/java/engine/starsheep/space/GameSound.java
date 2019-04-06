@@ -1,5 +1,5 @@
 package engine.starsheep.space;
 
-interface GameSound {
+public interface GameSound {
 
 }

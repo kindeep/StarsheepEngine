@@ -24,9 +24,9 @@ import java.util.List;
 // TODO: StarReader should probably be a singlton, and thus so should
 // DevStarReader.
 public class StarReader {
-	protected static StarSaveFilesReader fileManager;
+	protected static StarFileManager fileManager;
 
-	public static void setFileManager(StarSaveFilesReader manager) {
+	public static void setFileManager(StarFileManager manager) {
 		StarReader.fileManager = manager;
 	}
 

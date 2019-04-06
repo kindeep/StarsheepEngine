@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import devTool.DevStarReader;
 import devTool.DevFileManager;
 import devTool.models.EditableMission;
-import engine.starsheep.space.StarSaveFilesReader;
+import engine.starsheep.space.StarFileManager;
 
 @XmlRootElement(name = "missions")
 public class MissionsModel {
@@ -39,7 +39,7 @@ public class MissionsModel {
 	}
 	
 	public void loadMissionsFile(File gameDir) {
-		StarSaveFilesReader wtf = new DevFileManager(gameDir);
+		StarFileManager wtf = new DevFileManager(gameDir);
 		DevStarReader.setFileManager(wtf);
 		this.missions = DevStarReader.readEditableMissions();
 	}

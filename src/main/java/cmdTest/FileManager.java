@@ -1,11 +1,11 @@
 package cmdTest;
 
-import engine.starsheep.space.StarSaveFilesReader;
+import engine.starsheep.space.StarFileManager;
 
 import java.io.File;
 import java.io.InputStream;
 
-public class FileManager extends StarSaveFilesReader {
+public class FileManager extends StarFileManager {
 
     @Override
     public InputStream getMissionsStream() {
