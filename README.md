@@ -1,21 +1,20 @@
 # StarsheepEngine
+<p align="center">
+  <img src="src/main/java/devTool/sheep.jpg" alt="Starsheep Engine" width="226">
+  <br>
+  <a href="https://github.com/kargq/StarsheepEngine"><img src="https://travis-ci.org/lord/slate.svg?branch=master" alt="Build Status"></a>
+</p>
 
-A game engine for creating decision based games.
+<p align="center">One small step for man, one giant leap for mankind.</p>
 
-The engine is designed to be portable to any Java based OS.
-
-The engine uses MVC: Model View Controller structure. The model remains the same, the 
-controller and the View can be implemented differently for different Enviornments.
+# Overview
+StarsheepEngine is a game engine for creating static decision-based games.
+This engine is designed to be portable to any Java based OS.
 
 # Running DevTool
 ```
 ./gradlew rundev
 ```
-
-# Interface: View
-
-This should probably be an interface, implement seperately for different systems. 
-Pass in the view as a parameter when initializing game possibly.
 
 # Notes
 
@@ -24,8 +23,8 @@ for the enviornment.
 
 # Questions
 
-- Do we need to worry about naming conflitcs? as in maybe some other engine might have
-a sound manager called GameSoundManager
+- Do we need to worry about naming conflicts? As in maybe some other engine might have
+a sound manager called GameSoundManager.
 
 # UML
 
