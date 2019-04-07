@@ -2,6 +2,7 @@ package engine.starsheep.space;
 
 import engine.starsheep.space.Job.JobFlyer;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,22 +19,22 @@ import javax.xml.bind.annotation.XmlType;
  * @see JobFlyer
  */
 
-//@XmlSeeAlso({EditableMission.class})
+// @XmlSeeAlso({EditableMission.class})
 @XmlRootElement(name = "mission")
-@XmlType(propOrder={"title", "description" , "id", "staminaCost", "jobFlyers"})
+@XmlType(propOrder = { "title", "description", "id", "staminaCost", "jobFlyers" })
 public class Mission {
 	protected String title;
 	protected String description;
 	protected String id;
 	protected List<JobFlyer> jobFlyers;
-	
-	//no-arg constructor required for XML marshalling.
-	public Mission() {}
+
+	// no-arg constructor required for XML marshalling.
+	public Mission() {
+		jobFlyers = new ArrayList<JobFlyer>();
+	}
 
 	public Mission(MissionBuilder builder) {
-		if (builder != null)
-			jobFlyers = builder.getJobFlyerList();
-
+		jobFlyers = builder.getJobFlyerList();
 		this.id = builder.getId();
 		this.title = builder.getName();
 		this.description = builder.getDescription();

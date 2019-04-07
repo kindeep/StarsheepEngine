@@ -12,8 +12,12 @@ public class FileManager extends StarFileManager {
         return null;
     }
 
-    @Override
     public InputStream getJobsStream() {
         return null;
     }
+
+	@Override
+	public InputStream getJobStreamEdit(String jobId) {
+		return null;
+	}
 }

@@ -26,9 +26,9 @@ public abstract class StarFileManager {
         }
     }
 
-    public InputStream getDefaultJobStream() {
+    public InputStream getJobStream(String jobId) {
         try {
-            InputStream saved = getMissionsStream();
+            InputStream saved = getJobStreamEdit(jobId);
             if (saved != null) {
                 return saved;
             } else
@@ -53,5 +53,5 @@ public abstract class StarFileManager {
     public abstract InputStream getMissionsStream();
 
 
-    public abstract InputStream getJobsStream();
+    public abstract InputStream getJobStreamEdit(String jobId);
 }

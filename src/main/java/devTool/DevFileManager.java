@@ -27,7 +27,14 @@ public class DevFileManager extends StarFileManager {
 	}
 
 	@Override
-	public InputStream getJobsStream() {
+	public InputStream getJobStreamEdit(String jobId) {
+		File missionsFile = new File(this.baseDir.getAbsolutePath() + "/jobs/j_" + jobId + ".xml");
+		try {
+			InputStream stream = new FileInputStream(missionsFile);
+			return stream;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 }
