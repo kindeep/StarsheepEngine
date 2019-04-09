@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class ChoiceBuilder {
 	
 	
-	private ArrayList<Choice> choices = null;
+	private ArrayList<String> choices = null;
 	private ArrayList<Integer> choicesIds = null;
 	private ArrayList<TraitDependency> traitDependencies = null;
 	private Double staminaCost = null;
@@ -15,7 +15,7 @@ public class ChoiceBuilder {
 	private int choiceId;
 	
 	public ChoiceBuilder() {
-		choices = new ArrayList<Choice>();
+		choices = new ArrayList<String>();
 		choicesIds = new ArrayList<Integer>();
 		traitDependencies = new ArrayList<TraitDependency>();
 	}
@@ -34,7 +34,7 @@ public class ChoiceBuilder {
 	}
 	
 	//getters
-	public ArrayList<Choice> getChoices(){
+	public ArrayList<String> getChoices(){
 		return this.choices;
 	}
 	
@@ -55,7 +55,7 @@ public class ChoiceBuilder {
 	}
 	
 	//setters
-	public void setChoices(ArrayList<Choice> choices) {
+	public void setChoices(ArrayList<String> choices) {
 		this.choices = choices;
 	}
 	

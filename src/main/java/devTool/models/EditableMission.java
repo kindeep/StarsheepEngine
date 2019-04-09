@@ -1,6 +1,5 @@
 package devTool.models;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import engine.starsheep.space.Mission;
@@ -16,24 +15,25 @@ import engine.starsheep.space.Job.JobFlyer;
 
 public class EditableMission extends Mission {
 
-	public EditableMission(EditableMissionBuilder builder) {
-		super(builder);
+	public EditableMission() {
+		super();
 	}
 	
 	/**
-	 * Gives devtool access to an editable linkedlist of jobflyers. 
+	 * Returns a list of EditableJobFlyers. JobFlyers are guaranteed 
+	 * to be EditableJobFlyer since only EditableJobFlyers can be added.
 	 */
 	@Override
-	public LinkedList<JobFlyer> getJobFlyers() {
-		return new LinkedList<JobFlyer>(this.jobFlyers);
+	public List<JobFlyer> getJobFlyers() {
+		return this.jobFlyers;
+	}
+	
+	public void addJobFlyer(EditableJobFlyer flyer) {
+		this.jobFlyers.add(flyer);
 	}
 
-	public void setJobFlyers(List<JobFlyer> jobFlyers) {
-		this.jobFlyers = jobFlyers;
-	}
-
-	public void setName(String name) {
-		this.title = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public void setDescription(String description) {

@@ -2,18 +2,21 @@ package engine.starsheep.space.Job;
 
 import engine.starsheep.space.Choice;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @see JobBuilder
  */
 
-@XmlRootElement(name = "mission")
+@XmlRootElement(name = "job")
 public class Job {
 	protected Choice head;
 	protected HashMap<Integer, Choice> choices;
@@ -23,7 +26,9 @@ public class Job {
 	protected String id;
 	
 	//no-arg constructor required for XML marshalling.
-	public Job() {}
+	public Job() {
+		choices = new HashMap<Integer, Choice>();
+	}
 	
 	public Job(JobBuilder jb) {
 		this.head = jb.getHead();
@@ -48,7 +53,12 @@ public class Job {
 		return description;
 	}
 	
-	@XmlElement(name = "choices")
+	@XmlElementWrapper(name = "choices")
+	@XmlElement(name = "choice")
+	public List<Choice> getChoicesForXML(){
+		return new ArrayList<Choice>(this.choices.values());
+	}
+	
 	public Map<Integer, Choice> getChoices() {
 		return Collections.unmodifiableMap(choices);
 	}

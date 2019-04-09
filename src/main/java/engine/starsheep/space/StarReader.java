@@ -106,6 +106,7 @@ public class StarReader {
 	 *            - The job id.
 	 * @return job object.
 	 */
+	//TODO: this jobid parameter should be a String.
 	public static Job readJob(int jobId) { // this method needs to be worked on.
 		XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 		InputStream in;
@@ -113,7 +114,7 @@ public class StarReader {
 			if (fileManager == null)
 				throw new Exception("Star file manager cannot be null in StarReader.");
 
-			in = fileManager.getDefaultJobStream();
+			in = fileManager.getJobStream(String.valueOf(jobId));
 			XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
 			JobBuilder jobBuilder = null;
 			ChoiceBuilder choiceBuilder = null;

@@ -56,7 +56,7 @@ public class XMLBuilder {
 			jaxbContext = JAXBContext.newInstance(MissionsModel.class);
 			Marshaller marshaller = jaxbContext.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			marshaller.marshal(mm, new File(this.baseDir + "missions"));
+			marshaller.marshal(mm, new File(this.baseDir + "missions.xml"));
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
