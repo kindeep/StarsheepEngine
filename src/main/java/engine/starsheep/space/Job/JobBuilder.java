@@ -8,12 +8,12 @@ import java.util.HashMap;
  * @see Job
  */
 public class JobBuilder {
-	Choice head = null;
-	String name = null;
-	String description = null;
-	Integer imageId = null;
-	Integer id = null;
-	HashMap<Integer, Choice> choices= new HashMap<Integer, Choice>();
+	protected Choice head = null;
+	protected String name = null;
+	protected String description = null;
+	protected String imageId = null;
+	protected String id = null;
+	protected HashMap<Integer, Choice> choices= new HashMap<Integer, Choice>();
 	
 	//build job.
 	public Job build() {
@@ -38,10 +38,10 @@ public class JobBuilder {
 	public String getDescription() {
 		return this.description;
 	}
-	public Integer getImageID() {
+	public String getImageID() {
 		return this.imageId;
 	}
-	public Integer getId() {
+	public String getId() {
 		return this.id;
 	}
 	
@@ -54,15 +54,15 @@ public class JobBuilder {
 		this.name = name;
 	}
 	
-	public void setHead(String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 	
-	public void setImageId(Integer imageId) {
+	public void setImageId(String imageId) {
 		this.imageId = imageId;
 	}
 	
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 }

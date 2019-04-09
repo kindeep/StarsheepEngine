@@ -14,7 +14,7 @@ public class MissionBuilder {
 	private List<JobFlyer> jobFlyers;
 	private String name = null;
 	private String description = null;
-	private Integer id = null;
+	private String id = null;
 	
 	public MissionBuilder() {
 		jobFlyers = new ArrayList<JobFlyer>();
@@ -37,13 +37,13 @@ public class MissionBuilder {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	
 	
 	//getters
-	public List<JobFlyer> getjobFlyerList(){
+	public List<JobFlyer> getJobFlyerList(){
 		return Collections.unmodifiableList(this.jobFlyers);
 	}
 	public String getName() {
@@ -52,7 +52,7 @@ public class MissionBuilder {
 	public String getDescription() {
 		return this.description;
 	}
-	public Integer getId() {
+	public String getId() {
 		return this.id;
 	}
 }
