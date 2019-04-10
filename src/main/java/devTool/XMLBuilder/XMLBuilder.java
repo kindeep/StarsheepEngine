@@ -25,7 +25,7 @@ public class XMLBuilder {
 		this.baseDir = f.getAbsolutePath() + "/";
 	}
 
-	public static void buildGameModelData(GameModel gm) {
+	public void buildGameModelData(GameModel gm) {
 		JAXBContext jaxbContext;
 		try {
 			jaxbContext = JAXBContext.newInstance(GameModel.class);

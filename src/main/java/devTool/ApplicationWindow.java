@@ -15,7 +15,6 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -23,7 +22,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
 
 public class ApplicationWindow {
 
@@ -111,6 +109,19 @@ public class ApplicationWindow {
 
 		JToolBar toolBar = new JToolBar();
 		mainFrame.getContentPane().add(toolBar, BorderLayout.NORTH);
+		
+		JButton saveBtn = new JButton("Save");
+		toolBar.add(saveBtn);
+		saveBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				XMLBuilder.getInstance().buildGameModelData(gameModel);
+				
+				//save changes in missions panel
+				XMLBuilder.getInstance().buildMissionsFile(missionsModel);
+			}
+		});
+		saveBtn.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		JButton newGameBtn = new JButton("New Game");
 		toolBar.add(newGameBtn);
@@ -139,19 +150,5 @@ public class ApplicationWindow {
 
 		JButton exportBtn = new JButton("Export Game");
 		toolBar.add(exportBtn);
-
-		JPanel panel = new JPanel();
-		toolBar.add(panel);
-		panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 0, 0));
-
-		JButton saveBtn = new JButton("Save");
-		saveBtn.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				XMLBuilder.buildGameModelData(gameModel);
-			}
-		});
-		saveBtn.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel.add(saveBtn);
 	}
 }

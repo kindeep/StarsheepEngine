@@ -1,6 +1,7 @@
 package devTool.Panels;
 
 import devTool.XMLBuilder.MissionsModel;
+import devTool.XMLBuilder.XMLBuilder;
 import devTool.models.EditableMission;
 import engine.starsheep.space.Job.JobFlyer;
 
@@ -39,23 +40,21 @@ public class MissionsPanel extends JPanel {
 	private LinkedListModel<JobFlyer> jobListModel;
 	private JTextField txtField_missionId;
 	private JobFlyer selectedJob = null;
-
-	LinkedListModel<EditableMission> missionsList = null;
+	private JList<EditableMission> list;
+	private LinkedListModel<EditableMission> missionsList = null;
 	/**
 	 * Create the panel.
 	 */
 
-	public void updateMissions(List<EditableMission> list) {
-		missionsList.clear();
-		System.out.println("list updated" + list.size());
-		missionsList.addAll(0, list);
-		missionsList.fireContentsChanged(0, missionsList.getSize()-1);
+	public void updateMissions(LinkedListModel<EditableMission> missionsList) {
+		this.missionsList = missionsList;
+		list.setModel(missionsList);
 	}
-
+	
 	public MissionsPanel(MissionsModel missionsModel) {
 
 		setLayout(new BorderLayout(0, 0));
-		missionsList = new LinkedListModel<EditableMission>();
+		
 		JPanel listPanel = new JPanel();
 		listPanel.setBorder(new LineBorder(Color.MAGENTA));
 		add(listPanel, BorderLayout.WEST);
@@ -97,7 +96,7 @@ public class MissionsPanel extends JPanel {
 
 		JLabel lbl_missionTitle = new JLabel("Mission title:");
 		centerPanel.add(lbl_missionTitle, "1, 3, center, default");
-		JList<EditableMission> list = new JList<EditableMission>();
+		list = new JList<EditableMission>();
 		txtField_missionTitle = new JTextField();
 
 		centerPanel.add(txtField_missionTitle, "2, 3, fill, default");
@@ -132,7 +131,8 @@ public class MissionsPanel extends JPanel {
 
 		listPanel.add(list);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.setModel(missionsList);
+		if (this.missionsList != null)
+			list.setModel(this.missionsList);
 
 		JPanel rightPanel = new JPanel();
 		add(rightPanel, BorderLayout.EAST);
@@ -163,16 +163,19 @@ public class MissionsPanel extends JPanel {
 		jobBtns.add(btn_newJob);
 
 		// listeners ---------------------
+		
+		//edit job button pressed.
 		btn_editJob.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JobEditor jobEditor = new JobEditor(jobListModel, missionsModel, selectedJob.getJobId(), currMission);
+				JobEditor jobEditor = new JobEditor(jobListModel, missionsModel, currMission, selectedJob.getJobId());
 				jobEditor.setVisible(true);
 			}
 		});
-
+		
+		//new job button pressed.
 		btn_newJob.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JobEditor jobEditor = new JobEditor(jobListModel, missionsModel);
+				JobEditor jobEditor = new JobEditor(jobListModel, missionsModel, currMission);
 				jobEditor.setVisible(true);
 			}
 		});
@@ -191,7 +194,8 @@ public class MissionsPanel extends JPanel {
 
 			}
 		});
-
+		
+		//clicked on a mission.
 		list.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -210,12 +214,14 @@ public class MissionsPanel extends JPanel {
 			}
 		});
 
+		//new mission button pressed.
 		btn_newMission.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				EditableMission mission = new EditableMission();
 				mission.setTitle("unnamed mission");
-				missionsList.push(mission);
+				missionsModel.addMission(mission);
+				
 			}
 		});
 

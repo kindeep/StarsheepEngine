@@ -9,6 +9,7 @@ import devTool.XMLBuilder.MissionsModel;
 import devTool.XMLBuilder.XMLBuilder;
 import devTool.models.EditableChoice;
 import devTool.models.EditableJob;
+import devTool.models.EditableJobFlyer;
 import devTool.models.EditableMission;
 
 import engine.starsheep.space.Job.JobFlyer;
@@ -36,13 +37,25 @@ public class JobEditor extends JFrame {
 	private EditableJob currJob = null;
 	private JobInfoPanel jobInfoPanel;
 
+	
+	
+	//common code for both constructors.
+	private void setup(LinkedListModel<JobFlyer> jobListModel, MissionsModel mm, EditableMission currMission) {
+		this.currMission = currMission;
+		this.missionsModel = mm;
+		this.jobList = jobListModel;
+	}
 	/**
 	 * Create the frame.
 	 * @wbp.parser.constructor
 	 */
-	public JobEditor(LinkedListModel<JobFlyer> jobListModel, MissionsModel mm) {
-		this.missionsModel = mm;
-		this.jobList = jobListModel;
+	
+	/**
+	 * This construcotr is used to open a brand new job.
+	 */
+	public JobEditor(LinkedListModel<JobFlyer> jobListModel, MissionsModel mm, EditableMission currMission) {
+		this.setup(jobListModel, mm, currMission);
+		
 		currJob = new EditableJob();
 		currJob.setId(UUID.randomUUID().toString());
 		choices = new LinkedList<EditableChoice>();
@@ -50,13 +63,13 @@ public class JobEditor extends JFrame {
 		initalize();
 	}
 	
-	/*TODO: complete constructor for editing existing jobs.
+	/** 
+	 * This constructor is used to open an existing job.
+	 * 
 	 * @param mm MissionsModel required to update missions.xml upon save.
 	 */
-	public JobEditor(LinkedListModel<JobFlyer> jobList, MissionsModel mm, String jobId, EditableMission currMission) {
-		this.currMission = currMission;
-		this.missionsModel = mm;
-		this.jobList = jobList;
+	public JobEditor(LinkedListModel<JobFlyer> jobListModel, MissionsModel mm, EditableMission currMission, String jobId) {
+		this.setup(jobListModel, mm, currMission);
 		
 		//read the job.xml file. load the data into a EditableJob object.
 		currJob = DevStarReader.readJob(jobId);
@@ -70,31 +83,19 @@ public class JobEditor extends JFrame {
 		XMLBuilder.getInstance().buildJobFile(currJob);
 		
 		///create job flyer and add to job list.
-		JobFlyerBuilder flyerBuilder = new JobFlyerBuilder();
-		flyerBuilder.setDescription(currJob.getDescription());
-		flyerBuilder.setJobId(currJob.getId());
-		flyerBuilder.setName(currJob.getName());
-		JobFlyer newFlyer = flyerBuilder.build();
+		EditableJobFlyer flyer = new EditableJobFlyer();
+		flyer.setDescription(currJob.getDescription());
+		flyer.setJobId(currJob.getId());
+		flyer.setName(currJob.getName());
 		
-		this.updateJobList(newFlyer);
+		//update the LinkedListModel<JobFLyer>
+		this.updateJobList(flyer);
 		
-		
-		//-----------------------------------
-		List<EditableMission> missions = this.missionsModel.getMissions();
-		String id = currMission.getId();
-		int index = -1;
-		for (int i = 0; i < missions.size(); i++) { //getting the current mission. 
-			if (missions.get(i).getId() == id) {
-				index = i;
-				break;
-			}
-		}
-		List<JobFlyer> flyers = missions.get(index).getJobFlyers(); //getting list of job flyers for this mission.
-		
-		//clear the list, and add items from the LinkedListModel of JobFlyers.
+		//update the jobList in MissionsModel.
+		List<JobFlyer> flyers = currMission.getJobFlyers();
 		flyers.clear();
+		System.out.println("JobList size: " + jobList);
 		flyers.addAll(jobList);
-		//-----------------------------------
 		
 		//update Missions xml.
 		XMLBuilder.getInstance().buildMissionsFile(this.missionsModel);
@@ -108,15 +109,22 @@ public class JobEditor extends JFrame {
 	 * @param newFlyer The updated jobflyer.
 	 */
 	private void updateJobList(JobFlyer newFlyer) {
+		if (jobList.getSize() == 0) {
+			this.jobList.add(newFlyer);
+			return;
+		}
+		
 		for (int i = 0; i < jobList.getSize(); i++) {
 			JobFlyer flyer = jobList.getElementAt(i);
 			if (flyer.getJobId().compareTo(currJob.getId()) == 0) { //replace jobflyer.
 					jobList.set(i, newFlyer);
-					System.out.println("updated");
+					System.out.println("repaced a jobflyer.");
 					break;
 			} else {
-				if (i == jobList.getSize() -1 )
+				if (i == jobList.getSize() -1 ) {
 					this.jobList.add(newFlyer); //add new jobflyer.
+					System.out.println("added a jobflyer.");
+				}
 			}
 		}
 	}

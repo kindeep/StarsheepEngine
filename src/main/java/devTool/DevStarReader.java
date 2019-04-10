@@ -3,7 +3,6 @@ package devTool;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 import devTool.models.EditableChoice;
@@ -11,13 +10,8 @@ import devTool.models.EditableJob;
 import devTool.models.EditableJobFlyer;
 import devTool.models.EditableMission;
 import devTool.models.EditableTraitDependency;
-import engine.starsheep.space.Choice;
 import engine.starsheep.space.StarReader;
-import engine.starsheep.space.Job.ChoiceBuilder;
-import engine.starsheep.space.Job.Job;
-import engine.starsheep.space.Job.JobBuilder;
 import engine.starsheep.space.Job.JobFlyerBuilder;
-import engine.starsheep.space.Job.TraitDependency;
 
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventReader;
@@ -28,6 +22,8 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+import com.jgoodies.common.collect.LinkedListModel;
+
 public class DevStarReader extends StarReader {
 	/**
 	 * Reads the Missions.xml file and returns a List of EditableMissions.
@@ -35,12 +31,12 @@ public class DevStarReader extends StarReader {
 	 * @see EditableMission
 	 * @return A List of editable missions.
 	 */
-	public static LinkedList<EditableMission> readEditableMissions() {
+	public static LinkedListModel<EditableMission> readEditableMissions() {
 
 		XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 		InputStream in;
 
-		LinkedList<EditableMission> editableMissions = new LinkedList<EditableMission>();
+		LinkedListModel<EditableMission> editableMissions = new LinkedListModel<EditableMission>();
 		EditableMission mission = null;
 		JobFlyerBuilder jobFlyerBuilder = null;
 

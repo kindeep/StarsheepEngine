@@ -7,6 +7,8 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.jgoodies.common.collect.LinkedListModel;
+
 import devTool.DevStarReader;
 import devTool.DevFileManager;
 import devTool.models.EditableMission;
@@ -14,10 +16,10 @@ import engine.starsheep.space.StarFileManager;
 
 @XmlRootElement(name = "missions")
 public class MissionsModel {
-	private List<EditableMission> missions;
+	private LinkedListModel<EditableMission> missions;
 
 	public MissionsModel() {
-		missions = new LinkedList<EditableMission>();
+		missions = new LinkedListModel<EditableMission>();
 	}
 
 	// helper
@@ -35,7 +37,7 @@ public class MissionsModel {
 
 	// getter
 	@XmlElement(name = "mission")
-	public List<EditableMission> getMissions() {
+	public LinkedListModel<EditableMission> getMissions() {
 		return this.missions;
 	}
 	
