@@ -15,20 +15,20 @@ import com.jgoodies.common.collect.ArrayListModel;
  */
 
 @XmlRootElement(name = "mission")
-public class EditableMission{
-	
+public class EditableMission {
+
 	@XmlElement(name = "name")
 	public String title;
-	
+
 	@XmlElement(name = "description")
 	public String description;
-	
+
 	@XmlElement(name = "id")
 	public String id;
-	
+
 	@XmlElement(name = "stamina-cost")
 	public String staminaCost;
-	
+
 	@XmlElementWrapper(name = "jobs")
 	@XmlElement(name = "job")
 	public ArrayListModel<EditableJobFlyer> jobFlyers;
@@ -36,7 +36,7 @@ public class EditableMission{
 	public EditableMission() {
 		jobFlyers = new ArrayListModel<EditableJobFlyer>();
 	}
-	
+
 	public void addJobFlyer(EditableJobFlyer flyer) {
 		this.jobFlyers.add(flyer);
 	}

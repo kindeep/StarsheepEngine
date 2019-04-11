@@ -1,35 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <missions>
     <mission>
-        <name>New York City</name>
-        <id>0</id>
+        <name>da</name>
+        <id>d9d3be10-7ac2-4d95-9042-976d2e44a2ba</id>
         <jobs>
             <job>
-                <id>247847a0-eeed-41bb-a941-32e45684ae40</id>
-                <name>rbc-no more</name>
-                <description>red hoodie</description>
-            </job>
-            <job>
-                <id>9282e7f1-94d7-4b30-bead-d32b34faa640</id>
-                <name>v for vendetta</name>
-                <description>damnnn v</description>
+                <id>d8463b37-ffa8-4abb-b7c7-816039714b44</id>
+                <name>jobone</name>
+                <description>kill noobs</description>
             </job>
         </jobs>
     </mission>
     <mission>
-        <name>stunts</name>
-        <id>8e2509bc-5f21-45a7-9620-400346f9e0b9</id>
+        <name>yeetboy mission</name>
+        <id>c2812877-ea30-4085-9829-f3f8e2a809ff</id>
         <jobs>
             <job>
-                <id>82e5904b-e5b4-466d-a7b2-247823952f1b</id>
-                <name>gravy</name>
-                <description>gravy train</description>
+                <id>24d1852d-4688-4d77-ae78-91df239e7f1f</id>
+                <name>lfmalfmlamflamflamfa</name>
+                <description>heakjdlkasd</description>
             </job>
         </jobs>
-    </mission>
-    <mission>
-        <name>boston city</name>
-        <id>7fcd276c-fece-4c30-91ec-4597c9e2d5b5</id>
-        <jobs/>
     </mission>
 </missions>

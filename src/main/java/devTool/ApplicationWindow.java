@@ -69,7 +69,7 @@ public class ApplicationWindow {
 		this.missionsModel = DevStarReader.readEditableMissions();
 
 
-		missionsPanel.updateMissions(this.missionsModel.getMissions()); // update missions panel.
+		missionsPanel.updateMissions(this.missionsModel); // update missions panel.
 
 		// TODO: update traits panel.
 
@@ -105,7 +105,7 @@ public class ApplicationWindow {
 		tabbedPane.addTab("Missions", null, Missions, null);
 		Missions.setLayout(new BorderLayout(0, 0));
 
-		missionsPanel = new MissionsPanel(missionsModel);
+		missionsPanel = new MissionsPanel();
 		Missions.add(missionsPanel);
 
 		JPanel Traits = new JPanel();
