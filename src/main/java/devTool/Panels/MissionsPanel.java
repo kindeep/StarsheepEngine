@@ -177,6 +177,7 @@ public class MissionsPanel extends JPanel {
 			}
 		});
 
+		//delete a mission.
 		btn_deleteMission.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

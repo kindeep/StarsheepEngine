@@ -113,6 +113,7 @@ public class JobEditor extends JFrame {
 	
 	private void initalize() {
 		this.setTitle("Job Editor");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		this.setSize(725, 455);
 		
@@ -133,7 +134,7 @@ public class JobEditor extends JFrame {
 		jobInfoPanel = new JobInfoPanel(currJob);
 		tabbedPane.addTab("jobInfoPanel", null, jobInfoPanel, null);
 		
-		ChoicesPanel choicesPanel = new ChoicesPanel();
+		ChoicesPanel choicesPanel = new ChoicesPanel(currJob);
 		tabbedPane.addTab("Choices", null, choicesPanel, null);
 	}
 }

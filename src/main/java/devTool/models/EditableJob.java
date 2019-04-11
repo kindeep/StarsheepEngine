@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.jgoodies.common.collect.ArrayListModel;
+import com.jgoodies.common.collect.LinkedListModel;
 
 @XmlRootElement(name = "job")
 public class EditableJob {
@@ -26,10 +27,10 @@ public class EditableJob {
 	
 	@XmlElementWrapper(name = "choices")
 	@XmlElement(name = "choice")
-	public ArrayListModel<EditableChoice> choices;
+	public LinkedListModel<EditableChoice> choices = null;
 	
 	public EditableJob() {
-		choices = new ArrayListModel<EditableChoice>();
+		choices = new LinkedListModel<EditableChoice>();
 	}
 	
 	public void addChoice(EditableChoice choice) {
