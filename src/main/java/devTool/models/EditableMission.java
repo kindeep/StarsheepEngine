@@ -1,9 +1,10 @@
 package devTool.models;
 
-import java.util.List;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
-import engine.starsheep.space.Mission;
-import engine.starsheep.space.Job.JobFlyer;
+import com.jgoodies.common.collect.ArrayListModel;
 
 /**
  * An EditableMission is an extension of Mission that allows for the ability to
@@ -13,39 +14,31 @@ import engine.starsheep.space.Job.JobFlyer;
  *
  */
 
-public class EditableMission extends Mission {
+@XmlRootElement(name = "mission")
+public class EditableMission{
+	
+	@XmlElement(name = "name")
+	public String title;
+	
+	@XmlElement(name = "description")
+	public String description;
+	
+	@XmlElement(name = "id")
+	public String id;
+	
+	@XmlElement(name = "stamina-cost")
+	public String staminaCost;
+	
+	@XmlElementWrapper(name = "jobs")
+	@XmlElement(name = "job")
+	public ArrayListModel<EditableJobFlyer> jobFlyers;
 
 	public EditableMission() {
-		super();
-	}
-	
-	/**
-	 * Returns a list of EditableJobFlyers. JobFlyers are guaranteed 
-	 * to be EditableJobFlyer since only EditableJobFlyers can be added.
-	 */
-	@Override
-	public List<JobFlyer> getJobFlyers() {
-		return this.jobFlyers;
+		jobFlyers = new ArrayListModel<EditableJobFlyer>();
 	}
 	
 	public void addJobFlyer(EditableJobFlyer flyer) {
 		this.jobFlyers.add(flyer);
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public Integer getStaminaCost() {
-		return 999;
 	}
 
 	@Override

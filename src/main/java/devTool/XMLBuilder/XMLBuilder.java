@@ -6,7 +6,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
-import engine.starsheep.space.Job.Job;
+import devTool.models.EditableJob;
 
 public class XMLBuilder {
 	private static XMLBuilder instance;
@@ -37,13 +37,13 @@ public class XMLBuilder {
 		}
 	}
 	
-	public void buildJobFile(Job job) {
+	public void buildJobFile(EditableJob job) {
 		JAXBContext jaxbContext;
 		try {
-			jaxbContext = JAXBContext.newInstance(Job.class);
+			jaxbContext = JAXBContext.newInstance(EditableJob.class);
 			Marshaller marshaller = jaxbContext.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			String fileName = "j_" + job.getId() + ".xml";
+			String fileName = "j_" + job.id + ".xml";
 			marshaller.marshal(job, new File(this.baseDir + "/jobs/" + fileName));
 		} catch (JAXBException e) {
 			e.printStackTrace();

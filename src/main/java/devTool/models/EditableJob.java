@@ -1,47 +1,43 @@
 package devTool.models;
 
-import engine.starsheep.space.Job.Job;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
-public class EditableJob extends Job {
+import com.jgoodies.common.collect.ArrayListModel;
 
+@XmlRootElement(name = "job")
+public class EditableJob {
+	
+	@XmlElement(name = "title")
+	public String name;
+	
+	@XmlElement(name = "description")
+	public String description;
+	
+	@XmlElement(name = "id")
+	public String id;
+	
+	@XmlElement(name = "image-id")
+	public String imageID;
+	
+	@XmlElement(name = "head-choice")
+	public EditableChoice head;
+	
+	@XmlElementWrapper(name = "choices")
+	@XmlElement(name = "choice")
+	public ArrayListModel<EditableChoice> choices;
+	
 	public EditableJob() {
-		super();
+		choices = new ArrayListModel<EditableChoice>();
 	}
 	
-	//helper
-	public void setChoice(int index, EditableChoice choice) {
-		this.choices.put(index, choice);
+	public void addChoice(EditableChoice choice) {
+		this.choices.add(choice);
 	}
 	
-	/**
-	 *  Only EditableChoices can be added into the map, and so 
-	 *  casting a choice from the map back into an EditableChoice will always work.
-	 *  
-	 * @param id The id of the choice.
-	 * @return The EditableChoice that matches the id.
-	 */
-	public EditableChoice getChoice(int id) {
-		return (EditableChoice) this.choices.get(id);
-	}
-	
-	public void removeChoice(int index) {
-		this.choices.remove(index);
-	}
-	
-	//setters
-	public void setHead(EditableChoice head) {
-		this.head = head;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public void setImageID(String imageID) {
-		this.imageID = imageID;
-	}
-	public void setId(String id) {
-		this.id = id;
+	@Override
+	public String toString() {
+		return this.name;
 	}
 }

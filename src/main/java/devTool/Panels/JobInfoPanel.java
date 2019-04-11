@@ -34,9 +34,9 @@ public class JobInfoPanel extends JPanel {
 		
 		if (currJob != null) {
 			this.currJob = currJob;
-			jobName = currJob.getName();
-			description = currJob.getDescription();
-			id = currJob.getId();
+			jobName = currJob.name;
+			description = currJob.description;
+			id = currJob.id;
 		}
 		initalize();
 		
@@ -46,8 +46,8 @@ public class JobInfoPanel extends JPanel {
 	}
 	
 	public void save() {
-		currJob.setName(txtField_jobName.getText());
-		currJob.setDescription(txtField_description.getText());
+		currJob.name = txtField_jobName.getText();
+		currJob.description = txtField_description.getText();
 	}
 	
 	public void initalize() {

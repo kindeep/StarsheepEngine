@@ -1,25 +1,27 @@
 package devTool.models;
 
-import engine.starsheep.space.Job.JobFlyer;
-import engine.starsheep.space.Job.JobFlyerBuilder;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
-public class EditableJobFlyer extends JobFlyer {
+@XmlRootElement(name = "job")
+public class EditableJobFlyer{
+	
+	@XmlElement(name = "id")
+	public String id;
+	
+	@XmlElement(name = "name")
+	public String name;
+	
+	@XmlElement(name = "description")
+	public String description;
+	
+	@XmlElement(name = "stamina-cost")
+	public Integer staminaCost;
 
-	public EditableJobFlyer() {
-		super();
-	}
-
-	//setters
-	public void setJobId(String jobId) {
-		this.jobId = jobId;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public void setStaminaCost(Integer staminaCost) {
-		this.staminaCost = staminaCost;
+	public EditableJobFlyer() {}
+	
+	@Override
+	public String toString() {
+		return this.name;
 	}
 }

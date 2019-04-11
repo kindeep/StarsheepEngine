@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 
+import com.jgoodies.common.collect.ArrayListModel;
 import com.jgoodies.common.collect.LinkedListModel;
 
 import javax.swing.JButton;
@@ -32,7 +33,7 @@ public class JobEditor extends JFrame {
 	
 	private EditableMission currMission;
 	private LinkedList<EditableChoice> choices;
-	private LinkedListModel<JobFlyer> jobList;
+	private ArrayListModel<EditableJobFlyer> jobList;
 	private MissionsModel missionsModel;
 	private EditableJob currJob = null;
 	private JobInfoPanel jobInfoPanel;
@@ -40,7 +41,7 @@ public class JobEditor extends JFrame {
 	
 	
 	//common code for both constructors.
-	private void setup(LinkedListModel<JobFlyer> jobListModel, MissionsModel mm, EditableMission currMission) {
+	private void setup(ArrayListModel<EditableJobFlyer> jobListModel, MissionsModel mm, EditableMission currMission) {
 		this.currMission = currMission;
 		this.missionsModel = mm;
 		this.jobList = jobListModel;
@@ -53,11 +54,11 @@ public class JobEditor extends JFrame {
 	/**
 	 * This construcotr is used to open a brand new job.
 	 */
-	public JobEditor(LinkedListModel<JobFlyer> jobListModel, MissionsModel mm, EditableMission currMission) {
+	public JobEditor(ArrayListModel<EditableJobFlyer> jobListModel, MissionsModel mm, EditableMission currMission) {
 		this.setup(jobListModel, mm, currMission);
 		
 		currJob = new EditableJob();
-		currJob.setId(UUID.randomUUID().toString());
+		currJob.id = UUID.randomUUID().toString();
 		choices = new LinkedList<EditableChoice>();
 		
 		initalize();
@@ -68,7 +69,7 @@ public class JobEditor extends JFrame {
 	 * 
 	 * @param mm MissionsModel required to update missions.xml upon save.
 	 */
-	public JobEditor(LinkedListModel<JobFlyer> jobListModel, MissionsModel mm, EditableMission currMission, String jobId) {
+	public JobEditor(ArrayListModel<EditableJobFlyer> jobListModel, MissionsModel mm, EditableMission currMission, String jobId) {
 		this.setup(jobListModel, mm, currMission);
 		
 		//read the job.xml file. load the data into a EditableJob object.
@@ -84,15 +85,15 @@ public class JobEditor extends JFrame {
 		
 		///create job flyer and add to job list.
 		EditableJobFlyer flyer = new EditableJobFlyer();
-		flyer.setDescription(currJob.getDescription());
-		flyer.setJobId(currJob.getId());
-		flyer.setName(currJob.getName());
+		flyer.description = currJob.description;
+		flyer.id = currJob.id;
+		flyer.name = currJob.name;
 		
 		//update the LinkedListModel<JobFLyer>
 		this.updateJobList(flyer);
 		
 		//update the jobList in MissionsModel.
-		List<JobFlyer> flyers = currMission.getJobFlyers();
+		List<EditableJobFlyer> flyers = currMission.jobFlyers;
 		flyers.clear();
 		System.out.println("JobList size: " + jobList);
 		flyers.addAll(jobList);
@@ -108,15 +109,15 @@ public class JobEditor extends JFrame {
 	 * 
 	 * @param newFlyer The updated jobflyer.
 	 */
-	private void updateJobList(JobFlyer newFlyer) {
+	private void updateJobList(EditableJobFlyer newFlyer) {
 		if (jobList.getSize() == 0) {
 			this.jobList.add(newFlyer);
 			return;
 		}
 		
 		for (int i = 0; i < jobList.getSize(); i++) {
-			JobFlyer flyer = jobList.getElementAt(i);
-			if (flyer.getJobId().compareTo(currJob.getId()) == 0) { //replace jobflyer.
+			EditableJobFlyer flyer = jobList.get(i);
+			if (flyer.id.compareTo(currJob.id) == 0) { //replace jobflyer.
 					jobList.set(i, newFlyer);
 					System.out.println("repaced a jobflyer.");
 					break;

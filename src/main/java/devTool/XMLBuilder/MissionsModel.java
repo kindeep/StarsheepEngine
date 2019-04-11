@@ -1,25 +1,23 @@
 package devTool.XMLBuilder;
 
 import java.io.File;
-import java.util.LinkedList;
-import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.jgoodies.common.collect.LinkedListModel;
+import com.jgoodies.common.collect.ArrayListModel;
 
-import devTool.DevStarReader;
 import devTool.DevFileManager;
+import devTool.DevStarReader;
 import devTool.models.EditableMission;
 import engine.starsheep.space.StarFileManager;
 
 @XmlRootElement(name = "missions")
 public class MissionsModel {
-	private LinkedListModel<EditableMission> missions;
+	private ArrayListModel<EditableMission> missions;
 
 	public MissionsModel() {
-		missions = new LinkedListModel<EditableMission>();
+		missions = new ArrayListModel<EditableMission>();
 	}
 
 	// helper
@@ -37,7 +35,7 @@ public class MissionsModel {
 
 	// getter
 	@XmlElement(name = "mission")
-	public LinkedListModel<EditableMission> getMissions() {
+	public ArrayListModel<EditableMission> getMissions() {
 		return this.missions;
 	}
 	

@@ -45,7 +45,7 @@ public class JobFlyer {
 		return description;
 	}
 	
-	@XmlElement(name = "stamina_cost")
+	@XmlElement(name = "stamina-cost")
 	public Integer getStaminaCost() {
 		return staminaCost;
 	}

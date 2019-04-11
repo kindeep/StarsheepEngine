@@ -1,17 +1,21 @@
 package devTool.models;
 
-import engine.starsheep.space.Job.TraitDependency;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 
-public class EditableTraitDependency extends TraitDependency{
-
-	public EditableTraitDependency() {
-		super(null, 0);
-	}
+@XmlRootElement(name = "trait-dependency")
+public class EditableTraitDependency {
 	
-	public void setName(String name) {
-		this.name = name;
-	}
-	public void setWeight(int weight) {
-		this.weight = weight;
+	@XmlAttribute(name = "name")
+	public String name;
+	
+	@XmlAttribute(name = "weight")
+	public int weight;
+
+	public EditableTraitDependency() {}
+	
+	@Override
+	public String toString() {
+		return this.name;
 	}
 }
