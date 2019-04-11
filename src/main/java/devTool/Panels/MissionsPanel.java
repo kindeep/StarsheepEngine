@@ -164,7 +164,7 @@ public class MissionsPanel extends JPanel {
 		//edit job button pressed.
 		btn_editJob.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JobEditor jobEditor = new JobEditor(jobListModel, missionsModel, currMission, selectedJob.id);
+				JobEditor jobEditor = new JobEditor(missionsModel, currMission, selectedJob.id);
 				jobEditor.setVisible(true);
 			}
 		});
@@ -172,7 +172,7 @@ public class MissionsPanel extends JPanel {
 		//new job button pressed.
 		btn_newJob.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JobEditor jobEditor = new JobEditor(jobListModel, missionsModel, currMission);
+				JobEditor jobEditor = new JobEditor(missionsModel, currMission);
 				jobEditor.setVisible(true);
 			}
 		});
