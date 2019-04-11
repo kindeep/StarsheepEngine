@@ -1,6 +1,5 @@
 package engine.starsheep.space;
 
-import engine.starsheep.space.Job.Job;
 import engine.starsheep.space.Job.TraitDependency;
 import engine.starsheep.space.Trait.TraitManager;
 
@@ -11,10 +10,10 @@ public class StarGame {
     private TraitManager traitManager;
     private Mission currentMission;
     private Choice currentChoice;
-
     private StarGameView display;
     private StarPlayer player;
     private GameSoundManager soundManager;
+    private StarController controller;
 
     /**
      * Need some way to read the game state from XML files. Possibly another class
@@ -26,17 +25,19 @@ public class StarGame {
      *                different enviornments.
      */
     public StarGame(StarGameView display, StarPlayer player, StarFileManager fileManager, GameSoundManager soundManager) {
-    	StarReader.setFileManager(fileManager); //give StarReader class the filemanager.
-    	Controller.setGame(this);
-    	this.soundManager = soundManager;
+        StarReader.setFileManager(fileManager); //give StarReader class the filemanager.
+        StarController.setGame(this);
+        this.soundManager = soundManager;
         this.traitManager = TraitManager.getInstance();
         this.missionsManager = MissionsManager.getInstance();
         this.currentMission = null;
         this.currentChoice = null;
         this.display = display;
         this.player = player;
+
+
     }
-        
+
     public void setMission(Mission m) {
         currentMission = m;
     }
@@ -44,15 +45,16 @@ public class StarGame {
     public void setChoice(Choice c) {
         currentChoice = c;
     }
-    
-    public List<Mission> getMissions(){
-    	return this.missionsManager.getMissions();
+
+    public List<Mission> getMissions() {
+        return this.missionsManager.getMissions();
     }
-    
+
     //this method is used to expose the controller outside of the engine. to be connected with the view.
-    public Controller getController() {
-    	return Controller.getInstance();
+    public StarController getController() {
+        return StarController.getInstance();
     }
+
 
     public boolean calculateSuccess(List<TraitDependency> traitDependencies) {
 
@@ -64,6 +66,10 @@ public class StarGame {
             int weight = td.getWeight();
         }
         return true;
+    }
+
+    public StarGameView getView() {
+        return this.display;
     }
 }
 

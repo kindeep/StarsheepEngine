@@ -2,14 +2,25 @@ package engine.starsheep.space;
 
 /**
  * Defies the StarGameView in MVC
- *
- *
  */
-public interface StarGameView {
+public abstract class StarGameView {
+
+    private StarTab currStarTab = StarTab.HOME;
 
     /**
      * Similar to working of System.out.println, log implementations can differ.
+     *
+     * uses toString on object
      */
-    public void log(Object toPrint);
+    public abstract void log(Object toPrint);
+
+
+    public void changeToTab(StarTab starTab) {
+        currStarTab = starTab;
+    }
+
+    public StarTab getCurrentTab(){
+        return this.currStarTab;
+    }
 
 }
