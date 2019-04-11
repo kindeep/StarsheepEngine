@@ -20,4 +20,9 @@ public class FileManager extends StarFileManager {
 	public InputStream getJobStreamEdit(String jobId) {
 		return null;
 	}
+
+	@Override
+	public File getBaseDirectory() {
+		return null;
+	}
 }

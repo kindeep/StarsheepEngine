@@ -29,7 +29,7 @@ public class ApplicationWindow {
 	private GameModel gameModel;
 	private MissionsModel missionsModel;
 	private XMLBuilder xml;
-	
+
 	MissionsPanel missionsPanel = null;
 
 	/**
@@ -52,24 +52,28 @@ public class ApplicationWindow {
 	 * Create the application.
 	 */
 	public ApplicationWindow() {
-		//set default save location.
+		// set default save location.
 		xml = XMLBuilder.getInstance();
 		xml.setBaseDir(new File("."));
-		
+
 		initialize();
 	}
-	
+
 	private void loadDirectory(File directory) {
-		//set as write location for xmlBuilder.
+		// set as write location for xmlBuilder.
 		xml.setBaseDir(directory);
-		
-		this.missionsModel.loadMissionsFile(directory); //read mission.xml
-		
-		missionsPanel.updateMissions(this.missionsModel.getMissions());  //update missions panel.
-		
-		//TODO: update traits panel.
-		
-		//TODO: update general panel.
+
+		DevFileManager wtf = DevFileManager.getInstance();
+		wtf.setBaseDirectory(directory);
+		DevStarReader.setFileManager(wtf);
+		this.missionsModel = DevStarReader.readEditableMissions();
+
+
+		missionsPanel.updateMissions(this.missionsModel.getMissions()); // update missions panel.
+
+		// TODO: update traits panel.
+
+		// TODO: update general panel.
 	}
 
 	/**
@@ -109,15 +113,15 @@ public class ApplicationWindow {
 
 		JToolBar toolBar = new JToolBar();
 		mainFrame.getContentPane().add(toolBar, BorderLayout.NORTH);
-		
+
 		JButton saveBtn = new JButton("Save");
 		toolBar.add(saveBtn);
 		saveBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				XMLBuilder.getInstance().buildGameModelData(gameModel);
-				
-				//save changes in missions panel
+
+				// save changes in missions panel
 				XMLBuilder.getInstance().buildMissionsFile(missionsModel);
 			}
 		});
@@ -127,7 +131,7 @@ public class ApplicationWindow {
 		toolBar.add(newGameBtn);
 
 		JButton openGameBtn = new JButton("Open Game");
-		
+
 		openGameBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser chooser = new JFileChooser();
@@ -135,17 +139,17 @@ public class ApplicationWindow {
 				chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 				chooser.setAcceptAllFileFilterUsed(false);
 				int returnVal = chooser.showOpenDialog(mainFrame);
-				
+
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File directory = chooser.getSelectedFile();
-					//TODO: save current game before loading new game.
-					
-					//load current game.
+					// TODO: save current game before loading new game.
+
+					// load current game.
 					loadDirectory(directory);
 				}
 			}
 		});
-		
+
 		toolBar.add(openGameBtn);
 
 		JButton exportBtn = new JButton("Export Game");

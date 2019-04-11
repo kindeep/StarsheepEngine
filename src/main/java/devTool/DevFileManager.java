@@ -8,16 +8,31 @@ import java.io.InputStream;
 import engine.starsheep.space.StarFileManager;
 
 public class DevFileManager extends StarFileManager {
-	File baseDir;
-
-	public DevFileManager(File baseDir) {
-		this.baseDir = baseDir;
+	
+	private static DevFileManager instance;
+	private File baseDirectory;
+	
+	private DevFileManager() {}
+	
+	public static DevFileManager getInstance() {
+		if (instance == null)
+			instance = new DevFileManager();
+		return instance;
+	}
+	
+	public void setBaseDirectory(File baseDir) {
+		this.baseDirectory = baseDir;
+	}
+	
+	@Override
+	public File getBaseDirectory() {
+		return instance.baseDirectory;
 	}
 
 	@Override
 	public InputStream getMissionsStream() {
-		File missionsFile = new File(this.baseDir.getAbsolutePath() + "/missions.xml");
 		try {
+			File missionsFile = new File(instance.baseDirectory.getAbsolutePath() + "/missions.xml");
 			InputStream stream = new FileInputStream(missionsFile);
 			return stream;
 		} catch (FileNotFoundException e) {
@@ -28,8 +43,8 @@ public class DevFileManager extends StarFileManager {
 
 	@Override
 	public InputStream getJobStreamEdit(String jobId) {
-		File missionsFile = new File(this.baseDir.getAbsolutePath() + "/jobs/j_" + jobId + ".xml");
 		try {
+			File missionsFile = new File(instance.baseDirectory.getAbsolutePath() + "/jobs/j_" + jobId + ".xml");
 			InputStream stream = new FileInputStream(missionsFile);
 			return stream;
 		} catch (FileNotFoundException e) {

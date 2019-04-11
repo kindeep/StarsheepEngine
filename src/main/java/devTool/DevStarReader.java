@@ -1,21 +1,23 @@
 package devTool;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 import com.jgoodies.common.collect.ArrayListModel;
 
+import devTool.XMLBuilder.MissionsModel;
 import devTool.models.EditableChoice;
 import devTool.models.EditableJob;
 import devTool.models.EditableJobFlyer;
@@ -25,13 +27,77 @@ import engine.starsheep.space.StarReader;
 import engine.starsheep.space.Job.JobFlyerBuilder;
 
 public class DevStarReader extends StarReader {
+
+	/**
+	 * Reads the missions.xml file and returns a MissionsModel.
+	 * 
+	 * @return The unmarshalled mission model.
+	 */
+	public static MissionsModel readEditableMissions() {
+		try {
+			if (fileManager == null)
+				throw new Exception("Star file manager cannot be null in StarReader.");
+
+			String path = fileManager.getBaseDirectory().toString() + "/missions.xml";
+			File file = new File(path);
+
+			JAXBContext jContext = JAXBContext.newInstance(MissionsModel.class);
+			Unmarshaller unmarshallerObj = jContext.createUnmarshaller();
+
+			MissionsModel mm = (MissionsModel) unmarshallerObj.unmarshal(file);
+
+			return mm;
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return null;
+	}
+
+	/**
+	 * Reads the job_<jobid>.xml file and returns an EditableJob.
+	 * 
+	 * @param jobId
+	 * @return
+	 */
+	public static EditableJob readJob(String jobId) {
+		try {
+			if (fileManager == null)
+				throw new Exception("Star file manager cannot be null in StarReader.");
+
+			String path = fileManager.getBaseDirectory().toString() + "/jobs/j_" + jobId + ".xml";
+			File file = new File(path);
+
+			JAXBContext jContext = JAXBContext.newInstance(EditableJob.class);
+			Unmarshaller unmarshallerObj = jContext.createUnmarshaller();
+
+			EditableJob job = (EditableJob) unmarshallerObj.unmarshal(file);
+
+			System.out.println(job.toString());
+			return job;
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return null;
+	}
+	
+	//===================================================================
+	//====================== DEPRECATED CODE BELOW ======================
+	
 	/**
 	 * Reads the Missions.xml file and returns a List of EditableMissions.
 	 * 
 	 * @see EditableMission
 	 * @return A List of editable missions.
+	 * @deprecated
 	 */
-	public static ArrayListModel<EditableMission> readEditableMissions() {
+	@Deprecated
+	public static ArrayListModel<EditableMission> readEditableMissions_DEPRECATED() {
 
 		XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 		InputStream in;
@@ -103,12 +169,14 @@ public class DevStarReader extends StarReader {
 	}
 
 	/**
-	 * Reads the job_<jobid>.xml file and returns an EditableJob
+	 * Reads the job_<jobid>.xml file and returns an EditableJob.
 	 * 
 	 * @param jobId
 	 * @return
+	 * @deprecated Use ReadJob().
 	 */
-	public static EditableJob readJob(String jobId) {
+	@Deprecated
+	public static EditableJob readJob_DEPRECATED(String jobId) {
 		XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 		InputStream in = null;
 		try {
@@ -154,6 +222,7 @@ public class DevStarReader extends StarReader {
 		return null;
 	}
 
+	@Deprecated
 	private static EditableChoice parseChoice(XMLEventReader eventReader, XMLEvent event) throws XMLStreamException {
 		EditableChoice choice = new EditableChoice();
 		List<String> children = null;

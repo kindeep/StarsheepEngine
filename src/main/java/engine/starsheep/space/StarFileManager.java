@@ -1,5 +1,6 @@
 package engine.starsheep.space;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -14,6 +15,8 @@ public abstract class StarFileManager {
     public StarFileManager() {
 
     }
+    
+    public abstract File getBaseDirectory();
 
     public InputStream getDefaultMissionsStream() {
         try {
