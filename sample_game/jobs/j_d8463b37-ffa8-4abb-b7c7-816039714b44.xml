@@ -3,5 +3,41 @@
     <title>jobone</title>
     <description>kill noobs</description>
     <id>d8463b37-ffa8-4abb-b7c7-816039714b44</id>
-    <choices/>
+    <choices>
+        <choice>
+            <name>scared</name>
+            <id>e21b442e-8de6-4d2f-a0c1-4002d9e6012f</id>
+            <stamina-cost>0.0</stamina-cost>
+            <description>choice description here.</description>
+            <trait-dependencies/>
+            <children>
+                <child>f35bb297-4b42-4488-be9d-1836c8f0a966</child>
+                <child>677bcdb4-8003-4248-b8ec-326951e637ea</child>
+            </children>
+        </choice>
+        <choice>
+            <name>gread idea</name>
+            <id>89e14a7d-4073-4829-84e7-f2c62f19c313</id>
+            <stamina-cost>0.0</stamina-cost>
+            <description>choice description here.</description>
+            <trait-dependencies/>
+            <children/>
+        </choice>
+        <choice>
+            <name>life</name>
+            <id>f35bb297-4b42-4488-be9d-1836c8f0a966</id>
+            <stamina-cost>0.0</stamina-cost>
+            <description>choice description here.</description>
+            <trait-dependencies/>
+            <children/>
+        </choice>
+        <choice>
+            <name>gun</name>
+            <id>677bcdb4-8003-4248-b8ec-326951e637ea</id>
+            <stamina-cost>0.0</stamina-cost>
+            <description>choice description here.</description>
+            <trait-dependencies/>
+            <children/>
+        </choice>
+    </choices>
 </job>
