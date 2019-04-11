@@ -2,6 +2,7 @@ package devTool.XMLBuilder;
 
 import java.io.File;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -13,7 +14,7 @@ import engine.starsheep.space.StarFileManager;
 
 @XmlRootElement(name = "missions")
 public class MissionsModel {
-	private LinkedList<EditableMission> missions;
+	private List<EditableMission> missions;
 
 	public MissionsModel() {
 		missions = new LinkedList<EditableMission>();
@@ -34,7 +35,7 @@ public class MissionsModel {
 
 	// getter
 	@XmlElement(name = "mission")
-	public LinkedList<EditableMission> getMissions() {
+	public List<EditableMission> getMissions() {
 		return this.missions;
 	}
 	

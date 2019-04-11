@@ -7,13 +7,29 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Choice {
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
-	private ArrayList<Choice> choices;
-	private ArrayList<TraitDependency> traitDependencies;
-	private Double staminaCost = 0.0;
-	private Integer id;
-	private String description = "fake description here";
+/**
+ * 
+ * @author peakyDicers
+ * @see ChoiceBuilder
+ */
+
+@XmlRootElement(name = "choice")
+public class Choice {
+	protected ArrayList<String> choices;
+	protected ArrayList<TraitDependency> traitDependencies;
+	protected Double staminaCost = 0.0;
+	protected Integer id;
+	protected String description = "fake description here";
+	
+	//no-arg constructor required for XML marshalling.
+	public Choice() {
+		this.traitDependencies = new ArrayList<TraitDependency>();
+	}
 
 	public Choice(ChoiceBuilder cb) {
 		this.choices = cb.getChoices();
@@ -27,6 +43,7 @@ public class Choice {
 		return "Choice - id: " + this.id + " staminaCost: " + this.staminaCost + "description: " + this.description;
 	}
 
+	@XmlAttribute(name = "id")
 	public int getID() {
 		return this.id;
 	}
@@ -36,16 +53,21 @@ public class Choice {
 	 * 
 	 * @return an unmodifiable list of trait dependencies.
 	 */
+	@XmlElementWrapper(name = "trait-dependencies")
+	@XmlElement(name = "trait")
 	public List<TraitDependency> getTraitDependencies() {
 		return Collections.unmodifiableList(this.traitDependencies) ;
 	}
 
 	/**
-	 * Returns a list with all children of the current choice
+	 * Returns a list with all children Choice Ids.
 	 *
-	 * @return a list of all children choices
+	 * @return a list of all children choice IDs.
 	 */
-	public List<Choice> getChildrenChoices() {
+	
+	@XmlElementWrapper(name = "children")
+	@XmlElement(name = "child")
+	public List<String> getChildrenChoices() {
 		return this.choices;
 	}
 
@@ -54,6 +76,7 @@ public class Choice {
 	 *
 	 * @return Double stamina
 	 */
+	@XmlElement(name = "stamina-cost")
 	public double getStaminaCost() {
 		return this.staminaCost;
 	}

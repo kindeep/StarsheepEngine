@@ -14,6 +14,8 @@ import javax.swing.JToolBar;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -63,15 +65,24 @@ public class ApplicationWindow {
 		//set as write location for xmlBuilder.
 		xml.setBaseDir(directory);
 		
-		//read mission.xml and missions panel.
-		this.missionsModel.loadMissionsFile(directory);
-		missionsPanel.updateMissions(this.missionsModel.getMissions());
+		this.missionsModel.loadMissionsFile(directory); //read mission.xml
+		
+		missionsPanel.updateMissions(this.missionsModel.getMissions());  //update missions panel.
+		
+		//TODO: update traits panel.
+		
+		//TODO: update general panel.
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		gameModel = new GameModel();
 		missionsModel = new MissionsModel();
@@ -105,12 +116,6 @@ public class ApplicationWindow {
 		toolBar.add(newGameBtn);
 
 		JButton openGameBtn = new JButton("Open Game");
-		openGameBtn.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				
-			}
-		});	
 		
 		openGameBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -122,9 +127,9 @@ public class ApplicationWindow {
 				
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File directory = chooser.getSelectedFile();
-					//TODO: save current game
+					//TODO: save current game before loading new game.
 					
-					//TODO: load current game.
+					//load current game.
 					loadDirectory(directory);
 				}
 			}

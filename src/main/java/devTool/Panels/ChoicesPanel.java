@@ -56,6 +56,11 @@ public class ChoicesPanel extends JPanel {
 		panel_choiceBtns.add(btn_newChoice);
 		
 		JButton btn_editChoice = new JButton("Edit Choice");
+		btn_editChoice.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//JobEditor editor = new JobEditor(null, null, name)
+			}
+		});
 		panel_choiceBtns.add(btn_editChoice);
 		
 		JPanel panel_choiceData = new JPanel();

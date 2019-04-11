@@ -5,8 +5,8 @@ import engine.starsheep.space.Job.JobFlyerBuilder;
 
 public class EditableJobFlyer extends JobFlyer {
 
-	public EditableJobFlyer(JobFlyerBuilder builder) {
-		super(builder);
+	public EditableJobFlyer() {
+		super();
 	}
 
 	//setters
