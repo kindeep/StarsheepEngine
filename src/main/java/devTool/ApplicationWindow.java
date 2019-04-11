@@ -3,8 +3,8 @@ package devTool;
 import java.io.File;
 
 import devTool.Panels.*;
-import devTool.XMLBuilder.GameModel;
-import devTool.XMLBuilder.MissionsModel;
+import devTool.models.GameModel;
+import devTool.models.MissionsModel;
 import devTool.XMLBuilder.XMLBuilder;
 
 import javax.swing.JFrame;

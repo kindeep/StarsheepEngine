@@ -1,4 +1,4 @@
-package devTool.XMLBuilder;
+package devTool.models;
 
 import javax.xml.bind.annotation.*;
 

@@ -5,7 +5,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
-import devTool.XMLBuilder.GameModel;
+import devTool.models.GameModel;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,7 +25,7 @@ public class GeneralPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public GeneralPanel(GameModel gameModel) {
+	public GeneralPanel(devTool.models.GameModel gameModel) {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel info = new JPanel();

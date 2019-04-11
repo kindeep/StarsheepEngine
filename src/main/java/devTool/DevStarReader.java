@@ -17,7 +17,7 @@ import javax.xml.stream.events.XMLEvent;
 
 import com.jgoodies.common.collect.ArrayListModel;
 
-import devTool.XMLBuilder.MissionsModel;
+import devTool.models.MissionsModel;
 import devTool.models.EditableChoice;
 import devTool.models.EditableJob;
 import devTool.models.EditableJobFlyer;

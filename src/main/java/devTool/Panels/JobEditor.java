@@ -1,7 +1,7 @@
 package devTool.Panels;
 
 import devTool.DevStarReader;
-import devTool.XMLBuilder.MissionsModel;
+import devTool.models.MissionsModel;
 import devTool.XMLBuilder.XMLBuilder;
 import devTool.models.EditableJob;
 import devTool.models.EditableJobFlyer;

@@ -7,6 +7,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 import devTool.models.EditableJob;
+import devTool.models.GameModel;
+import devTool.models.MissionsModel;
 
 public class XMLBuilder {
 	private static XMLBuilder instance;

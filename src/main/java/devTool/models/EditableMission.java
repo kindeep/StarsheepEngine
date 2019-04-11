@@ -31,7 +31,7 @@ public class EditableMission {
 
 	@XmlElementWrapper(name = "jobs")
 	@XmlElement(name = "job")
-	public ArrayListModel<EditableJobFlyer> jobFlyers;
+	public ArrayListModel<EditableJobFlyer> jobFlyers = null;
 
 	public EditableMission() {
 		jobFlyers = new ArrayListModel<EditableJobFlyer>();

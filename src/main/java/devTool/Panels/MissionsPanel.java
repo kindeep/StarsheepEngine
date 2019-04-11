@@ -25,7 +25,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
-import devTool.XMLBuilder.MissionsModel;
+import devTool.models.MissionsModel;
 import devTool.models.EditableJobFlyer;
 import devTool.models.EditableMission;
 
