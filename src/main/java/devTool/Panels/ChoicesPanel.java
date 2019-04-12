@@ -33,9 +33,12 @@ public class ChoicesPanel extends JPanel {
 	private JTextField txtField_choiceId;
 	private JTextField txtField_description;
 	private JTextField textField;
+	private JLabel lbl_viewer_choiceName;
+	private JList<String> list_children;
+	
 	private EditableJob currJob;
 	private EditableChoice selectedChoice;
-	private JList list_children;
+	private String selectedChild;
 
 	/**
 	 * Create the panel.
@@ -46,6 +49,7 @@ public class ChoicesPanel extends JPanel {
 	}
 
 	private void updateDisplay() {
+		clearDisplay();
 		txtField_choiceName.setText(selectedChoice.name);
 		txtField_choiceId.setText(selectedChoice.id);
 		txtField_description.setText(selectedChoice.description);
@@ -61,6 +65,7 @@ public class ChoicesPanel extends JPanel {
 		txtField_choiceName.setText("");
 		txtField_choiceId.setText("");
 		txtField_description.setText("");
+		lbl_viewer_choiceName.setText("");
 	}
 
 	public void initalize() {
@@ -124,7 +129,8 @@ public class ChoicesPanel extends JPanel {
 		panel_choiceData.add(panel_children, "2, 7, fill, fill");
 		panel_children.setLayout(new BorderLayout(0, 0));
 
-		list_children = new JList();
+		list_children = new JList<String>();
+		
 		panel_children.add(list_children, BorderLayout.CENTER);
 
 		JPanel panel_childrenBtns = new JPanel();
@@ -142,6 +148,12 @@ public class ChoicesPanel extends JPanel {
 
 		JButton btn_removeChild = new JButton("Remove Child");
 		panel_childrenBtns.add(btn_removeChild);
+		
+		JPanel panel_childViewer = new JPanel();
+		panel_children.add(panel_childViewer, BorderLayout.NORTH);
+		
+		lbl_viewer_choiceName = new JLabel("");
+		panel_childViewer.add(lbl_viewer_choiceName);
 
 		JLabel lbl_reward = new JLabel("Reward:");
 		panel_choiceData.add(lbl_reward, "1, 9, left, default");
@@ -191,6 +203,22 @@ public class ChoicesPanel extends JPanel {
 
 				System.out.println("choice cliked on." + selectedChoice);
 				updateDisplay();
+			}
+		});
+		
+		// select a child.
+		list_children.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				selectedChild = list_children.getSelectedValue();
+				EditableChoice choice = null;
+				for (EditableChoice c : currJob.choices) {
+					if (c.id.compareTo(selectedChild) == 0) {
+						choice = c;
+					}
+				}
+				if (choice != null)
+					lbl_viewer_choiceName.setText(choice.name);
 			}
 		});
 	}
