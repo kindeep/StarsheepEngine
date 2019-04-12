@@ -147,6 +147,7 @@ public class ChoicesPanel extends JPanel {
 		panel_childrenBtns.add(btn_addChild);
 
 		JButton btn_removeChild = new JButton("Remove Child");
+		
 		panel_childrenBtns.add(btn_removeChild);
 		
 		JPanel panel_childViewer = new JPanel();
@@ -219,6 +220,15 @@ public class ChoicesPanel extends JPanel {
 				}
 				if (choice != null)
 					lbl_viewer_choiceName.setText(choice.name);
+			}
+		});
+		
+		//delete a child
+		btn_removeChild.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				selectedChoice.children.remove(selectedChild);
+				updateDisplay();
 			}
 		});
 	}
