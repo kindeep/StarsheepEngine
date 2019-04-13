@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <missions>
     <mission>
-        <name>da</name>
-        <id>d9d3be10-7ac2-4d95-9042-976d2e44a2ba</id>
+        <name>new york city</name>
+        <id>38f5e230-f1a4-4cf4-9c98-5cbdbb5fb8d9</id>
         <jobs>
             <job>
-                <id>d8463b37-ffa8-4abb-b7c7-816039714b44</id>
-                <name>jobone</name>
-                <description>kill noobs</description>
-            </job>
-        </jobs>
-    </mission>
-    <mission>
-        <name>yeetboy mission</name>
-        <id>c2812877-ea30-4085-9829-f3f8e2a809ff</id>
-        <jobs>
-            <job>
-                <id>24d1852d-4688-4d77-ae78-91df239e7f1f</id>
-                <name>lfmalfmlamflamflamfa</name>
-                <description>heakjdlkasd</description>
+                <id>07c495ff-bcc4-4396-b603-678949c11d09</id>
+                <name>bank-echo</name>
+                <description>heloo hellolsk</description>
             </job>
         </jobs>
     </mission>
