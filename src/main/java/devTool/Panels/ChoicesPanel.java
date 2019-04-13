@@ -25,6 +25,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class ChoicesPanel extends JPanel {
@@ -192,6 +193,19 @@ public class ChoicesPanel extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				// TODO: potentially need to update xml file
 
+				
+				//remove this choice from the children of other choices.
+				for (EditableChoice choice: currJob.choices) {
+					ArrayList<String> toRemove = new ArrayList<String>();
+					for (String child: choice.children) {
+						if (child.compareTo(selectedChoice.id) == 0) {
+							toRemove.add(child);
+						}
+					}
+					choice.children.removeAll(toRemove);
+				}
+				
+				//delete this choice.
 				currJob.choices.remove(selectedChoice);
 			}
 		});
@@ -228,6 +242,7 @@ public class ChoicesPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				selectedChoice.children.remove(selectedChild);
+				selectedChoice = null;
 				updateDisplay();
 			}
 		});
