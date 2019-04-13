@@ -8,6 +8,7 @@ import devTool.models.MissionsModel;
 import devTool.XMLBuilder.XMLBuilder;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
@@ -15,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+import javax.xml.bind.JAXBException;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -119,10 +121,15 @@ public class ApplicationWindow {
 		saveBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				XMLBuilder.getInstance().buildGameModelData(gameModel);
-
-				// save changes in missions panel
-				XMLBuilder.getInstance().buildMissionsFile(missionsModel);
+								
+				try {
+					XMLBuilder.getInstance().buildGameModelData(gameModel);
+					XMLBuilder.getInstance().buildMissionsFile(missionsModel);
+					JOptionPane.showMessageDialog(null, "Saved.");
+				} catch (JAXBException e1) {
+					JOptionPane.showMessageDialog(null, "Save Unsuccessful. You should probably manually check the XML files.");
+					e1.printStackTrace();
+				}
 			}
 		});
 		saveBtn.setHorizontalAlignment(SwingConstants.RIGHT);

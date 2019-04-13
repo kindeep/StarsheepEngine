@@ -14,6 +14,8 @@ import com.jgoodies.common.collect.LinkedListModel;
 import devTool.models.EditableChoice;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -26,7 +28,7 @@ public class ChoiceListDisplay extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ChoiceListDisplay(LinkedListModel<EditableChoice> listModel, ArrayListModel<String> children) {
+	public ChoiceListDisplay(LinkedListModel<EditableChoice> listModel, ArrayListModel<String> children, ChoicesPanel choicesPanel) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 267, 406);
 		contentPane = new JPanel();
@@ -36,7 +38,6 @@ public class ChoiceListDisplay extends JFrame {
 		
 		JButton btnSelect = new JButton("Select");
 		contentPane.add(btnSelect, BorderLayout.SOUTH);
-		
 		JList<EditableChoice> list = new JList<EditableChoice>();
 		list.addMouseListener(new MouseAdapter() {
 			@Override
@@ -53,7 +54,17 @@ public class ChoiceListDisplay extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if (selectedChoice == null)
 					return;
+				
+				//check if child is going to be a duplicate, if so, don't add it.
+				for (String childId: children){
+					if (childId.compareTo(selectedChoice.id) == 0) {
+						JOptionPane.showMessageDialog(null, "You've already added this child.");
+						return;
+					}
+				}
+				
 				children.add(selectedChoice.id);
+				choicesPanel.updateGraph();
 				dispose();
 			}
 		});

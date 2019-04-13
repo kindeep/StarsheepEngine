@@ -28,6 +28,9 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.UUID;
 
+
+//TODO: (MEDIUM PRIORITY) auto select a choice, don't let the fields be editable if no choice selected
+// TODO: Remove Select button for child, click=select
 public class ChoicesPanel extends JPanel {
 	private static final long serialVersionUID = -3584319698203595596L;
 	private JTextField txtField_choiceName;
@@ -40,16 +43,21 @@ public class ChoicesPanel extends JPanel {
 	private EditableJob currJob;
 	private EditableChoice selectedChoice;
 	private String selectedChild;
+	private ChoicesGraph graph;
+	private ChoicesPanel this_panel;
 
 	/**
 	 * Create the panel.
 	 */
 	public ChoicesPanel(EditableJob currJob) {
+		this_panel = this;
 		this.currJob = currJob;
+		graph = new ChoicesGraph();
+		graph.populationGraph(currJob.choices);
 		initalize();
 	}
 
-	private void updateDisplay() {
+	public void updateDisplay() {
 		clearDisplay();
 		txtField_choiceName.setText(selectedChoice.name);
 		txtField_choiceId.setText(selectedChoice.id);
@@ -67,6 +75,10 @@ public class ChoicesPanel extends JPanel {
 		txtField_choiceId.setText("");
 		txtField_description.setText("");
 		lbl_viewer_choiceName.setText("");
+	}
+	
+	void updateGraph() {
+		graph.populationGraph(currJob.choices);
 	}
 
 	public void initalize() {
@@ -138,13 +150,7 @@ public class ChoicesPanel extends JPanel {
 		panel_children.add(panel_childrenBtns, BorderLayout.SOUTH);
 
 		JButton btn_addChild = new JButton("Add New Child");
-		btn_addChild.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				ChoiceListDisplay display = new ChoiceListDisplay(currJob.choices, selectedChoice.children);
-				display.setVisible(true);
-			}
-		});
+		
 		panel_childrenBtns.add(btn_addChild);
 
 		JButton btn_removeChild = new JButton("Remove Child");
@@ -174,6 +180,7 @@ public class ChoicesPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				save();
+				updateGraph();
 			}
 		});
 		
@@ -184,6 +191,7 @@ public class ChoicesPanel extends JPanel {
 				choice.id = UUID.randomUUID().toString();
 				choice.name = "Unnamed choice.";
 				currJob.choices.add(choice);
+				updateGraph();
 			}
 		});
 
@@ -192,7 +200,7 @@ public class ChoicesPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO: potentially need to update xml file
-
+				
 				
 				//remove this choice from the children of other choices.
 				for (EditableChoice choice: currJob.choices) {
@@ -207,6 +215,8 @@ public class ChoicesPanel extends JPanel {
 				
 				//delete this choice.
 				currJob.choices.remove(selectedChoice);
+				
+				updateGraph();
 			}
 		});
 
@@ -218,6 +228,15 @@ public class ChoicesPanel extends JPanel {
 
 				System.out.println("choice cliked on." + selectedChoice);
 				updateDisplay();
+			}
+		});
+		
+		// add a child.
+		btn_addChild.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ChoiceListDisplay display = new ChoiceListDisplay(currJob.choices, selectedChoice.children, this_panel);
+				display.setVisible(true);
 			}
 		});
 		

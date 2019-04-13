@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<job>
+    <title>job0</title>
+    <description>213123</description>
+    <id>7d5d205a-be9d-4f57-95aa-47b4f11d825a</id>
+    <choices>
+        <choice>
+            <name>enter shop</name>
+            <id>d7122b86-c381-444b-afaf-f35669e9d80a</id>
+            <stamina-cost>0.0</stamina-cost>
+            <description>choice description here.</description>
+            <trait-dependencies/>
+            <children>
+                <child>7125cfec-7865-4423-930b-9d31e08f3f36</child>
+                <child>7a85f14f-e45d-4dc6-b891-00f4ffbde28d</child>
+                <child>2241d809-4643-46f9-b3e9-3bfb15584e52</child>
+            </children>
+        </choice>
+        <choice>
+            <name>order a pizza</name>
+            <id>7125cfec-7865-4423-930b-9d31e08f3f36</id>
+            <stamina-cost>0.0</stamina-cost>
+            <description>choice description here.</description>
+            <trait-dependencies/>
+            <children/>
+        </choice>
+        <choice>
+            <name>order peperoni</name>
+            <id>7a85f14f-e45d-4dc6-b891-00f4ffbde28d</id>
+            <stamina-cost>0.0</stamina-cost>
+            <description>choice description here.</description>
+            <trait-dependencies/>
+            <children/>
+        </choice>
+        <choice>
+            <name>go to the bathroom</name>
+            <id>2241d809-4643-46f9-b3e9-3bfb15584e52</id>
+            <stamina-cost>0.0</stamina-cost>
+            <description>choice description here.</description>
+            <trait-dependencies/>
+            <children>
+                <child>3f154687-49f6-430d-9979-54a070ab02a4</child>
+            </children>
+        </choice>
+        <choice>
+            <name>slip and fall</name>
+            <id>3f154687-49f6-430d-9979-54a070ab02a4</id>
+            <stamina-cost>0.0</stamina-cost>
+            <description>choice description here.</description>
+            <trait-dependencies/>
+            <children/>
+        </choice>
+    </choices>
+</job>

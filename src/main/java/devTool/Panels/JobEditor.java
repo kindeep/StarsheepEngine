@@ -11,6 +11,7 @@ import com.jgoodies.common.collect.ArrayListModel;
 
 import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
+import javax.xml.bind.JAXBException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -84,7 +85,11 @@ public class JobEditor extends JFrame {
 		this.updateJobList(flyer);
 		
 		//update Missions xml.
-		XMLBuilder.getInstance().buildMissionsFile(this.missionsModel);
+		try {
+			XMLBuilder.getInstance().buildMissionsFile(this.missionsModel);
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
 		JOptionPane.showMessageDialog(null, "This job has been saved.");
 	}
 	
@@ -105,7 +110,11 @@ public class JobEditor extends JFrame {
 		currMission.jobFlyers.remove(toDelete);
 		
 		//save missions.xml
-		XMLBuilder.getInstance().buildMissionsFile(this.missionsModel);
+		try {
+			XMLBuilder.getInstance().buildMissionsFile(this.missionsModel);
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
 		JOptionPane.showMessageDialog(null, "This job has been deleted.");
 		setVisible(false);
 		dispose();
