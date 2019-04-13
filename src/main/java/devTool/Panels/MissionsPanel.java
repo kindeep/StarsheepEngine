@@ -14,6 +14,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -39,6 +40,10 @@ public class MissionsPanel extends JPanel {
 	private JTextField txtField_missionDescription;
 	private JTextField txtField_staminaCost;
 	private JTextField txtField_missionId;
+	private JButton btn_editJob;
+	private JButton btn_newJob;
+	
+private JButton btn_newMission;
 
 	private ArrayListModel<EditableJobFlyer> jobListModel;
 	private ArrayListModel<EditableMission> missionListModel = null;
@@ -53,6 +58,19 @@ public class MissionsPanel extends JPanel {
 		this.missionsModel = missionsModel;
 		this.missionListModel = missionsModel.getMissions();
 		jList_missionList.setModel(missionListModel);
+	}
+	
+	private void deleteMission() {
+		missionsModel.getMissions().remove(currMission); //remove mission.
+		
+		//clear fields.
+		txtField_missionId.setText("");
+		txtField_missionTitle.setText("");
+		txtField_missionDescription.setText("");
+		txtField_staminaCost.setText("");
+		jobListModel = null;
+		btn_editJob.setEnabled(false);
+		btn_newJob.setEnabled(false);
 	}
 
 	public MissionsPanel() {
@@ -145,10 +163,10 @@ public class MissionsPanel extends JPanel {
 		rightPanel.add(jobBtns, BorderLayout.SOUTH);
 		jobBtns.setLayout(new BoxLayout(jobBtns, BoxLayout.Y_AXIS));
 
-		JButton btn_editJob = new JButton("Edit Job");
+		btn_editJob = new JButton("Edit Job");
 		jobBtns.add(btn_editJob);
 
-		JButton btn_newJob = new JButton("New Job");
+		btn_newJob = new JButton("New Job");
 		jobBtns.add(btn_newJob);
 
 		//==================== listeners ====================
@@ -181,16 +199,13 @@ public class MissionsPanel extends JPanel {
 		btn_deleteMission.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				missionsModel.getMissions().remove(currMission); //remove mission.
 				
-				//clear fields.
-				txtField_missionId.setText("");
-				txtField_missionTitle.setText("");
-				txtField_missionDescription.setText("");
-				txtField_staminaCost.setText("");
-				jobListModel = null;
-				btn_editJob.setEnabled(false);
-				btn_newJob.setEnabled(false);
+				int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete mission: " + currMission.title, "ARE YOU SURE?", JOptionPane.YES_NO_OPTION);
+				if (reply == JOptionPane.YES_OPTION) {
+					reply = JOptionPane.showConfirmDialog(null, currMission.title + " and all its jobs and choices will be DELETED. Are you sure?", "FINAL WARNING", JOptionPane.YES_NO_OPTION);
+					if (reply == JOptionPane.YES_OPTION)
+						deleteMission();
+				}
 			}
 		});
 
