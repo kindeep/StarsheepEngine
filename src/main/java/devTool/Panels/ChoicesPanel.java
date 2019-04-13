@@ -9,8 +9,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.border.LineBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JList;
@@ -53,6 +51,7 @@ public class ChoicesPanel extends JPanel {
 		this_panel = this;
 		this.currJob = currJob;
 		graph = new ChoicesGraph();
+		graph.setTitle(currJob.name);
 		graph.populationGraph(currJob.choices);
 		initalize();
 	}
