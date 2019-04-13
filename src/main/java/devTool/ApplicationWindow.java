@@ -70,7 +70,6 @@ public class ApplicationWindow {
 		DevStarReader.setFileManager(wtf);
 		this.missionsModel = DevStarReader.readEditableMissions();
 
-
 		missionsPanel.updateMissions(this.missionsModel); // update missions panel.
 
 		// TODO: update traits panel.
@@ -121,13 +120,14 @@ public class ApplicationWindow {
 		saveBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-								
+
 				try {
 					XMLBuilder.getInstance().buildGameModelData(gameModel);
 					XMLBuilder.getInstance().buildMissionsFile(missionsModel);
 					JOptionPane.showMessageDialog(null, "Saved.");
 				} catch (JAXBException e1) {
-					JOptionPane.showMessageDialog(null, "Save Unsuccessful. You should probably manually check the XML files.");
+					JOptionPane.showMessageDialog(null,
+							"Save Unsuccessful. You should probably manually check the XML files.");
 					e1.printStackTrace();
 				}
 			}

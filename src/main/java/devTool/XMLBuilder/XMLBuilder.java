@@ -5,7 +5,6 @@ import java.io.File;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.PropertyException;
 
 import devTool.models.EditableJob;
 import devTool.models.GameModel;

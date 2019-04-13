@@ -8,7 +8,7 @@ public class TraitDependencyModel {
 
 	@XmlAttribute(name = "name")
 	private String name;
-	
+
 	@XmlAttribute(name = "weight")
 	private Integer weight;
 }

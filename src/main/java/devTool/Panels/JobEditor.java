@@ -31,60 +31,63 @@ import java.awt.event.MouseEvent;
  */
 public class JobEditor extends JFrame {
 	private static final long serialVersionUID = 3708943064065821431L;
-	
+
 	private EditableMission currMission;
 	private EditableJob currJob = null;
 	private MissionsModel missionsModel;
 
 	private JobInfoPanel jobInfoPanel;
-	
-	//common code for both constructors.
+
+	// common code for both constructors.
 	private void setup(MissionsModel mm, EditableMission currMission) {
 		this.currMission = currMission;
 		this.missionsModel = mm;
 	}
+
 	/**
 	 * Create the frame.
+	 * 
 	 * @wbp.parser.constructor
 	 *
-	 * Start JobEditor with a brand new job.
+	 * 						Start JobEditor with a brand new job.
 	 */
 	public JobEditor(MissionsModel mm, EditableMission currMission) {
-		this.setup( mm, currMission);
-		
+		this.setup(mm, currMission);
+
 		currJob = new EditableJob();
 		currJob.id = UUID.randomUUID().toString();
 		initalize();
 	}
-	
-	/** 
+
+	/**
 	 * Start JobEditor with an existing job.
 	 * 
-	 * @param mm MissionsModel required to update missions.xml upon save.
+	 * @param mm
+	 *            MissionsModel required to update missions.xml upon save.
 	 */
 	public JobEditor(MissionsModel mm, EditableMission currMission, String jobId) {
 		this.setup(mm, currMission);
-		
-		//read the job.xml file. load the data into a EditableJob object.
+
+		// read the job.xml file. load the data into a EditableJob object.
 		currJob = DevStarReader.readJob(jobId);
 		initalize();
 	}
-	
+
 	private void saveBtnPressed() {
-		jobInfoPanel.save(); 
-		
+		jobInfoPanel.save();
+
 		XMLBuilder.getInstance().buildJobFile(currJob);
-		
-		///create job flyer and add to job list.
+
+		/// create job flyer and add to job list.
 		EditableJobFlyer flyer = new EditableJobFlyer();
 		flyer.description = currJob.description;
 		flyer.id = currJob.id;
 		flyer.name = currJob.name;
-		
-		//update jobFlyer in missionsModel.
+
+		// update jobFlyer in missionsModel.
 		this.updateJobList(flyer);
-		
-		//update Missions xml.
+
+		// update Missions xml.
 		try {
 			XMLBuilder.getInstance().buildMissionsFile(this.missionsModel);
 		} catch (JAXBException e) {
@@ -92,24 +95,24 @@ public class JobEditor extends JFrame {
 		}
 		JOptionPane.showMessageDialog(null, "This job has been saved.");
 	}
-	
+
 	private void deleteJob() {
-		//delete the job.xml file.
+		// delete the job.xml file.
 		boolean success = XMLBuilder.getInstance().deleteJobFile(currJob.id);
 		if (!success)
 			JOptionPane.showMessageDialog(null, "The job file: j_" + currJob.id + " could not be deleted.");
-		
-		//remove job from missions.xml
+
+		// remove job from missions.xml
 		EditableJobFlyer toDelete = null;
-		for (EditableJobFlyer flyer: currMission.jobFlyers) {
+		for (EditableJobFlyer flyer : currMission.jobFlyers) {
 			if (flyer.id.compareTo(currJob.id) == 0) {
 				toDelete = flyer;
 				break;
 			}
 		}
 		currMission.jobFlyers.remove(toDelete);
-		
-		//save missions.xml
+
+		// save missions.xml
 		try {
 			XMLBuilder.getInstance().buildMissionsFile(this.missionsModel);
 		} catch (JAXBException e) {
@@ -119,46 +122,47 @@ public class JobEditor extends JFrame {
 		setVisible(false);
 		dispose();
 	}
-	
+
 	/**
 	 * updates jobflyers.
 	 * 
-	 * @param newFlyer The updated jobflyer.
+	 * @param newFlyer
+	 *            The updated jobflyer.
 	 */
 	private void updateJobList(EditableJobFlyer newFlyer) {
-		
+
 		ArrayListModel<EditableJobFlyer> jobs = currMission.jobFlyers;
-		
+
 		if (jobs.getSize() == 0) {
 			jobs.add(newFlyer);
 			return;
 		}
-		
-		//for each jobflyer in the current mission:
+
+		// for each jobflyer in the current mission:
 		for (int i = 0; i < jobs.getSize(); i++) {
 			EditableJobFlyer flyer = jobs.get(i);
-			if (flyer.id.compareTo(currJob.id) == 0) { //replace jobflyer.
-					jobs.set(i, newFlyer);
-					break;
+			if (flyer.id.compareTo(currJob.id) == 0) { // replace jobflyer.
+				jobs.set(i, newFlyer);
+				break;
 			} else {
-				if (i == jobs.getSize() -1 ) {
-					jobs.add(newFlyer); //add new jobflyer.
+				if (i == jobs.getSize() - 1) {
+					jobs.add(newFlyer); // add new jobflyer.
 					break;
 				}
 			}
 		}
 	}
-	
+
 	private void initalize() {
 		this.setTitle("Job Editor");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		this.setSize(725, 455);
-		
+
 		JToolBar toolBar = new JToolBar();
 		toolBar.setFloatable(false);
 		getContentPane().add(toolBar, BorderLayout.NORTH);
-		
+
 		JButton btnSaveJob = new JButton("Save Job");
 		btnSaveJob.setBackground(new Color(51, 255, 102));
 		btnSaveJob.addActionListener(new ActionListener() {
@@ -167,14 +171,15 @@ public class JobEditor extends JFrame {
 			}
 		});
 		toolBar.add(btnSaveJob);
-		
+
 		JButton btnNewButton = new JButton("DELETE JOB");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this job?", "ARE YOU SURE?", JOptionPane.YES_NO_OPTION);
-		        if (reply == JOptionPane.YES_OPTION)
-		          deleteJob();
+				int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this job?",
+						"ARE YOU SURE?", JOptionPane.YES_NO_OPTION);
+				if (reply == JOptionPane.YES_OPTION)
+					deleteJob();
 			}
 		});
 		btnNewButton.setForeground(new Color(255, 255, 255));
@@ -185,13 +190,13 @@ public class JobEditor extends JFrame {
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNewButton.setBackground(new Color(255, 0, 0));
 		toolBar.add(btnNewButton);
-		
+
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
-		
+
 		jobInfoPanel = new JobInfoPanel(currJob);
 		tabbedPane.addTab("jobInfoPanel", null, jobInfoPanel, null);
-		
+
 		ChoicesPanel choicesPanel = new ChoicesPanel(currJob);
 		tabbedPane.addTab("Choices", null, choicesPanel, null);
 	}

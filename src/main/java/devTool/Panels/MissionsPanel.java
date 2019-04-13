@@ -42,8 +42,7 @@ public class MissionsPanel extends JPanel {
 	private JTextField txtField_missionId;
 	private JButton btn_editJob;
 	private JButton btn_newJob;
-	
-private JButton btn_newMission;
+	private JButton btn_newMission;
 
 	private ArrayListModel<EditableJobFlyer> jobListModel;
 	private ArrayListModel<EditableMission> missionListModel = null;
@@ -59,11 +58,11 @@ private JButton btn_newMission;
 		this.missionListModel = missionsModel.getMissions();
 		jList_missionList.setModel(missionListModel);
 	}
-	
+
 	private void deleteMission() {
-		missionsModel.getMissions().remove(currMission); //remove mission.
-		
-		//clear fields.
+		missionsModel.getMissions().remove(currMission); // remove mission.
+
+		// clear fields.
 		txtField_missionId.setText("");
 		txtField_missionTitle.setText("");
 		txtField_missionDescription.setText("");
@@ -169,9 +168,9 @@ private JButton btn_newMission;
 		btn_newJob = new JButton("New Job");
 		jobBtns.add(btn_newJob);
 
-		//==================== listeners ====================
-		
-		//clicked on a job.
+		// ==================== listeners ====================
+
+		// clicked on a job.
 		jList_jobList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -179,7 +178,7 @@ private JButton btn_newMission;
 			}
 		});
 
-		//edit job button pressed.
+		// edit job button pressed.
 		btn_editJob.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JobEditor jobEditor = new JobEditor(missionsModel, currMission, selectedJob.id);
@@ -187,7 +186,7 @@ private JButton btn_newMission;
 			}
 		});
 
-		//new job button pressed.
+		// new job button pressed.
 		btn_newJob.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JobEditor jobEditor = new JobEditor(missionsModel, currMission);
@@ -195,28 +194,32 @@ private JButton btn_newMission;
 			}
 		});
 
-		//delete a mission.
+		// delete a mission.
 		btn_deleteMission.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete mission: " + currMission.title, "ARE YOU SURE?", JOptionPane.YES_NO_OPTION);
+
+				int reply = JOptionPane.showConfirmDialog(null,
+						"Are you sure you want to delete mission: " + currMission.title, "ARE YOU SURE?",
+						JOptionPane.YES_NO_OPTION);
 				if (reply == JOptionPane.YES_OPTION) {
-					reply = JOptionPane.showConfirmDialog(null, currMission.title + " and all its jobs and choices will be DELETED. Are you sure?", "FINAL WARNING", JOptionPane.YES_NO_OPTION);
+					reply = JOptionPane.showConfirmDialog(null,
+							currMission.title + " and all its jobs and choices will be DELETED. Are you sure?",
+							"FINAL WARNING", JOptionPane.YES_NO_OPTION);
 					if (reply == JOptionPane.YES_OPTION)
 						deleteMission();
 				}
 			}
 		});
 
-		//clicked on a mission.
+		// clicked on a mission.
 		jList_missionList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				selectedJob = null;
 				currMission = jList_missionList.getSelectedValue();
-				
-				//update data in fields.
+
+				// update data in fields.
 				txtField_missionTitle.setText(currMission.title);
 				txtField_missionDescription.setText(currMission.description);
 				txtField_staminaCost.setText(String.valueOf(currMission.staminaCost));
@@ -224,12 +227,12 @@ private JButton btn_newMission;
 				btn_editJob.setEnabled(true);
 				btn_newJob.setEnabled(true);
 
-				//update job list.
+				// update job list.
 				jList_jobList.setModel(currMission.jobFlyers);
 			}
 		});
 
-		//new mission button pressed.
+		// new mission button pressed.
 		btn_newMission.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

@@ -8,22 +8,23 @@ import java.io.InputStream;
 import engine.starsheep.space.StarFileManager;
 
 public class DevFileManager extends StarFileManager {
-	
+
 	private static DevFileManager instance;
 	private File baseDirectory;
-	
-	private DevFileManager() {}
-	
+
+	private DevFileManager() {
+	}
+
 	public static DevFileManager getInstance() {
 		if (instance == null)
 			instance = new DevFileManager();
 		return instance;
 	}
-	
+
 	public void setBaseDirectory(File baseDir) {
 		this.baseDirectory = baseDir;
 	}
-	
+
 	@Override
 	public File getBaseDirectory() {
 		return instance.baseDirectory;

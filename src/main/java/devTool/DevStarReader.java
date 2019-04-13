@@ -85,10 +85,10 @@ public class DevStarReader extends StarReader {
 		}
 		return null;
 	}
-	
-	//===================================================================
-	//====================== DEPRECATED CODE BELOW ======================
-	
+
+	// ===================================================================
+	// ====================== DEPRECATED CODE BELOW ======================
+
 	/**
 	 * Reads the Missions.xml file and returns a List of EditableMissions.
 	 * 

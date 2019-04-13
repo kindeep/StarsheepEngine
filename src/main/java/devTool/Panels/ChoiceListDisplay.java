@@ -28,14 +28,15 @@ public class ChoiceListDisplay extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ChoiceListDisplay(LinkedListModel<EditableChoice> listModel, ArrayListModel<String> children, ChoicesPanel choicesPanel) {
+	public ChoiceListDisplay(LinkedListModel<EditableChoice> listModel, ArrayListModel<String> children,
+			ChoicesPanel choicesPanel) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 267, 406);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
+
 		JButton btnSelect = new JButton("Select");
 		contentPane.add(btnSelect, BorderLayout.SOUTH);
 		JList<EditableChoice> list = new JList<EditableChoice>();
@@ -48,21 +49,21 @@ public class ChoiceListDisplay extends JFrame {
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setModel(listModel);
 		contentPane.add(list, BorderLayout.CENTER);
-		
+
 		btnSelect.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (selectedChoice == null)
 					return;
-				
-				//check if child is going to be a duplicate, if so, don't add it.
-				for (String childId: children){
+
+				// check if child is going to be a duplicate, if so, don't add it.
+				for (String childId : children) {
 					if (childId.compareTo(selectedChoice.id) == 0) {
 						JOptionPane.showMessageDialog(null, "You've already added this child.");
 						return;
 					}
 				}
-				
+
 				children.add(selectedChoice.id);
 				choicesPanel.updateGraph();
 				dispose();

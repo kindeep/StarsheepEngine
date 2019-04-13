@@ -26,7 +26,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.UUID;
 
-
 //TODO: (MEDIUM PRIORITY) auto select a choice, don't let the fields be editable if no choice selected
 // TODO: Remove Select button for child, click=select
 public class ChoicesPanel extends JPanel {
@@ -37,7 +36,7 @@ public class ChoicesPanel extends JPanel {
 	private JTextField textField;
 	private JLabel lbl_viewer_choiceName;
 	private JList<String> list_children;
-	
+
 	private EditableJob currJob;
 	private EditableChoice selectedChoice;
 	private String selectedChild;
@@ -63,7 +62,7 @@ public class ChoicesPanel extends JPanel {
 		txtField_description.setText(selectedChoice.description);
 		list_children.setModel(selectedChoice.children);
 	}
-	
+
 	private void save() {
 		selectedChoice.name = txtField_choiceName.getText();
 		selectedChoice.description = txtField_description.getText();
@@ -75,7 +74,7 @@ public class ChoicesPanel extends JPanel {
 		txtField_description.setText("");
 		lbl_viewer_choiceName.setText("");
 	}
-	
+
 	void updateGraph() {
 		graph.populationGraph(currJob.choices);
 	}
@@ -142,23 +141,23 @@ public class ChoicesPanel extends JPanel {
 		panel_children.setLayout(new BorderLayout(0, 0));
 
 		list_children = new JList<String>();
-		
+
 		panel_children.add(list_children, BorderLayout.CENTER);
 
 		JPanel panel_childrenBtns = new JPanel();
 		panel_children.add(panel_childrenBtns, BorderLayout.SOUTH);
 
 		JButton btn_addChild = new JButton("Add New Child");
-		
+
 		panel_childrenBtns.add(btn_addChild);
 
 		JButton btn_removeChild = new JButton("Remove Child");
-		
+
 		panel_childrenBtns.add(btn_removeChild);
-		
+
 		JPanel panel_childViewer = new JPanel();
 		panel_children.add(panel_childViewer, BorderLayout.NORTH);
-		
+
 		lbl_viewer_choiceName = new JLabel("");
 		panel_childViewer.add(lbl_viewer_choiceName);
 
@@ -168,13 +167,13 @@ public class ChoicesPanel extends JPanel {
 		textField = new JTextField();
 		panel_choiceData.add(textField, "2, 9, fill, default");
 		textField.setColumns(10);
-		
+
 		JButton btn_saveChoice = new JButton("Save Choice");
 		add(btn_saveChoice, BorderLayout.NORTH);
 
 		// ================ LISTENERS ================
-		
-		//save choice
+
+		// save choice
 		btn_saveChoice.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -182,7 +181,7 @@ public class ChoicesPanel extends JPanel {
 				updateGraph();
 			}
 		});
-		
+
 		// add a new choice.
 		btn_newChoice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -199,22 +198,21 @@ public class ChoicesPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO: potentially need to update xml file
-				
-				
-				//remove this choice from the children of other choices.
-				for (EditableChoice choice: currJob.choices) {
+
+				// remove this choice from the children of other choices.
+				for (EditableChoice choice : currJob.choices) {
 					ArrayList<String> toRemove = new ArrayList<String>();
-					for (String child: choice.children) {
+					for (String child : choice.children) {
 						if (child.compareTo(selectedChoice.id) == 0) {
 							toRemove.add(child);
 						}
 					}
 					choice.children.removeAll(toRemove);
 				}
-				
-				//delete this choice.
+
+				// delete this choice.
 				currJob.choices.remove(selectedChoice);
-				
+
 				updateGraph();
 			}
 		});
@@ -229,7 +227,7 @@ public class ChoicesPanel extends JPanel {
 				updateDisplay();
 			}
 		});
-		
+
 		// add a child.
 		btn_addChild.addMouseListener(new MouseAdapter() {
 			@Override
@@ -238,7 +236,7 @@ public class ChoicesPanel extends JPanel {
 				display.setVisible(true);
 			}
 		});
-		
+
 		// select a child.
 		list_children.addMouseListener(new MouseAdapter() {
 			@Override
@@ -254,8 +252,8 @@ public class ChoicesPanel extends JPanel {
 					lbl_viewer_choiceName.setText(choice.name);
 			}
 		});
-		
-		//delete a child
+
+		// delete a child
 		btn_removeChild.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
