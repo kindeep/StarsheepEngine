@@ -26,6 +26,11 @@ public class XMLBuilder {
 	public void setBaseDir(File f) {
 		this.baseDir = f.getAbsolutePath() + "/";
 	}
+	
+	public boolean deleteJobFile(String id) {
+		File f = new File(baseDir + "jobs/j_" + id + ".xml");
+		return f.delete();
+	}
 
 	public void buildGameModelData(GameModel gm) {
 		JAXBContext jaxbContext;

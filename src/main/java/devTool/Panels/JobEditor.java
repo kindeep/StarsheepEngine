@@ -18,6 +18,11 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.UUID;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.JOptionPane;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * @author peakyDicers
@@ -80,6 +85,30 @@ public class JobEditor extends JFrame {
 		
 		//update Missions xml.
 		XMLBuilder.getInstance().buildMissionsFile(this.missionsModel);
+		JOptionPane.showMessageDialog(null, "This job has been saved.");
+	}
+	
+	private void deleteJob() {
+		//delete the job.xml file.
+		boolean success = XMLBuilder.getInstance().deleteJobFile(currJob.id);
+		if (!success)
+			JOptionPane.showMessageDialog(null, "The job file: j_" + currJob.id + " could not be deleted.");
+		
+		//remove job from missions.xml
+		EditableJobFlyer toDelete = null;
+		for (EditableJobFlyer flyer: currMission.jobFlyers) {
+			if (flyer.id.compareTo(currJob.id) == 0) {
+				toDelete = flyer;
+				break;
+			}
+		}
+		currMission.jobFlyers.remove(toDelete);
+		
+		//save missions.xml
+		XMLBuilder.getInstance().buildMissionsFile(this.missionsModel);
+		JOptionPane.showMessageDialog(null, "This job has been deleted.");
+		setVisible(false);
+		dispose();
 	}
 	
 	/**
@@ -118,15 +147,35 @@ public class JobEditor extends JFrame {
 		this.setSize(725, 455);
 		
 		JToolBar toolBar = new JToolBar();
+		toolBar.setFloatable(false);
 		getContentPane().add(toolBar, BorderLayout.NORTH);
 		
 		JButton btnSaveJob = new JButton("Save Job");
+		btnSaveJob.setBackground(new Color(51, 255, 102));
 		btnSaveJob.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				saveBtnPressed();
 			}
 		});
 		toolBar.add(btnSaveJob);
+		
+		JButton btnNewButton = new JButton("DELETE JOB");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this job?", "ARE YOU SURE?", JOptionPane.YES_NO_OPTION);
+		        if (reply == JOptionPane.YES_OPTION)
+		          deleteJob();
+			}
+		});
+		btnNewButton.setForeground(new Color(255, 255, 255));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButton.setBackground(new Color(255, 0, 0));
+		toolBar.add(btnNewButton);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
