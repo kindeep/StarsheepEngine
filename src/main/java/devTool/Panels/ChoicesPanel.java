@@ -36,22 +36,19 @@ public class ChoicesPanel extends JPanel {
 	private JTextField textField;
 	private JLabel lbl_viewer_choiceName;
 	private JList<String> list_children;
+	private JList<EditableChoice> list_choices;
 
 	private EditableJob currJob;
 	private EditableChoice selectedChoice;
 	private String selectedChild;
 	private ChoicesGraph graph;
-	private ChoicesPanel this_panel;
 
 	/**
 	 * Create the panel.
 	 */
-	public ChoicesPanel(EditableJob currJob) {
-		this_panel = this;
+	public ChoicesPanel(EditableJob currJob, ChoicesGraph graph) {
 		this.currJob = currJob;
-		graph = new ChoicesGraph();
-		graph.setTitle(currJob.name);
-		graph.populationGraph(currJob.choices);
+		this.graph = graph;
 		initalize();
 	}
 
@@ -66,6 +63,9 @@ public class ChoicesPanel extends JPanel {
 	private void save() {
 		selectedChoice.name = txtField_choiceName.getText();
 		selectedChoice.description = txtField_description.getText();
+		
+		//update choices list.
+		list_choices.repaint();
 	}
 
 	private void clearDisplay() {
@@ -76,7 +76,7 @@ public class ChoicesPanel extends JPanel {
 	}
 
 	void updateGraph() {
-		graph.populationGraph(currJob.choices);
+		graph.populateGraph();
 	}
 
 	public void initalize() {
@@ -86,7 +86,7 @@ public class ChoicesPanel extends JPanel {
 		this.add(panel_choiceList, BorderLayout.EAST);
 		panel_choiceList.setLayout(new BorderLayout(0, 0));
 
-		JList<EditableChoice> list_choices = new JList<EditableChoice>();
+		list_choices = new JList<EditableChoice>();
 		list_choices.setModel(currJob.choices);
 		list_choices.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -232,7 +232,7 @@ public class ChoicesPanel extends JPanel {
 		btn_addChild.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ChoiceListDisplay display = new ChoiceListDisplay(currJob.choices, selectedChoice.children, this_panel);
+				ChoiceListDisplay display = new ChoiceListDisplay(currJob.choices, selectedChoice.children, graph);
 				display.setVisible(true);
 			}
 		});

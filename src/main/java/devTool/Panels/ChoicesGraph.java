@@ -12,13 +12,21 @@ import org.graphstream.ui.view.Viewer;
 
 import devTool.models.EditableChoice;
 
+/**
+ * 
+ * @author peakyDicers
+ *
+ */
 public class ChoicesGraph extends JFrame {
 	private static final long serialVersionUID = -302682455085417699L;
+	private String headChoiceId = "";
 	Graph graph;
+	List<EditableChoice> choices;
 
-	public ChoicesGraph() {
+	public ChoicesGraph(List<EditableChoice> choices) {
+		this.choices = choices;
 		graph = new SingleGraph("Tutorial 1");
-		graph.addAttribute("ui.stylesheet", "node {fill-color: red;}");
+		populateGraph();
 
 		Viewer viewer = new Viewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
 		viewer.enableAutoLayout();
@@ -30,13 +38,24 @@ public class ChoicesGraph extends JFrame {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 
-	public void populationGraph(List<EditableChoice> choices) {
+	public void setHeadChoiceId(String id) {
+		headChoiceId = id;
+		this.populateGraph();
+	}
+
+	public void populateGraph() {
 		graph.clear();
 		graph.addAttribute("ui.stylesheet", "node {fill-color: red;}");
+		graph.addAttribute("ui.stylesheet", "node.start {fill-color: green;}");
 		for (EditableChoice c : choices) {
 			Node n = graph.addNode(c.id);
 			n.addAttribute("ui.label", c.name);
-			n.addAttribute("ui.class", "base");
+
+			if (c.id.compareTo(headChoiceId) == 0)
+				n.addAttribute("ui.class", "start");
+			else
+				n.addAttribute("ui.class", "base");
+
 		}
 
 		// connect the dots
@@ -46,9 +65,4 @@ public class ChoicesGraph extends JFrame {
 			}
 		}
 	}
-
-	public static void main(String args[]) {
-		new ChoicesGraph();
-	}
-
 }

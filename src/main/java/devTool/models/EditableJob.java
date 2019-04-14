@@ -22,8 +22,8 @@ public class EditableJob {
 	public String imageID;
 
 	@XmlElement(name = "head-choice")
-	public EditableChoice head;
-
+	public String headChoice;
+	
 	@XmlElementWrapper(name = "choices")
 	@XmlElement(name = "choice")
 	public LinkedListModel<EditableChoice> choices = null;

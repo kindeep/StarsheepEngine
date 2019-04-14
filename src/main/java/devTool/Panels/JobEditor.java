@@ -35,8 +35,8 @@ public class JobEditor extends JFrame {
 	private EditableMission currMission;
 	private EditableJob currJob = null;
 	private MissionsModel missionsModel;
-
 	private JobInfoPanel jobInfoPanel;
+	private ChoicesGraph graph;
 
 	// common code for both constructors.
 	private void setup(MissionsModel mm, EditableMission currMission) {
@@ -154,6 +154,11 @@ public class JobEditor extends JFrame {
 	}
 
 	private void initalize() {
+		// create graph.
+		graph = new ChoicesGraph(currJob.choices);
+		graph.setTitle(currJob.name);
+		graph.populateGraph();
+
 		this.setTitle("Job Editor");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout(0, 0));
@@ -194,10 +199,10 @@ public class JobEditor extends JFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
-		jobInfoPanel = new JobInfoPanel(currJob);
+		jobInfoPanel = new JobInfoPanel(currJob, graph);
 		tabbedPane.addTab("jobInfoPanel", null, jobInfoPanel, null);
 
-		ChoicesPanel choicesPanel = new ChoicesPanel(currJob);
+		ChoicesPanel choicesPanel = new ChoicesPanel(currJob, graph);
 		tabbedPane.addTab("Choices", null, choicesPanel, null);
 	}
 }
