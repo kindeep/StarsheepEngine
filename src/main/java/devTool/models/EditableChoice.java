@@ -15,7 +15,7 @@ public class EditableChoice {
 	public String id;
 
 	@XmlElement(name = "stamina-cost")
-	public Double staminaCost = 0.0;
+	public Integer staminaCost = 0;
 
 	@XmlElement(name = "description")
 	public String description = "choice description here.";

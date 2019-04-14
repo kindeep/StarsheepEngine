@@ -12,6 +12,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -25,6 +26,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.UUID;
+import javax.swing.JFormattedTextField;
 
 //TODO: (MEDIUM PRIORITY) auto select a choice, don't let the fields be editable if no choice selected
 // TODO: Remove Select button for child, click=select
@@ -33,6 +35,7 @@ public class ChoicesPanel extends JPanel {
 	private JTextField txtField_choiceName;
 	private JTextField txtField_choiceId;
 	private JTextField txtField_description;
+	private JTextField txtField_staminaCost;
 	private JTextField textField;
 	private JLabel lbl_viewer_choiceName;
 	private JList<String> list_children;
@@ -57,21 +60,38 @@ public class ChoicesPanel extends JPanel {
 		txtField_choiceName.setText(selectedChoice.name);
 		txtField_choiceId.setText(selectedChoice.id);
 		txtField_description.setText(selectedChoice.description);
+		txtField_staminaCost.setText(String.valueOf(selectedChoice.staminaCost));
 		list_children.setModel(selectedChoice.children);
 	}
 
 	private void save() {
 		selectedChoice.name = txtField_choiceName.getText();
 		selectedChoice.description = txtField_description.getText();
-		
+		String staminaCost = txtField_staminaCost.getText();
+		if (isInteger(staminaCost))
+			selectedChoice.staminaCost = Integer.valueOf(staminaCost);
+		else
+			JOptionPane.showMessageDialog(this, "Stamina Cost must be an integer.");
 		//update choices list.
 		list_choices.repaint();
+	}
+	
+	public boolean isInteger(String s) {
+	    try { 
+	        Integer.parseInt(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    return true;
 	}
 
 	private void clearDisplay() {
 		txtField_choiceName.setText("");
 		txtField_choiceId.setText("");
 		txtField_description.setText("");
+		txtField_staminaCost.setText("");
 		lbl_viewer_choiceName.setText("");
 	}
 
@@ -104,12 +124,21 @@ public class ChoicesPanel extends JPanel {
 
 		JPanel panel_choiceData = new JPanel();
 		add(panel_choiceData, BorderLayout.CENTER);
-		panel_choiceData.setLayout(new FormLayout(
-				new ColumnSpec[] { ColumnSpec.decode("max(56dlu;default)"), ColumnSpec.decode("default:grow"), },
-				new RowSpec[] { FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						RowSpec.decode("top:default:grow"), FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, }));
+		panel_choiceData.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("max(56dlu;default)"),
+				ColumnSpec.decode("default:grow"),},
+			new RowSpec[] {
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("top:default:grow"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
 
 		JLabel lbl_choiceName = new JLabel("Choice Name");
 		panel_choiceData.add(lbl_choiceName, "1, 1, left, default");
@@ -160,12 +189,18 @@ public class ChoicesPanel extends JPanel {
 
 		lbl_viewer_choiceName = new JLabel("");
 		panel_childViewer.add(lbl_viewer_choiceName);
+		
+		JLabel lbl_staminaCost = new JLabel("Stamina Cost");
+		panel_choiceData.add(lbl_staminaCost, "1, 9, left, default");
+		
+		txtField_staminaCost = new JTextField();
+		panel_choiceData.add(txtField_staminaCost, "2, 9, fill, default");
 
 		JLabel lbl_reward = new JLabel("Reward:");
-		panel_choiceData.add(lbl_reward, "1, 9, left, default");
+		panel_choiceData.add(lbl_reward, "1, 11, left, default");
 
 		textField = new JTextField();
-		panel_choiceData.add(textField, "2, 9, fill, default");
+		panel_choiceData.add(textField, "2, 11, fill, default");
 		textField.setColumns(10);
 
 		JButton btn_saveChoice = new JButton("Save Choice");
