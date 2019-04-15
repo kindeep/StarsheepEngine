@@ -5,6 +5,7 @@ import java.io.File;
 import devTool.Panels.*;
 import devTool.models.GameModel;
 import devTool.models.MissionsModel;
+import devTool.models.TraitsModel;
 import devTool.XMLBuilder.XMLBuilder;
 
 import javax.swing.JFrame;
@@ -30,9 +31,11 @@ public class ApplicationWindow {
 	private JFrame mainFrame;
 	private GameModel gameModel;
 	private MissionsModel missionsModel;
+	private TraitsModel traitsModel;
 	private XMLBuilder xml;
 
 	MissionsPanel missionsPanel = null;
+	TraitsPanel traitsPanel = null;
 
 	/**
 	 * Launch the application.
@@ -69,10 +72,10 @@ public class ApplicationWindow {
 		wtf.setBaseDirectory(directory);
 		DevStarReader.setFileManager(wtf);
 		this.missionsModel = DevStarReader.readEditableMissions();
-
 		missionsPanel.updateMissions(this.missionsModel); // update missions panel.
 
-		// TODO: update traits panel.
+		this.traitsModel = DevStarReader.readEditableTraits();
+		traitsPanel.updateTraits(this.traitsModel);
 
 		// TODO: update general panel.
 	}
@@ -108,9 +111,9 @@ public class ApplicationWindow {
 
 		missionsPanel = new MissionsPanel();
 		Missions.add(missionsPanel);
-
-		JPanel Traits = new JPanel();
-		tabbedPane.addTab("Traits", null, Traits, null);
+		
+		traitsPanel = new TraitsPanel();
+		tabbedPane.addTab("Traits", null, traitsPanel, null);
 
 		JToolBar toolBar = new JToolBar();
 		mainFrame.getContentPane().add(toolBar, BorderLayout.NORTH);
@@ -124,6 +127,7 @@ public class ApplicationWindow {
 				try {
 					XMLBuilder.getInstance().buildGameModelData(gameModel);
 					XMLBuilder.getInstance().buildMissionsFile(missionsModel);
+					XMLBuilder.getInstance().buildTraitsFile(traitsModel);
 					JOptionPane.showMessageDialog(null, "Saved.");
 				} catch (JAXBException e1) {
 					JOptionPane.showMessageDialog(null,

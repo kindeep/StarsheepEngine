@@ -9,6 +9,7 @@ import javax.xml.bind.Marshaller;
 import devTool.models.EditableJob;
 import devTool.models.GameModel;
 import devTool.models.MissionsModel;
+import devTool.models.TraitsModel;
 
 public class XMLBuilder {
 	private static XMLBuilder instance;
@@ -59,5 +60,13 @@ public class XMLBuilder {
 		Marshaller marshaller = jaxbContext.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		marshaller.marshal(mm, new File(this.baseDir + "missions.xml"));
+	}
+	
+	public void buildTraitsFile(TraitsModel traitsModel) throws JAXBException {
+		JAXBContext jaxbContext;
+		jaxbContext = JAXBContext.newInstance(TraitsModel.class);
+		Marshaller marshaller = jaxbContext.createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		marshaller.marshal(traitsModel, new File(this.baseDir + "traits.xml"));
 	}
 }
