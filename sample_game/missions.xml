@@ -1,46 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <missions>
     <mission>
-        <title>New York City</title>
-        <id>0</id>
-        <staminaCost>999</staminaCost>
+        <name>new york city</name>
+        <id>38f5e230-f1a4-4cf4-9c98-5cbdbb5fb8d9</id>
         <jobs>
             <job>
-                <name>rbc</name>
-                <description>lmfao what a mission</description>
-                <id>247847a0-eeed-41bb-a941-32e45684ae40</id>
-            </job>
-            <job>
-                <name>CIBC</name>
-                <description>cibc, the oldest bank in canada.</description>
-                <id>1</id>
-            </job>
-            <job>
-                <name>TD Canada Trust</name>
-                <description>lets rob this green bank.</description>
-                <id>2</id>
-            </job>
-        </jobs>
-    </mission>
-    <mission>
-        <title>Boston</title>
-        <id>1</id>
-        <staminaCost>999</staminaCost>
-        <jobs>
-            <job>
-                <name>boston-rbc</name>
-                <description>lets get this american money</description>
-                <id>0</id>
-            </job>
-            <job>
-                <name>boston-cibc</name>
-                <description>lets rob this boston cibc.</description>
-                <id>1</id>
-            </job>
-            <job>
-                <name>boston-general-bank</name>
-                <description>lets rob this boston bank</description>
-                <id>2</id>
+                <id>7d5d205a-be9d-4f57-95aa-47b4f11d825a</id>
+                <name>job0</name>
+                <description>213123</description>
             </job>
         </jobs>
     </mission>

@@ -5,7 +5,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
-import devTool.XMLBuilder.GameModel;
+import devTool.models.GameModel;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,28 +25,21 @@ public class GeneralPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public GeneralPanel(GameModel gameModel) {
+	public GeneralPanel(devTool.models.GameModel gameModel) {
 		setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel info = new JPanel();
 		add(info, BorderLayout.WEST);
-		info.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("max(47dlu;default)"),
-				ColumnSpec.decode("max(86dlu;default):grow"),},
-			new RowSpec[] {
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
-		
+		info.setLayout(new FormLayout(
+				new ColumnSpec[] { ColumnSpec.decode("max(47dlu;default)"),
+						ColumnSpec.decode("max(86dlu;default):grow"), },
+				new RowSpec[] { FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
+
 		JLabel lblNewLabel = new JLabel("Title");
 		info.add(lblNewLabel, "1, 1");
-		
+
 		titleTxtField = new JTextField();
 		titleTxtField.addFocusListener(new FocusAdapter() {
 			@Override
@@ -56,10 +49,10 @@ public class GeneralPanel extends JPanel {
 		});
 		info.add(titleTxtField, "2, 1, fill, default");
 		titleTxtField.setColumns(10);
-		
+
 		JLabel lblCreator = new JLabel("Creator");
 		info.add(lblCreator, "1, 3");
-		
+
 		creatorTxtField = new JTextField();
 		creatorTxtField.addFocusListener(new FocusAdapter() {
 			@Override
@@ -69,10 +62,10 @@ public class GeneralPanel extends JPanel {
 		});
 		info.add(creatorTxtField, "2, 3, fill, default");
 		creatorTxtField.setColumns(10);
-		
+
 		JLabel lblCurrency = new JLabel("Currency");
 		info.add(lblCurrency, "1, 5");
-		
+
 		currencyTxtField = new JTextField();
 		currencyTxtField.addFocusListener(new FocusAdapter() {
 			@Override
@@ -82,10 +75,10 @@ public class GeneralPanel extends JPanel {
 		});
 		info.add(currencyTxtField, "2, 5, fill, default");
 		currencyTxtField.setColumns(10);
-		
+
 		JLabel lblStamina = new JLabel("Stamina");
 		info.add(lblStamina, "1, 7");
-		
+
 		staminaTxtField = new JTextField();
 		staminaTxtField.addFocusListener(new FocusAdapter() {
 			@Override

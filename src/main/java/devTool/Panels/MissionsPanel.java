@@ -1,61 +1,81 @@
 package devTool.Panels;
 
-import devTool.XMLBuilder.MissionsModel;
-import devTool.models.EditableMission;
-import engine.starsheep.space.Job.JobFlyer;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.UUID;
 
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.common.collect.LinkedListModel;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.LineBorder;
+
+import com.jgoodies.common.collect.ArrayListModel;
 import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
-import javax.swing.border.LineBorder;
-import javax.swing.JPanel;
-import javax.swing.JList;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.BoxLayout;
-import javax.swing.ListSelectionModel;
-import javax.swing.JButton;
-
-import java.util.List;
-import java.awt.Color;
-import java.awt.BorderLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import devTool.models.MissionsModel;
+import devTool.models.EditableJobFlyer;
+import devTool.models.EditableMission;
 
 public class MissionsPanel extends JPanel {
 	private static final long serialVersionUID = -9215001740566008009L;
+	private MissionsModel missionsModel;
+	private EditableMission currMission;
+	private EditableJobFlyer selectedJob = null;
+
 	private JTextField txtField_missionTitle;
 	private JTextField txtField_missionDescription;
 	private JTextField txtField_staminaCost;
-	private EditableMission currMission;
-	private List<JobFlyer> jobList;
-	private LinkedListModel<JobFlyer> jobListModel;
 	private JTextField txtField_missionId;
-	private JobFlyer selectedJob = null;
+	private JButton btn_editJob;
+	private JButton btn_newJob;
+	private JButton btn_newMission;
 
-	LinkedListModel<EditableMission> missionsList = null;
+	private ArrayListModel<EditableJobFlyer> jobListModel;
+	private ArrayListModel<EditableMission> missionListModel = null;
+	private JList<EditableMission> jList_missionList;
+	private JList<EditableJobFlyer> jList_jobList;
+
 	/**
 	 * Create the panel.
 	 */
 
-	public void updateMissions(List<EditableMission> list) {
-		missionsList.clear();
-		System.out.println("list updated" + list.size());
-		missionsList.addAll(0, list);
-		missionsList.fireContentsChanged(0, missionsList.getSize()-1);
+	public void updateMissions(MissionsModel missionsModel) {
+		this.missionsModel = missionsModel;
+		this.missionListModel = missionsModel.getMissions();
+		jList_missionList.setModel(missionListModel);
 	}
 
-	public MissionsPanel(MissionsModel missionsModel) {
+	private void deleteMission() {
+		missionsModel.getMissions().remove(currMission); // remove mission.
+
+		// clear fields.
+		txtField_missionId.setText("");
+		txtField_missionTitle.setText("");
+		txtField_missionDescription.setText("");
+		txtField_staminaCost.setText("");
+		jobListModel = null;
+		btn_editJob.setEnabled(false);
+		btn_newJob.setEnabled(false);
+	}
+
+	public MissionsPanel() {
 
 		setLayout(new BorderLayout(0, 0));
-		missionsList = new LinkedListModel<EditableMission>();
+
 		JPanel listPanel = new JPanel();
 		listPanel.setBorder(new LineBorder(Color.MAGENTA));
 		add(listPanel, BorderLayout.WEST);
@@ -71,7 +91,6 @@ public class MissionsPanel extends JPanel {
 		JButton btn_deleteMission = new JButton("Delete Mission");
 		missionBtns.add(btn_deleteMission);
 
-		
 		// mission form labels + textfields.
 		JPanel missionEditor = new JPanel();
 		missionEditor.setBackground(Color.GREEN);
@@ -97,7 +116,7 @@ public class MissionsPanel extends JPanel {
 
 		JLabel lbl_missionTitle = new JLabel("Mission title:");
 		centerPanel.add(lbl_missionTitle, "1, 3, center, default");
-		JList<EditableMission> list = new JList<EditableMission>();
+		jList_missionList = new JList<EditableMission>();
 		txtField_missionTitle = new JTextField();
 
 		centerPanel.add(txtField_missionTitle, "2, 3, fill, default");
@@ -123,32 +142,19 @@ public class MissionsPanel extends JPanel {
 		JButton btnBrowse = new JButton("Browse");
 		centerPanel.add(btnBrowse, "2, 9");
 
-		jobListModel = new LinkedListModel<JobFlyer>();
-		
-		//if a mission is selected, and it has jobflyers.
-		if (currMission != null && currMission.getJobFlyers() != null) {
-			jobListModel = new LinkedListModel<JobFlyer>(jobList);
-		}
+		jobListModel = new ArrayListModel<EditableJobFlyer>();
 
-		listPanel.add(list);
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.setModel(missionsList);
+		listPanel.add(jList_missionList);
+		jList_missionList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		JPanel rightPanel = new JPanel();
 		add(rightPanel, BorderLayout.EAST);
 		rightPanel.setBorder(new LineBorder(Color.ORANGE));
 		rightPanel.setLayout(new BorderLayout(0, 0));
 
-		JList<JobFlyer> jList_jobList = new JList<JobFlyer>();
+		jList_jobList = new JList<EditableJobFlyer>();
 		jList_jobList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // only one item can be selected.
 
-		jList_jobList.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				selectedJob = jList_jobList.getSelectedValue();
-			}
-		});
-		jList_jobList.setModel(jobListModel);
 		rightPanel.add(jList_jobList);
 
 		// job button panel --------------
@@ -156,74 +162,93 @@ public class MissionsPanel extends JPanel {
 		rightPanel.add(jobBtns, BorderLayout.SOUTH);
 		jobBtns.setLayout(new BoxLayout(jobBtns, BoxLayout.Y_AXIS));
 
-		JButton btn_editJob = new JButton("Edit Job");
+		btn_editJob = new JButton("Edit Job");
 		jobBtns.add(btn_editJob);
 
-		JButton btn_newJob = new JButton("New Job");
+		btn_newJob = new JButton("New Job");
 		jobBtns.add(btn_newJob);
 
-		// listeners ---------------------
+		// ==================== listeners ====================
+
+		// clicked on a job.
+		jList_jobList.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				selectedJob = jList_jobList.getSelectedValue();
+			}
+		});
+
+		// edit job button pressed.
 		btn_editJob.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JobEditor jobEditor = new JobEditor(jobListModel, missionsModel, selectedJob.getJobId(), currMission);
+				JobEditor jobEditor = new JobEditor(missionsModel, currMission, selectedJob.id);
 				jobEditor.setVisible(true);
 			}
 		});
 
+		// new job button pressed.
 		btn_newJob.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JobEditor jobEditor = new JobEditor(jobListModel, missionsModel);
+				JobEditor jobEditor = new JobEditor(missionsModel, currMission);
 				jobEditor.setVisible(true);
 			}
 		});
 
+		// delete a mission.
 		btn_deleteMission.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				missionsList.remove(currMission);
-				txtField_missionId.setText("");
-				txtField_missionTitle.setText("");
-				txtField_missionDescription.setText("");
-				txtField_staminaCost.setText("");
-				jobListModel = null;
-				btn_editJob.setEnabled(false);
-				btn_newJob.setEnabled(false);
 
+				int reply = JOptionPane.showConfirmDialog(null,
+						"Are you sure you want to delete mission: " + currMission.title, "ARE YOU SURE?",
+						JOptionPane.YES_NO_OPTION);
+				if (reply == JOptionPane.YES_OPTION) {
+					reply = JOptionPane.showConfirmDialog(null,
+							currMission.title + " and all its jobs and choices will be DELETED. Are you sure?",
+							"FINAL WARNING", JOptionPane.YES_NO_OPTION);
+					if (reply == JOptionPane.YES_OPTION)
+						deleteMission();
+				}
 			}
 		});
 
-		list.addMouseListener(new MouseAdapter() {
+		// clicked on a mission.
+		jList_missionList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				selectedJob = null;
-				currMission = list.getSelectedValue();
-				txtField_missionTitle.setText(currMission.getTitle());
-				txtField_missionDescription.setText(currMission.getDescription());
-				txtField_staminaCost.setText(String.valueOf(currMission.getStaminaCost()));
-				txtField_missionId.setText(currMission.getId());
+				currMission = jList_missionList.getSelectedValue();
+
+				// update data in fields.
+				txtField_missionTitle.setText(currMission.title);
+				txtField_missionDescription.setText(currMission.description);
+				txtField_staminaCost.setText(String.valueOf(currMission.staminaCost));
+				txtField_missionId.setText(currMission.id);
 				btn_editJob.setEnabled(true);
 				btn_newJob.setEnabled(true);
-				
-				//update job list.
-				jobListModel.clear();
-				jobListModel.addAll(0, currMission.getJobFlyers());
+
+				// update job list.
+				jList_jobList.setModel(currMission.jobFlyers);
 			}
 		});
 
+		// new mission button pressed.
 		btn_newMission.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				EditableMission mission = new EditableMission();
-				mission.setTitle("unnamed mission");
-				missionsList.push(mission);
+				mission.title = "unnamed mission";
+				mission.id = UUID.randomUUID().toString();
+				missionListModel.add(mission);
+
 			}
 		});
 
 		txtField_missionTitle.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				currMission.setTitle(txtField_missionTitle.getText());
-				list.updateUI();
+				currMission.title = txtField_missionTitle.getText();
+				jList_missionList.updateUI();
 			}
 		});
 	}

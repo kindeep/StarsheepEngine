@@ -1,36 +1,48 @@
 package devTool.models;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import com.jgoodies.common.collect.ArrayListModel;
 
-import engine.starsheep.space.Choice;
-import engine.starsheep.space.Job.TraitDependency;
+@XmlRootElement(name = "choice")
+public class EditableChoice {
 
-public class EditableChoice extends Choice {
+	@XmlElement(name = "name")
+	public String name;
+
+	@XmlElement(name = "id")
+	public String id;
+
+	@XmlElement(name = "stamina-cost")
+	public Integer staminaCost = 0;
+
+	@XmlElement(name = "description")
+	public String description = "choice description here.";
+
+	@XmlElementWrapper(name = "trait-dependencies")
+	@XmlElement(name = "trait")
+	public ArrayListModel<EditableTraitDependency> traitDependencies = null;
+
+	@XmlElementWrapper(name = "children")
+	@XmlElement(name = "child")
+	public ArrayListModel<String> children = null;
 
 	public EditableChoice() {
-		super();
+		traitDependencies = new ArrayListModel<EditableTraitDependency>();
+		children = new ArrayListModel<String>();
 	}
-	//helpers
+
+	public void addChild(String child) {
+		children.add(child);
+	}
+
 	public void addTraitDependency(EditableTraitDependency td) {
-		traitDependencies.add(td);
+		this.traitDependencies.add(td);
 	}
-	
-	//setters
-	public void setChoices(ArrayList<String> choices) {
-		this.choices = choices;
-	}
-	
-	public void setStaminaCost(Double staminaCost) {
-		this.staminaCost = staminaCost;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public void setChoiceId(Integer id) {
-		this.id = id;
+
+	@Override
+	public String toString() {
+		return this.name;
 	}
 }
