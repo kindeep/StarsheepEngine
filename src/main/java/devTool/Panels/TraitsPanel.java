@@ -9,6 +9,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
 import devTool.models.EditableTrait;
+import devTool.models.GameDataManager;
 import devTool.models.TraitsModel;
 
 import com.jgoodies.forms.layout.FormSpecs;
@@ -41,8 +42,9 @@ public class TraitsPanel extends JPanel implements ActionListener {
 		txtField_traitId.setText(selectedTrait.id);
 	}
 
-	public void updateTraits(TraitsModel traitsModel) {
-		traitList = traitsModel.traits;
+	public void updateTraits() {
+		GameDataManager dataManager = GameDataManager.getInstance();
+		traitList = dataManager.getTraitsModel().traits;
 		System.out.println("updating traits to: " + traitList.getSize());
 		list_traitList.setModel(traitList);
 	}
@@ -119,6 +121,7 @@ public class TraitsPanel extends JPanel implements ActionListener {
 		JButton btn_deleteTrait = new JButton("Delete Trait");
 		btn_deleteTrait.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				traitList.remove(selectedTrait); //remove trait from TraitsModel.
 			}
 		});
 		panel_buttons.add(btn_deleteTrait);

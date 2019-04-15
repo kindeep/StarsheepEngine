@@ -54,7 +54,7 @@ public class DevStarReader extends StarReader {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Reads the missions.xml file and returns a MissionsModel.
 	 * 
@@ -280,7 +280,7 @@ public class DevStarReader extends StarReader {
 					String name = startElement.getAttributeByName(new QName("name")).getValue();
 					String weight = startElement.getAttributeByName(new QName("weight")).getValue();
 					td.name = name;
-					td.weight = Integer.parseInt(weight);
+					td.weight = weight;
 					choice.addTraitDependency(td);
 				}
 			} else if (event.isEndElement()) {

@@ -7,6 +7,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 import devTool.models.EditableJob;
+import devTool.models.GameDataManager;
 import devTool.models.GameModel;
 import devTool.models.MissionsModel;
 import devTool.models.TraitsModel;
@@ -54,7 +55,8 @@ public class XMLBuilder {
 		}
 	}
 
-	public void buildMissionsFile(MissionsModel mm) throws JAXBException {
+	public void buildMissionsFile() throws JAXBException {
+		MissionsModel mm = GameDataManager.getInstance().getMissionsModel();
 		JAXBContext jaxbContext;
 		jaxbContext = JAXBContext.newInstance(MissionsModel.class);
 		Marshaller marshaller = jaxbContext.createMarshaller();
@@ -62,7 +64,8 @@ public class XMLBuilder {
 		marshaller.marshal(mm, new File(this.baseDir + "missions.xml"));
 	}
 	
-	public void buildTraitsFile(TraitsModel traitsModel) throws JAXBException {
+	public void buildTraitsFile() throws JAXBException {
+		TraitsModel traitsModel = GameDataManager.getInstance().getTraitsModel();
 		JAXBContext jaxbContext;
 		jaxbContext = JAXBContext.newInstance(TraitsModel.class);
 		Marshaller marshaller = jaxbContext.createMarshaller();
