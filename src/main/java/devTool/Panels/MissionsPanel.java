@@ -99,14 +99,22 @@ public class MissionsPanel extends JPanel {
 
 		JPanel centerPanel = new JPanel();
 		missionEditor.add(centerPanel, BorderLayout.CENTER);
-		centerPanel.setLayout(new FormLayout(
-				new ColumnSpec[] { ColumnSpec.decode("left:50dlu"), ColumnSpec.decode("center:53dlu:grow"), },
-				new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
+		centerPanel.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("left:50dlu"),
+				ColumnSpec.decode("center:53dlu:grow"),},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(15dlu;default)"),
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
 
 		JLabel lbl_missionId = new JLabel("Mission id:");
-		centerPanel.add(lbl_missionId, "1, 2, center, default");
+		centerPanel.add(lbl_missionId, "1, 2, left, default");
 
 		txtField_missionId = new JTextField();
 		txtField_missionId.setEnabled(false);
@@ -115,7 +123,7 @@ public class MissionsPanel extends JPanel {
 		txtField_missionId.setColumns(10);
 
 		JLabel lbl_missionTitle = new JLabel("Mission title:");
-		centerPanel.add(lbl_missionTitle, "1, 3, center, default");
+		centerPanel.add(lbl_missionTitle, "1, 3, left, default");
 		jList_missionList = new JList<EditableMission>();
 		txtField_missionTitle = new JTextField();
 
@@ -123,21 +131,21 @@ public class MissionsPanel extends JPanel {
 		txtField_missionTitle.setColumns(10);
 
 		JLabel lbl_description = new JLabel("Description:");
-		centerPanel.add(lbl_description, "1, 5, center, default");
+		centerPanel.add(lbl_description, "1, 5, left, default");
 
 		txtField_missionDescription = new JTextField();
 		centerPanel.add(txtField_missionDescription, "2, 5, fill, default");
 		txtField_missionDescription.setColumns(10);
 
 		JLabel lbl_staminaCost = new JLabel("Stamina Cost:");
-		centerPanel.add(lbl_staminaCost, "1, 7, center, default");
+		centerPanel.add(lbl_staminaCost, "1, 7, left, default");
 
 		txtField_staminaCost = new JTextField();
 		centerPanel.add(txtField_staminaCost, "2, 7, fill, default");
 		txtField_staminaCost.setColumns(10);
 
 		JLabel lblImage = new JLabel("Image:");
-		centerPanel.add(lblImage, "1, 9, center, default");
+		centerPanel.add(lblImage, "1, 9, left, default");
 
 		JButton btnBrowse = new JButton("Browse");
 		centerPanel.add(btnBrowse, "2, 9");
