@@ -8,7 +8,14 @@ import com.jgoodies.common.collect.ArrayListModel;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
+import devTool.DevStarReader;
+import devTool.XMLBuilder.XMLBuilder;
+import devTool.models.EditableChoice;
+import devTool.models.EditableJob;
+import devTool.models.EditableJobFlyer;
+import devTool.models.EditableMission;
 import devTool.models.EditableTrait;
+import devTool.models.EditableTraitDependency;
 import devTool.models.GameDataManager;
 import devTool.models.TraitsModel;
 
@@ -17,8 +24,10 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.xml.bind.JAXBException;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.UUID;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -121,7 +130,40 @@ public class TraitsPanel extends JPanel implements ActionListener {
 		JButton btn_deleteTrait = new JButton("Delete Trait");
 		btn_deleteTrait.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				traitList.remove(selectedTrait); //remove trait from TraitsModel.
+				
+				//remove the trait dependency from every single choice, in every job, in every mission.
+				ArrayListModel<EditableMission> missions = GameDataManager.getInstance().getMissionsModel().getMissions();
+				for(EditableMission mission: missions) { //for each mission.
+					ArrayListModel<EditableJobFlyer> jobFlyers = mission.jobFlyers;
+					
+					for (EditableJobFlyer flyer: jobFlyers) { //for each job.
+						EditableJob job = DevStarReader.readJob(flyer.id);
+						
+						for (EditableChoice choice: job.choices) { //for each choice.
+							
+							ArrayList<EditableTraitDependency> toRemove = new ArrayList<EditableTraitDependency>();
+							for (EditableTraitDependency trait: choice.traitDependencies) { //for each trait.
+								
+								//if trait dependency matches trait.
+								if (trait.id.compareTo(selectedTrait.id) == 0) { 
+									System.out.println("match found in choice: " + choice.id);
+									toRemove.add(trait);
+								}
+							}
+							choice.traitDependencies.removeAll(toRemove);
+						}
+						
+						//save all files
+						try {
+							XMLBuilder.getInstance().buildJobFile(job);
+							XMLBuilder.getInstance().buildTraitsFile();
+						} catch (JAXBException e1) {
+							e1.printStackTrace();
+						}
+					}
+				}
 			}
 		});
 		panel_buttons.add(btn_deleteTrait);

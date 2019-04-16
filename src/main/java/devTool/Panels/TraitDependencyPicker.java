@@ -43,7 +43,7 @@ public class TraitDependencyPicker extends JFrame {
 
 	public TraitDependencyPicker(EditableChoice currChoice) {
 		initalize();
-		
+
 		this.currChoice = currChoice;
 		jList_traits.setModel(GameDataManager.getInstance().getTraitsModel().traits);
 	}
@@ -93,7 +93,7 @@ public class TraitDependencyPicker extends JFrame {
 		panel_traitList.setLayout(new BorderLayout(0, 0));
 
 		jList_traits = new JList();
-		
+
 		panel_traitList.add(jList_traits);
 
 		JButton btn_selectTrait = new JButton("Select Trait");
@@ -107,22 +107,22 @@ public class TraitDependencyPicker extends JFrame {
 		panel.add(btn_save);
 		btn_save.setForeground(Color.BLACK);
 		btn_save.setBackground(Color.GREEN);
-		
-		//listeners ------------------
-		
-		//selecting a trait.
+
+		// listeners ------------------
+
+		// selecting a trait.
 		jList_traits.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				selectedTrait = jList_traits.getSelectedValue();
-				
-				//update txt fields.
+
+				// update txt fields.
 				txtField_traitDependency.setText(selectedTrait.name);
 				txtField_id.setText(selectedTrait.id);
 			}
 		});
-		
-		//clicking save btn.
+
+		// clicking save btn.
 		btn_save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EditableTraitDependency td = new EditableTraitDependency();
