@@ -89,7 +89,7 @@ public class JobEditor extends JFrame {
 
 		// update Missions xml.
 		try {
-			XMLBuilder.getInstance().buildMissionsFile(this.missionsModel);
+			XMLBuilder.getInstance().buildMissionsFile();
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
@@ -114,7 +114,7 @@ public class JobEditor extends JFrame {
 
 		// save missions.xml
 		try {
-			XMLBuilder.getInstance().buildMissionsFile(this.missionsModel);
+			XMLBuilder.getInstance().buildMissionsFile();
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}

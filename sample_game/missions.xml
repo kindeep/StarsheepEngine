@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <missions>
     <mission>
-        <name>new york city</name>
-        <id>38f5e230-f1a4-4cf4-9c98-5cbdbb5fb8d9</id>
+        <name>the lost mission</name>
+        <id>b45b2585-e1bc-4b6b-b6ba-059e7f1241a9</id>
         <jobs>
             <job>
-                <id>7d5d205a-be9d-4f57-95aa-47b4f11d825a</id>
-                <name>job0</name>
-                <description>213123</description>
+                <id>bf6e4e36-82f1-4485-8985-bc6d78f5f692</id>
+                <name>job01</name>
+                <description>job01 is the best job ever</description>
+            </job>
+        </jobs>
+    </mission>
+    <mission>
+        <name>mission02</name>
+        <id>98f94ada-fa31-4087-aec6-33952fa2d04e</id>
+        <jobs>
+            <job>
+                <id>4865fd82-e76f-4fbd-83dd-83258675dc10</id>
+                <name>job in mission2</name>
+                <description></description>
             </job>
         </jobs>
     </mission>

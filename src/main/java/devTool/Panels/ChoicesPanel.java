@@ -2,6 +2,8 @@ package devTool.Panels;
 
 import devTool.models.EditableChoice;
 import devTool.models.EditableJob;
+import devTool.models.EditableTraitDependency;
+import engine.starsheep.space.Job.TraitDependency;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -19,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
 import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.common.collect.ArrayListModel;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
@@ -38,13 +41,18 @@ public class ChoicesPanel extends JPanel {
 	private JTextField txtField_staminaCost;
 	private JTextField textField;
 	private JLabel lbl_viewer_choiceName;
-	private JList<String> list_children;
-	private JList<EditableChoice> list_choices;
+	private JList<String> jList_children;
+	private JList<EditableChoice> jList_choices;
+	private JList<EditableTraitDependency> jList_traitDependencies;
 
 	private EditableJob currJob;
 	private EditableChoice selectedChoice;
+	private EditableTraitDependency selectedTrait;
 	private String selectedChild;
+	
 	private ChoicesGraph graph;
+	private JTextField txtField_trait_id;
+	private JTextField txtField_trait_weight;
 
 	/**
 	 * Create the panel.
@@ -61,7 +69,8 @@ public class ChoicesPanel extends JPanel {
 		txtField_choiceId.setText(selectedChoice.id);
 		txtField_description.setText(selectedChoice.description);
 		txtField_staminaCost.setText(String.valueOf(selectedChoice.staminaCost));
-		list_children.setModel(selectedChoice.children);
+		jList_children.setModel(selectedChoice.children);
+		jList_traitDependencies.setModel(selectedChoice.traitDependencies);
 	}
 
 	private void save() {
@@ -73,7 +82,7 @@ public class ChoicesPanel extends JPanel {
 		else
 			JOptionPane.showMessageDialog(this, "Stamina Cost must be an integer.");
 		//update choices list.
-		list_choices.repaint();
+		jList_choices.repaint();
 	}
 	
 	public boolean isInteger(String s) {
@@ -91,6 +100,8 @@ public class ChoicesPanel extends JPanel {
 		txtField_choiceName.setText("");
 		txtField_choiceId.setText("");
 		txtField_description.setText("");
+		txtField_trait_id.setText("");
+		txtField_trait_weight.setText("");
 		txtField_staminaCost.setText("");
 		lbl_viewer_choiceName.setText("");
 	}
@@ -106,11 +117,11 @@ public class ChoicesPanel extends JPanel {
 		this.add(panel_choiceList, BorderLayout.EAST);
 		panel_choiceList.setLayout(new BorderLayout(0, 0));
 
-		list_choices = new JList<EditableChoice>();
-		list_choices.setModel(currJob.choices);
-		list_choices.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		jList_choices = new JList<EditableChoice>();
+		jList_choices.setModel(currJob.choices);
+		jList_choices.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		panel_choiceList.add(list_choices, BorderLayout.CENTER);
+		panel_choiceList.add(jList_choices, BorderLayout.CENTER);
 
 		JPanel panel_choiceBtns = new JPanel();
 		panel_choiceList.add(panel_choiceBtns, BorderLayout.SOUTH);
@@ -137,6 +148,8 @@ public class ChoicesPanel extends JPanel {
 				RowSpec.decode("top:default:grow"),
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,}));
 
@@ -169,9 +182,9 @@ public class ChoicesPanel extends JPanel {
 		panel_choiceData.add(panel_children, "2, 7, fill, fill");
 		panel_children.setLayout(new BorderLayout(0, 0));
 
-		list_children = new JList<String>();
+		jList_children = new JList<String>();
 
-		panel_children.add(list_children, BorderLayout.CENTER);
+		panel_children.add(jList_children, BorderLayout.CENTER);
 
 		JPanel panel_childrenBtns = new JPanel();
 		panel_children.add(panel_childrenBtns, BorderLayout.SOUTH);
@@ -195,12 +208,67 @@ public class ChoicesPanel extends JPanel {
 		
 		txtField_staminaCost = new JTextField();
 		panel_choiceData.add(txtField_staminaCost, "2, 9, fill, default");
+		
+		JLabel lbl_traitDependencies = new JLabel("Trait Dependencies");
+		panel_choiceData.add(lbl_traitDependencies, "1, 11");
+		
+		JPanel panel_traitDependencies = new JPanel();
+		panel_choiceData.add(panel_traitDependencies, "2, 11, fill, fill");
+		panel_traitDependencies.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_traitBtns = new JPanel();
+		panel_traitDependencies.add(panel_traitBtns, BorderLayout.SOUTH);
+		
+		JButton btn_addTrait = new JButton("Add Trait");
+		
+		panel_traitBtns.add(btn_addTrait);
+		
+		JButton btn_removeTrait = new JButton("Remove Trait");
+		
+		panel_traitBtns.add(btn_removeTrait);
+		
+		JPanel panel_traitDisplay = new JPanel();
+		panel_traitDependencies.add(panel_traitDisplay, BorderLayout.CENTER);
+		panel_traitDisplay.setLayout(new BorderLayout(0, 0));
+		
+		jList_traitDependencies = new JList();
+		
+		panel_traitDisplay.add(jList_traitDependencies, BorderLayout.CENTER);
+		
+		JPanel panel_traitSummary = new JPanel();
+		panel_traitDisplay.add(panel_traitSummary, BorderLayout.EAST);
+		panel_traitSummary.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
+		
+		JLabel lbl_id = new JLabel("id");
+		panel_traitSummary.add(lbl_id, "2, 2, left, default");
+		
+		txtField_trait_id = new JTextField();
+		txtField_trait_id.setEditable(false);
+		panel_traitSummary.add(txtField_trait_id, "4, 2, fill, default");
+		txtField_trait_id.setColumns(10);
+		
+		JLabel lbl_weight = new JLabel("Weight");
+		panel_traitSummary.add(lbl_weight, "2, 4, right, default");
+		
+		txtField_trait_weight = new JTextField();
+		txtField_trait_weight.setEditable(false);
+		panel_traitSummary.add(txtField_trait_weight, "4, 4, fill, default");
+		txtField_trait_weight.setColumns(10);
 
 		JLabel lbl_reward = new JLabel("Reward:");
-		panel_choiceData.add(lbl_reward, "1, 11, left, default");
+		panel_choiceData.add(lbl_reward, "1, 13, left, default");
 
 		textField = new JTextField();
-		panel_choiceData.add(textField, "2, 11, fill, default");
+		panel_choiceData.add(textField, "2, 13, fill, default");
 		textField.setColumns(10);
 
 		JButton btn_saveChoice = new JButton("Save Choice");
@@ -208,6 +276,33 @@ public class ChoicesPanel extends JPanel {
 
 		// ================ LISTENERS ================
 
+		//adds a trait.
+		btn_addTrait.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				TraitDependencyPicker picker = new TraitDependencyPicker(selectedChoice);
+			}
+		});
+		
+		//deletes a trait.
+		btn_removeTrait.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				selectedChoice.traitDependencies.remove(selectedTrait);
+			}
+		});
+		
+		
+		//selected a trait dependency
+		jList_traitDependencies.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				selectedTrait = jList_traitDependencies.getSelectedValue();
+				txtField_trait_id.setText(selectedTrait.id);
+				txtField_trait_weight.setText(selectedTrait.weight);
+			}
+		});
+		
+		
 		// save choice
 		btn_saveChoice.addMouseListener(new MouseAdapter() {
 			@Override
@@ -253,12 +348,10 @@ public class ChoicesPanel extends JPanel {
 		});
 
 		// select a choice.
-		list_choices.addMouseListener(new MouseAdapter() {
+		jList_choices.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				selectedChoice = list_choices.getSelectedValue();
-
-				System.out.println("choice cliked on." + selectedChoice);
+				selectedChoice = jList_choices.getSelectedValue();
 				updateDisplay();
 			}
 		});
@@ -273,10 +366,10 @@ public class ChoicesPanel extends JPanel {
 		});
 
 		// select a child.
-		list_children.addMouseListener(new MouseAdapter() {
+		jList_children.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				selectedChild = list_children.getSelectedValue();
+				selectedChild = jList_children.getSelectedValue();
 				EditableChoice choice = null;
 				for (EditableChoice c : currJob.choices) {
 					if (c.id.compareTo(selectedChild) == 0) {

@@ -3,6 +3,7 @@ package devTool;
 import java.io.File;
 
 import devTool.Panels.*;
+import devTool.models.GameDataManager;
 import devTool.models.GameModel;
 import devTool.models.MissionsModel;
 import devTool.models.TraitsModel;
@@ -30,8 +31,6 @@ public class ApplicationWindow {
 
 	private JFrame mainFrame;
 	private GameModel gameModel;
-	private MissionsModel missionsModel;
-	private TraitsModel traitsModel;
 	private XMLBuilder xml;
 
 	MissionsPanel missionsPanel = null;
@@ -65,19 +64,20 @@ public class ApplicationWindow {
 	}
 
 	private void loadDirectory(File directory) {
+		GameDataManager dataManager = GameDataManager.getInstance();
 		// set as write location for xmlBuilder.
 		xml.setBaseDir(directory);
 
 		DevFileManager wtf = DevFileManager.getInstance();
 		wtf.setBaseDirectory(directory);
 		DevStarReader.setFileManager(wtf);
-		this.missionsModel = DevStarReader.readEditableMissions();
-		missionsPanel.updateMissions(this.missionsModel); // update missions panel.
+		dataManager.setMissionsModel(DevStarReader.readEditableMissions());
+		missionsPanel.updateMissions(dataManager.getMissionsModel()); // update missions panel.
 
-		this.traitsModel = DevStarReader.readEditableTraits();
-		traitsPanel.updateTraits(this.traitsModel);
+		dataManager.setTraitsModel(DevStarReader.readEditableTraits());
+		traitsPanel.updateTraits();
 
-		// TODO: update general panel.
+		// TODO: update general panel. 
 	}
 
 	/**
@@ -91,8 +91,6 @@ public class ApplicationWindow {
 		}
 
 		gameModel = new GameModel();
-		missionsModel = new MissionsModel();
-
 		mainFrame = new JFrame();
 		mainFrame.setTitle("Starsheep Developer Tool");
 		mainFrame.setBounds(100, 100, 700, 450);
@@ -126,8 +124,8 @@ public class ApplicationWindow {
 
 				try {
 					XMLBuilder.getInstance().buildGameModelData(gameModel);
-					XMLBuilder.getInstance().buildMissionsFile(missionsModel);
-					XMLBuilder.getInstance().buildTraitsFile(traitsModel);
+					XMLBuilder.getInstance().buildMissionsFile();
+					XMLBuilder.getInstance().buildTraitsFile();
 					JOptionPane.showMessageDialog(null, "Saved.");
 				} catch (JAXBException e1) {
 					JOptionPane.showMessageDialog(null,
