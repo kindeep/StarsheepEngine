@@ -3,20 +3,14 @@
     <title>job01</title>
     <description>job01 is the best job ever</description>
     <id>bf6e4e36-82f1-4485-8985-bc6d78f5f692</id>
-    <head-choice>d77cc3fd-7135-4e5a-beb1-17a5d202ccaa</head-choice>
+    <head-choice>783a1bda-c559-4624-ad56-5055fb19d029</head-choice>
     <choices>
         <choice>
             <name>Unnamed choice.</name>
             <id>25cd7eee-5e94-426a-978e-e0439317a8f3</id>
             <stamina-cost>0</stamina-cost>
             <description>choice description here.</description>
-            <trait-dependencies>
-                <trait>
-                    <name>fishing</name>
-                    <id>da85018b-1272-4d2f-abd9-94841a3fef0d</id>
-                    <weight>5</weight>
-                </trait>
-            </trait-dependencies>
+            <trait-dependencies/>
             <children>
                 <child>25cd7eee-5e94-426a-978e-e0439317a8f3</child>
             </children>
@@ -26,13 +20,7 @@
             <id>b7ad08f2-bf16-476a-b6ca-8f85779f6a38</id>
             <stamina-cost>0</stamina-cost>
             <description>choice description here.</description>
-            <trait-dependencies>
-                <trait>
-                    <name>fishing</name>
-                    <id>da85018b-1272-4d2f-abd9-94841a3fef0d</id>
-                    <weight>22</weight>
-                </trait>
-            </trait-dependencies>
+            <trait-dependencies/>
             <children/>
         </choice>
         <choice>

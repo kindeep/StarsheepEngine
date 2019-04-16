@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<job>
+    <title>job in mission2</title>
+    <description></description>
+    <id>4865fd82-e76f-4fbd-83dd-83258675dc10</id>
+    <head-choice>3492cd99-d75a-44a2-a4f9-cd3ab063d5eb</head-choice>
+    <choices>
+        <choice>
+            <name>Unnamed choice.</name>
+            <id>bb8fc354-2928-4652-bd38-85802356f9b7</id>
+            <stamina-cost>0</stamina-cost>
+            <description>choice description here.</description>
+            <trait-dependencies/>
+            <children/>
+        </choice>
+        <choice>
+            <name>Unnamed choice.</name>
+            <id>3492cd99-d75a-44a2-a4f9-cd3ab063d5eb</id>
+            <stamina-cost>0</stamina-cost>
+            <description>choice description here.</description>
+            <trait-dependencies>
+                <trait>
+                    <name>cooking</name>
+                    <id>1283712932jk13hjk23hk2j13gh12kj3h2jk</id>
+                    <weight></weight>
+                </trait>
+            </trait-dependencies>
+            <children/>
+        </choice>
+        <choice>
+            <name>Unnamed choice.</name>
+            <id>e11abf28-2161-4030-9bd8-654a2a4c47a6</id>
+            <stamina-cost>0</stamina-cost>
+            <description>choice description here.</description>
+            <trait-dependencies/>
+            <children/>
+        </choice>
+    </choices>
+</job>

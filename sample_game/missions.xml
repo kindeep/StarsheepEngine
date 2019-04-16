@@ -11,4 +11,15 @@
             </job>
         </jobs>
     </mission>
+    <mission>
+        <name>mission02</name>
+        <id>98f94ada-fa31-4087-aec6-33952fa2d04e</id>
+        <jobs>
+            <job>
+                <id>4865fd82-e76f-4fbd-83dd-83258675dc10</id>
+                <name>job in mission2</name>
+                <description></description>
+            </job>
+        </jobs>
+    </mission>
 </missions>
