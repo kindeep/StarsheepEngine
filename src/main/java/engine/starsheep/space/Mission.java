@@ -15,17 +15,17 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * A Mission holds all data contained within a single mission.
  * 
- * @see MissionBuilder
+ * @see MutableMission
  * @see JobFlyer
  */
 
 // @XmlSeeAlso({EditableMission.class})
-@XmlRootElement(name = "mission")
-@XmlType(propOrder = { "title", "description", "id", "staminaCost", "jobFlyers" })
+
 public class Mission {
-	protected String title;
+	protected String name;
 	protected String description;
 	protected String id;
+	protected int staminaCost;
 	protected List<JobFlyer> jobFlyers;
 
 	// no-arg constructor required for XML marshalling.
@@ -33,36 +33,28 @@ public class Mission {
 		jobFlyers = new ArrayList<JobFlyer>();
 	}
 
-	public Mission(MissionBuilder builder) {
-		jobFlyers = builder.getJobFlyerList();
-		this.id = builder.getId();
-		this.title = builder.getName();
-		this.description = builder.getDescription();
-	}
-
-	@XmlElementWrapper(name = "jobs")
-	@XmlElement(name = "job")
 	public List<JobFlyer> getJobFlyers() {
-		return Collections.unmodifiableList(this.jobFlyers);
+		return this.jobFlyers;
 	}
 
-	@XmlElement(name = "id")
 	public String getId() {
 		return this.id;
 	}
 
-	@XmlElement(name = "title")
-	public String getTitle() {
-		return this.title;
+	public String getName() {
+		return this.name;
 	}
 
-	@XmlElement(name = "description")
 	public String getDescription() {
 		return this.description;
 	}
 
-	@XmlElement(name = "staminaCost")
 	public Integer getStaminaCost() {
-		return 999;
+		return this.staminaCost;
+	}
+	
+	@Override
+	public String toString() {
+		return this.name;
 	}
 }

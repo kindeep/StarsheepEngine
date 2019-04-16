@@ -25,7 +25,7 @@ import devTool.models.EditableJobFlyer;
 import devTool.models.EditableMission;
 import devTool.models.EditableTraitDependency;
 import engine.starsheep.space.StarReader;
-import engine.starsheep.space.Job.JobFlyerBuilder;
+import engine.starsheep.space.Job.MutableJobFlyer;
 
 public class DevStarReader extends StarReader {
 
@@ -72,7 +72,7 @@ public class DevStarReader extends StarReader {
 			Unmarshaller unmarshallerObj = jContext.createUnmarshaller();
 
 			MissionsModel mm = (MissionsModel) unmarshallerObj.unmarshal(file);
-
+			
 			return mm;
 
 		} catch (Exception e) {
@@ -131,7 +131,7 @@ public class DevStarReader extends StarReader {
 
 		ArrayListModel<EditableMission> editableMissions = new ArrayListModel<EditableMission>();
 		EditableMission mission = null;
-		JobFlyerBuilder jobFlyerBuilder = null;
+		MutableJobFlyer jobFlyerBuilder = null;
 
 		try {
 			if (fileManager == null)
@@ -151,7 +151,7 @@ public class DevStarReader extends StarReader {
 					} else if (elementName.equals("id")) {
 						mission.id = event.asCharacters().getData();
 					} else if (elementName.equals("name")) {
-						mission.title = event.asCharacters().getData();
+						mission.name = event.asCharacters().getData();
 
 					} else if (elementName.equals("job")) {
 						EditableJobFlyer flyer = new EditableJobFlyer();

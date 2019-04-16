@@ -1,7 +1,10 @@
 package engine.starsheep.space;
 
 import engine.starsheep.space.Job.*;
+import engine.starsheep.space.models.MissionsModel;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
@@ -9,6 +12,8 @@ import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
+
+import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,65 +41,25 @@ public class StarReader {
 	 * @return A list of all missions in the game.
 	 */
 	public static List<Mission> readMissions() {
-		/*
-		 * todo:
-		 *
-		 * read id, name and imageID for every mission.
-		 *
-		 */
-		XMLInputFactory inputFactory = XMLInputFactory.newInstance();
-		InputStream in;
-		// File configFile = fileManager.getDefaultMissionsStream();
-
-		ArrayList<Mission> missions = new ArrayList();
-		MissionBuilder missionBuilder = null;
-		JobFlyerBuilder jobFlyerBuilder = null;
-
 		try {
 			if (fileManager == null)
 				throw new Exception("Star file manager cannot be null in StarReader.");
 
-			// in = new FileInputStream(configFile);
-			in = fileManager.getDefaultMissionsStream();
-			XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
-			while (eventReader.hasNext()) {
-				XMLEvent event = eventReader.nextEvent();
-				if (event.isStartElement()) {
-					StartElement startElement = event.asStartElement();
-					event = eventReader.nextEvent();
-					String elementName = startElement.getName().getLocalPart();
-					if (elementName.equals("Mission")) { // create a new missionBuilder.
-						missionBuilder = new MissionBuilder();
+			String path = fileManager.getBaseDirectory().toString() + "/missions.xml";
+			File file = new File(path);
 
-					} else if (elementName.equals("Job")) {
-						jobFlyerBuilder = new JobFlyerBuilder(); // create a new jobBuilder.
+			JAXBContext jContext = JAXBContext.newInstance(MissionsModel.class);
+			Unmarshaller unmarshallerObj = jContext.createUnmarshaller();
 
-					} else if (elementName.equals("id")) { // add job id to job flyer.
-						jobFlyerBuilder.setJobId(event.asCharacters().getData());
+			MissionsModel mm = (MissionsModel) unmarshallerObj.unmarshal(file);
 
-					} else if (elementName.equals("name")) { // add job name to job flyer.
-						jobFlyerBuilder.setName(event.asCharacters().getData());
+			
+			return mm.getImmutableMissions();
 
-					} else if (elementName.equals("description")) { // add description to job flyer.
-						jobFlyerBuilder.setDescription(event.asCharacters().getData());
-
-					}
-				} else if (event.isEndElement()) {
-					EndElement endElement = event.asEndElement();
-					String elementName = endElement.getName().getLocalPart();
-					if (elementName.equals("Job")) {
-						missionBuilder.addFlyer(jobFlyerBuilder.build()); // add flyer to mission.
-
-					} else if (elementName.equals("Mission")) {
-						missions.add(missionBuilder.build()); // add mission to list of missions.
-
-					} else if (elementName.equals("Missions")) {
-						return Collections.unmodifiableList(missions); // return missions
-					}
-				}
-			}
 		} catch (Exception e) {
+
 			e.printStackTrace();
+
 		}
 		return null;
 	}
@@ -116,7 +81,7 @@ public class StarReader {
 
 			in = fileManager.getJobStream(String.valueOf(jobId));
 			XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
-			JobBuilder jobBuilder = null;
+			MutableJob jobBuilder = null;
 			ChoiceBuilder choiceBuilder = null;
 			ArrayList<Integer> childrenIds = null;
 
@@ -128,7 +93,7 @@ public class StarReader {
 					String elementName = startElement.getName().getLocalPart();
 
 					if (elementName.equals("Job")) { // start of new job element.
-						jobBuilder = new JobBuilder();
+						jobBuilder = new MutableJob();
 						// read job attributes.
 						Iterator<Attribute> attributes = startElement.getAttributes();
 						while (attributes.hasNext()) {
