@@ -55,6 +55,5 @@ public abstract class StarFileManager {
 
     public abstract InputStream getMissionsStream();
 
-
     public abstract InputStream getJobStreamEdit(String jobId);
 }

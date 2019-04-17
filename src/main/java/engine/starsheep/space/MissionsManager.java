@@ -14,7 +14,6 @@ import engine.starsheep.space.xml.StarReader;
 public class MissionsManager {
 	private static MissionsManager instance;
 	private List<Mission> missions; // a list of all missions.
-
 	private MissionsManager() {
 		missions = StarReader.readMissions(); // read the missions xml.
 	}
