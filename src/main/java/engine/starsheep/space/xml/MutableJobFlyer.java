@@ -3,7 +3,7 @@ package engine.starsheep.space.xml;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import engine.starsheep.space.Job.JobFlyer;
+import engine.starsheep.space.job.JobFlyer;
 
 /**
  * A subclass of the JobFlyer class to allow for setters. Only to be used when

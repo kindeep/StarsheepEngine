@@ -1,4 +1,4 @@
-package devTool.Panels;
+package devTool.panels;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

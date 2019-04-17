@@ -1,8 +1,5 @@
 package engine.starsheep.space;
 
-import engine.starsheep.space.Job.ChoiceBuilder;
-import engine.starsheep.space.Job.TraitDependency;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,6 +8,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import engine.starsheep.space.job.ChoiceBuilder;
+import engine.starsheep.space.job.TraitDependency;
 
 /**
  * 

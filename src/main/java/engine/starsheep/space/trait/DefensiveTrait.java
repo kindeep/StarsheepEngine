@@ -1,4 +1,4 @@
-package engine.starsheep.space.Trait;
+package engine.starsheep.space.trait;
 
 public class DefensiveTrait implements BaseTrait {
 	private String name;

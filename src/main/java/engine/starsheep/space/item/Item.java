@@ -1,4 +1,4 @@
-package engine.starsheep.space.Item;
+package engine.starsheep.space.item;
 
 public interface Item {
 	

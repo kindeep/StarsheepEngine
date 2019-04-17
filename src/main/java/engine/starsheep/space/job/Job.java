@@ -1,4 +1,4 @@
-package engine.starsheep.space.Job;
+package engine.starsheep.space.job;
 
 import engine.starsheep.space.Choice;
 

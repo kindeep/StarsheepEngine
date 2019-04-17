@@ -1,4 +1,4 @@
-package engine.starsheep.space.Trait;
+package engine.starsheep.space.trait;
 
 import java.util.ArrayList;
 import java.util.Collections;

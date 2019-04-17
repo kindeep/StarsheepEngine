@@ -1,4 +1,4 @@
-package devTool.Panels;
+package devTool.panels;
 
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;

@@ -6,7 +6,7 @@ import java.util.List;
 import engine.starsheep.space.Mission;
 import engine.starsheep.space.StarGame;
 import engine.starsheep.space.StarGameView;
-import engine.starsheep.space.Job.JobFlyer;
+import engine.starsheep.space.job.JobFlyer;
 
 /**
  * Application for testing purposes.

@@ -1,9 +1,9 @@
-package devTool.Panels;
+package devTool.panels;
 
 import devTool.models.EditableChoice;
 import devTool.models.EditableJob;
 import devTool.models.EditableTraitDependency;
-import engine.starsheep.space.Job.TraitDependency;
+import engine.starsheep.space.job.TraitDependency;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

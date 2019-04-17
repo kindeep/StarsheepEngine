@@ -1,4 +1,4 @@
-package engine.starsheep.space.Trait;
+package engine.starsheep.space.trait;
 /**
  *
  * @see Trait

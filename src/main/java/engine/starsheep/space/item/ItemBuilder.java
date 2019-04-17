@@ -1,4 +1,4 @@
-package engine.starsheep.space.Item;
+package engine.starsheep.space.item;
 
 import java.util.Collections;
 import java.util.List;

@@ -1,4 +1,4 @@
-package devTool.XMLBuilder;
+package devTool.xml;
 
 import java.io.File;
 

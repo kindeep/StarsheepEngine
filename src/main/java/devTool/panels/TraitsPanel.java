@@ -1,4 +1,4 @@
-package devTool.Panels;
+package devTool.panels;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -9,7 +9,6 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
 import devTool.DevStarReader;
-import devTool.XMLBuilder.XMLBuilder;
 import devTool.models.EditableChoice;
 import devTool.models.EditableJob;
 import devTool.models.EditableJobFlyer;
@@ -18,6 +17,7 @@ import devTool.models.EditableTrait;
 import devTool.models.EditableTraitDependency;
 import devTool.models.GameDataManager;
 import devTool.models.TraitsModel;
+import devTool.xml.XMLBuilder;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;

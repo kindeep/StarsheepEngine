@@ -2,12 +2,12 @@ package devTool;
 
 import java.io.File;
 
-import devTool.Panels.*;
 import devTool.models.GameDataManager;
 import devTool.models.GameModel;
 import devTool.models.MissionsModel;
 import devTool.models.TraitsModel;
-import devTool.XMLBuilder.XMLBuilder;
+import devTool.panels.*;
+import devTool.xml.XMLBuilder;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;

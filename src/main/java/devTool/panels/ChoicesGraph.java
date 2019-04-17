@@ -1,4 +1,4 @@
-package devTool.Panels;
+package devTool.panels;
 
 import java.awt.Component;
 import java.util.List;

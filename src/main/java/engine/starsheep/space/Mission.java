@@ -1,6 +1,6 @@
 package engine.starsheep.space;
 
-import engine.starsheep.space.Job.JobFlyer;
+import engine.starsheep.space.job.JobFlyer;
 import engine.starsheep.space.xml.MutableMission;
 
 import java.util.ArrayList;
