@@ -20,8 +20,6 @@ import javax.xml.bind.annotation.XmlType;
  * @see JobFlyer
  */
 
-// @XmlSeeAlso({EditableMission.class})
-
 public class Mission {
 	protected String name;
 	protected String description;

@@ -18,16 +18,6 @@ public class JobFlyer {
 	protected String description;
 	protected Integer staminaCost;
 	
-	//no-arg constructor required for XML marshalling.
-	public JobFlyer() {}
-	
-	public JobFlyer(MutableJobFlyer builder) {
-		this.jobId = builder.getJobId();
-		this.name = builder.getName();
-		this.description = builder.getDescription();
-		this.staminaCost = builder.getStaminaCost();
-	}
-	
 	public String getJobId() {
 		return jobId;
 	}

@@ -17,8 +17,6 @@ import engine.starsheep.space.Mission;
  */
 @XmlRootElement(name = "missions")
 public class MissionsModel {
-	
-	
 	private ArrayList<MutableMission> missions;
 
 	public MissionsModel() {
@@ -34,25 +32,23 @@ public class MissionsModel {
 	public ArrayList<MutableMission> getMissions() {
 		return this.missions;
 	}
-	
+
 	/**
-	 * Reading in the missions.xml, the data is unmarshalled into objects with setters.
-	 * In order to remove the setters, these objects are 
-	 * upcasted.
+	 * Reading in the missions.xml, the data is unmarshalled into objects with
+	 * setters. In order to remove the setters, these objects are upcasted.
 	 * 
 	 * This is the list to be used within the Engine.
 	 * 
-	 * 
 	 * @return An Unmodifiable list of all Missions and JobFlyers.
 	 */
-	public List<Mission> getImmutableMissions(){
+	public List<Mission> getImmutableMissions() {
 		ArrayList<Mission> result = new ArrayList<Mission>();
-		
-		for (MutableMission mutableMission: missions) {
+
+		for (MutableMission mutableMission : missions) {
 			mutableMission.buildImmutableJobFlyers();
 			result.add(mutableMission);
 		}
-		
+
 		return Collections.unmodifiableList(result);
 	}
 }
