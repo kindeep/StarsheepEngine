@@ -5,6 +5,8 @@ package engine.starsheep.space;
  */
 public abstract class StarGameView {
 
+    // Maybe think of views as activities?
+
     private StarTab currStarTab = StarTab.HOME;
 
     /**
@@ -23,4 +25,5 @@ public abstract class StarGameView {
         return this.currStarTab;
     }
 
+    
 }
