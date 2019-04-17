@@ -1,8 +1,11 @@
+cmdTest
+devApp
 devTool
-devTool.Panels
-devTool.XMLBuilder
 devTool.models
+devTool.panels
+devTool.xml
 engine.starsheep.space
-engine.starsheep.space.Item
-engine.starsheep.space.Job
-engine.starsheep.space.Trait
+engine.starsheep.space.item
+engine.starsheep.space.job
+engine.starsheep.space.trait
+engine.starsheep.space.xml
