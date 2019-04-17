@@ -18,7 +18,7 @@ public class Application {
 
 	public Application() {
 		StarGameView view = new AppView();
-		AppFileManager.getInstance().setBaseDirectory(new File("./sample_game"));
+		AppFileManager.getInstance().setBaseDirectory(new File("./src/main/resources/sample_game"));
 		
 		StarGame game = new StarGame(view, null, AppFileManager.getInstance(), null);
 		List<Mission> missions = game.getMissions();

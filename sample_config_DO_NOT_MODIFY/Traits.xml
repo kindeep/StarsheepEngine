@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Traits>
-	<Trait name="Strength" id="0"/>
-	<Trait name="Intelligence" id="1"/>
-	<Trait name="Lock Picking" id="2"/>
-	<Trait name="Social Engineering" id="3"/>
-</Traits>
