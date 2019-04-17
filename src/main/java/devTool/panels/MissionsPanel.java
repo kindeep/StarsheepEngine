@@ -26,9 +26,9 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
-import devTool.models.MissionsModel;
 import devTool.models.EditableJobFlyer;
 import devTool.models.EditableMission;
+import devTool.models.MissionsModel;
 
 public class MissionsPanel extends JPanel {
 	private static final long serialVersionUID = -9215001740566008009L;

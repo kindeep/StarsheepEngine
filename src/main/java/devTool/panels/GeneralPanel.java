@@ -1,19 +1,17 @@
 package devTool.panels;
 
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
-
-import devTool.models.GameModel;
+import java.awt.BorderLayout;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import java.awt.BorderLayout;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
 
 public class GeneralPanel extends JPanel {
 	private static final long serialVersionUID = -4856608278305715159L;

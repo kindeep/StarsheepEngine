@@ -1,11 +1,26 @@
 package devTool.panels;
 
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.UUID;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JList;
-import com.jgoodies.forms.layout.FormLayout;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.xml.bind.JAXBException;
+
 import com.jgoodies.common.collect.ArrayListModel;
 import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import devTool.DevStarReader;
@@ -16,22 +31,7 @@ import devTool.models.EditableMission;
 import devTool.models.EditableTrait;
 import devTool.models.EditableTraitDependency;
 import devTool.models.GameDataManager;
-import devTool.models.TraitsModel;
 import devTool.xml.XMLBuilder;
-
-import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.xml.bind.JAXBException;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.UUID;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class TraitsPanel extends JPanel implements ActionListener {
 	JTextField txtField_traitName;

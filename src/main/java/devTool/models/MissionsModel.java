@@ -4,7 +4,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.jgoodies.common.collect.ArrayListModel;
-import devTool.models.EditableMission;
 
 @XmlRootElement(name = "missions")
 public class MissionsModel {

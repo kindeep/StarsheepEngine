@@ -1,29 +1,29 @@
 package devTool.panels;
 
-import devTool.DevStarReader;
-import devTool.models.MissionsModel;
-import devTool.xml.XMLBuilder;
-import devTool.models.EditableJob;
-import devTool.models.EditableJobFlyer;
-import devTool.models.EditableMission;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.UUID;
 
-import com.jgoodies.common.collect.ArrayListModel;
-
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 import javax.xml.bind.JAXBException;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.UUID;
-import java.awt.Color;
-import java.awt.Font;
-import javax.swing.JOptionPane;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import com.jgoodies.common.collect.ArrayListModel;
+
+import devTool.DevStarReader;
+import devTool.models.EditableJob;
+import devTool.models.EditableJobFlyer;
+import devTool.models.EditableMission;
+import devTool.models.MissionsModel;
+import devTool.xml.XMLBuilder;
 
 /**
  * @author peakyDicers

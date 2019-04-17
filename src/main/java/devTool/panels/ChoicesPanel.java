@@ -1,35 +1,32 @@
 package devTool.panels;
 
-import devTool.models.EditableChoice;
-import devTool.models.EditableJob;
-import devTool.models.EditableTraitDependency;
-import engine.starsheep.space.job.TraitDependency;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
-import javax.swing.border.LineBorder;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
-
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.common.collect.ArrayListModel;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.UUID;
-import javax.swing.JFormattedTextField;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.LineBorder;
+
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
+
+import devTool.models.EditableChoice;
+import devTool.models.EditableJob;
+import devTool.models.EditableTraitDependency;
 
 //TODO: (MEDIUM PRIORITY) auto select a choice, don't let the fields be editable if no choice selected
 // TODO: Remove Select button for child, click=select
