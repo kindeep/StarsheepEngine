@@ -2,6 +2,8 @@ package engine.starsheep.space;
 
 import java.util.List;
 
+import engine.starsheep.space.xml.StarReader;
+
 /**
  * 
  * This is a singleton class that holds all data regarding all missions.

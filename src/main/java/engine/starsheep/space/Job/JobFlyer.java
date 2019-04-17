@@ -1,5 +1,7 @@
 package engine.starsheep.space.Job;
 
+import engine.starsheep.space.xml.MutableJobFlyer;
+
 /**
  * This class contains all metadata for a single job. 
  * KEY NOTE: This class differs from the Job class in that this 

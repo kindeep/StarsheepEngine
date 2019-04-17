@@ -24,8 +24,8 @@ import devTool.models.EditableJob;
 import devTool.models.EditableJobFlyer;
 import devTool.models.EditableMission;
 import devTool.models.EditableTraitDependency;
-import engine.starsheep.space.StarReader;
-import engine.starsheep.space.Job.MutableJobFlyer;
+import engine.starsheep.space.xml.MutableJobFlyer;
+import engine.starsheep.space.xml.StarReader;
 
 public class DevStarReader extends StarReader {
 

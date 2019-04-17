@@ -1,4 +1,4 @@
-package engine.starsheep.space.models;
+package engine.starsheep.space.xml;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import engine.starsheep.space.Mission;
-import engine.starsheep.space.MutableMission;
 
 /**
  * Mission model is the class that the missions.xml file is unmarshalled to.

@@ -2,6 +2,7 @@ package engine.starsheep.space;
 
 import engine.starsheep.space.Job.TraitDependency;
 import engine.starsheep.space.Trait.TraitManager;
+import engine.starsheep.space.xml.StarReader;
 
 import java.util.List;
 
