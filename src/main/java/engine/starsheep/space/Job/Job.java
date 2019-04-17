@@ -30,15 +30,6 @@ public class Job {
 		choices = new HashMap<Integer, Choice>();
 	}
 	
-	public Job(JobBuilder jb) {
-		this.head = jb.getHead();
-		this.name = jb.getName();
-		this.description = jb.getDescription();
-		this.imageID = jb.getImageID();
-		this.id = jb.getId();
-		this.choices = jb.getChoices();
-	}
-	
 	public Choice getHead() {
 		return head;
 	}
