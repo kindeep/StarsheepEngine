@@ -1,13 +1,12 @@
 package devTool.models;
 
+import java.util.ArrayList;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "trait-dependency")
 public class EditableTraitDependency {
-
-	@XmlElement(name = "name")
-	public String name;
 	
 	@XmlElement(name = "id")
 	public String id;
@@ -22,6 +21,12 @@ public class EditableTraitDependency {
 
 	@Override
 	public String toString() {
-		return this.name;
+	    ArrayList<EditableTrait> traits = GameDataManager.getInstance().getTraitsModel().traits;
+	    for (EditableTrait trait: traits) {
+	        if (trait.id.compareTo(this.id) == 0 ) {
+	            return trait.name;
+	        }
+	    }
+	    return "ERROR: Trait " + this.id + " not found.";
 	}
 }
