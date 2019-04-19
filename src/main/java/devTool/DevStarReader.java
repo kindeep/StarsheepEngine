@@ -1,30 +1,13 @@
 package devTool;
 
 import java.io.File;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.namespace.QName;
-import javax.xml.stream.XMLEventReader;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.events.EndElement;
-import javax.xml.stream.events.StartElement;
-import javax.xml.stream.events.XMLEvent;
 
-import com.jgoodies.common.collect.ArrayListModel;
-
+import devTool.models.EditableJob;
 import devTool.models.MissionsModel;
 import devTool.models.TraitsModel;
-import devTool.models.EditableChoice;
-import devTool.models.EditableJob;
-import devTool.models.EditableJobFlyer;
-import devTool.models.EditableMission;
-import devTool.models.EditableTraitDependency;
-import engine.starsheep.space.xml.MutableJobFlyer;
 import engine.starsheep.space.xml.StarReader;
 
 public class DevStarReader extends StarReader {
@@ -89,7 +72,7 @@ public class DevStarReader extends StarReader {
 	 * @param jobId
 	 * @return
 	 */
-	public static EditableJob readJob(String jobId) {
+	public static EditableJob readEditableJob(String jobId) {
 		try {
 			if (fileManager == null)
 				throw new Exception("Star file manager cannot be null in StarReader.");

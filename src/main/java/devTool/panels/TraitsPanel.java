@@ -139,7 +139,7 @@ public class TraitsPanel extends JPanel implements ActionListener {
 					ArrayListModel<EditableJobFlyer> jobFlyers = mission.jobFlyers;
 					
 					for (EditableJobFlyer flyer: jobFlyers) { //for each job.
-						EditableJob job = DevStarReader.readJob(flyer.id);
+						EditableJob job = DevStarReader.readEditableJob(flyer.id);
 						
 						for (EditableChoice choice: job.choices) { //for each choice.
 							

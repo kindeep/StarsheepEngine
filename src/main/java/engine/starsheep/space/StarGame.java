@@ -1,5 +1,6 @@
 package engine.starsheep.space;
 
+import engine.starsheep.space.controller.MissionsController;
 import engine.starsheep.space.job.TraitDependency;
 import engine.starsheep.space.trait.TraitManager;
 import engine.starsheep.space.xml.StarReader;
@@ -7,7 +8,6 @@ import engine.starsheep.space.xml.StarReader;
 import java.util.List;
 
 public class StarGame {
-    private MissionsManager missionsManager;
     private TraitManager traitManager;
     private Mission currentMission;
     private Choice currentChoice;
@@ -30,13 +30,11 @@ public class StarGame {
         StarController.setGame(this);
         this.soundManager = soundManager;
         this.traitManager = TraitManager.getInstance();
-        this.missionsManager = MissionsManager.getInstance();
+        MissionsController.getInstance();
         this.currentMission = null;
         this.currentChoice = null;
         this.display = display;
         this.player = player;
-
-
     }
 
     public void setMission(Mission m) {
@@ -46,9 +44,9 @@ public class StarGame {
     public void setChoice(Choice c) {
         currentChoice = c;
     }
-
-    public List<Mission> getMissions() {
-        return this.missionsManager.getMissions();
+    
+    public MissionsController getMissionsController() {
+        return MissionsController.getInstance();
     }
 
     //this method is used to expose the controller outside of the engine. to be connected with the view.

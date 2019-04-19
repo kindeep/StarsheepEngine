@@ -125,7 +125,6 @@ public class TraitDependencyPicker extends JFrame {
 		btn_save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EditableTraitDependency td = new EditableTraitDependency();
-				td.name = txtField_traitDependency.getText();
 				td.id = txtField_id.getText();
 				td.weight = txtField_weight.getText();
 				currChoice.traitDependencies.add(td);

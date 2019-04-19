@@ -10,6 +10,11 @@
 StarsheepEngine is a game engine for creating static decision-based games.
 This engine is designed to be portable to any Java based OS.
 
+# Running DevApp
+```
+./gradlew devApp
+```
+
 # Running DevTool
 ```
 ./gradlew rundev

@@ -22,11 +22,6 @@ public class StarController {
         game = g;
     }
 
-    //controller methods.
-    public List<Mission> getMissions() {
-        return game.getMissions();
-    }
-
     public void changeToTab(StarTab t) {
         game.getView().changeToTab(t);
     }

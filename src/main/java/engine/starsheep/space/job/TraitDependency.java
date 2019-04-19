@@ -1,28 +1,14 @@
 package engine.starsheep.space.job;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement(name = "trait-dependency")
 public class TraitDependency {
-	protected String name;
-	protected int weight; 
-	
-	//no-arg constructor required for XML marshalling.
-	public TraitDependency() {}
-	
-	public TraitDependency(String name, int weight) {
-		this.name = name;
-		this.weight = weight;
-	}
-	
-	@XmlAttribute(name = "name")
-	public String getName() {
-		return this.name;
-	}
-	
-	@XmlAttribute(name = "weight")
-	public int getWeight() {
-		return this.weight;
-	}
+    protected String id;
+    protected int weight;
+
+    public String getId() {
+        return this.id;
+    }
+
+    public int getWeight() {
+        return this.weight;
+    }
 }

@@ -69,7 +69,7 @@ public class JobEditor extends JFrame {
 		this.setup(mm, currMission);
 
 		// read the job.xml file. load the data into a EditableJob object.
-		currJob = DevStarReader.readJob(jobId);
+		currJob = DevStarReader.readEditableJob(jobId);
 		initalize();
 	}
 

@@ -4,89 +4,38 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-
-import engine.starsheep.space.job.ChoiceBuilder;
 import engine.starsheep.space.job.TraitDependency;
 
-/**
- * 
- * @author peakyDicers
- * @see ChoiceBuilder
- */
-
-@XmlRootElement(name = "choice")
 public class Choice {
-	protected ArrayList<String> choices;
-	protected ArrayList<TraitDependency> traitDependencies;
-	protected Double staminaCost = 0.0;
-	protected Integer id;
-	protected String description = "fake description here";
-	
-	//no-arg constructor required for XML marshalling.
-	public Choice() {
-		this.traitDependencies = new ArrayList<TraitDependency>();
-	}
+    protected ArrayList<String> children = new ArrayList<>();
+    protected ArrayList<TraitDependency> traitDependencies = new ArrayList<>();
+    protected Double staminaCost = 0.0;
+    protected String id;
+    protected String description = "fake description here";
+    protected String name;
 
-	public Choice(ChoiceBuilder cb) {
-		this.choices = cb.getChoices();
-		this.traitDependencies = cb.getTraitDependencies();
-		this.staminaCost = cb.getStaminaCost();
-		this.id = cb.getChoiceId();
-	}
+    public String getID() {
+        return this.id;
+    }
+    
+    public String getName() {
+        return this.name;
+    }
 
-	@Override
-	public String toString() {
-		return "Choice - id: " + this.id + " staminaCost: " + this.staminaCost + "description: " + this.description;
-	}
+    public List<TraitDependency> getTraitDependencies() {
+        return Collections.unmodifiableList(this.traitDependencies);
+    }
 
-	@XmlAttribute(name = "id")
-	public int getID() {
-		return this.id;
-	}
+    public List<String> getChildrenChoicesIds() {
+        return this.children;
+    }
 
-	/**
-	 * Returns an unmodifiable list of the trait dependencies.
-	 * 
-	 * @return an unmodifiable list of trait dependencies.
-	 */
-	@XmlElementWrapper(name = "trait-dependencies")
-	@XmlElement(name = "trait")
-	public List<TraitDependency> getTraitDependencies() {
-		return Collections.unmodifiableList(this.traitDependencies) ;
-	}
+    public double getStaminaCost() {
+        return this.staminaCost;
+    }
 
-	/**
-	 * Returns a list with all children Choice Ids.
-	 *
-	 * @return a list of all children choice IDs.
-	 */
-	
-	@XmlElementWrapper(name = "children")
-	@XmlElement(name = "child")
-	public List<String> getChildrenChoices() {
-		return this.choices;
-	}
-
-	/**
-	 * Getter method for stamina
-	 *
-	 * @return Double stamina
-	 */
-	@XmlElement(name = "stamina-cost")
-	public double getStaminaCost() {
-		return this.staminaCost;
-	}
-
-	/**
-	 * Uses trait weights and information from the stamina
-	 *
-	 * @return if the choice can be made
-	 */
-	boolean canMakeChoice(StarPlayer player) {
-		return false;
-	}
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
