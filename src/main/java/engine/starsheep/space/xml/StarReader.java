@@ -3,11 +3,13 @@ package engine.starsheep.space.xml;
 import engine.starsheep.space.Mission;
 import engine.starsheep.space.StarFileManager;
 import engine.starsheep.space.job.Job;
+import engine.starsheep.space.trait.Trait;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -17,11 +19,35 @@ import java.util.List;
  *
  */
 public class StarReader {
+    
 	protected static StarFileManager fileManager;
 
 	public static void setFileManager(StarFileManager manager) {
 		StarReader.fileManager = manager;
 	}
+	
+	public static HashMap<String, Trait> readTraits(){
+	    try {
+            if (fileManager == null)
+                throw new Exception("Star file manager cannot be null in StarReader.");
+
+            String path = fileManager.getBaseDirectory().toString() + "/traits.xml";
+            File file = new File(path);
+
+            JAXBContext jContext = JAXBContext.newInstance(TraitsModel.class);
+            Unmarshaller unmarshallerObj = jContext.createUnmarshaller();
+
+            TraitsModel traitsModel = (TraitsModel) unmarshallerObj.unmarshal(file);
+            return traitsModel.getTraits();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+        return null;
+	}
+	
 
 	/**
 	 * Reads the Missions.xml file and returns a list of Mission objects.

@@ -6,15 +6,9 @@ package engine.starsheep.space.trait;
  *
  */
 public class Trait implements BaseTrait{
-	private String name;
-	private int id;
-	private int baseLevel;
-	
-	public Trait(String name, int id, int baseLevel) {
-		this.name = name;
-		this.id = id;
-		this.baseLevel = baseLevel;
-	}
+	protected String name;
+	protected String id;
+	protected int baseLevel;
 
 	@Override
 	public String getName() {
@@ -22,7 +16,7 @@ public class Trait implements BaseTrait{
 	}
 
 	@Override
-	public int getId() {
+	public String getId() {
 		return this.id;
 	}
 

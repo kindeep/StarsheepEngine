@@ -64,6 +64,7 @@ public class MutableChoice extends Choice {
     }
 
     @XmlElementWrapper(name = "trait-dependencies")
+    @XmlElement(name = "trait")
     public List<MutableTraitDependency> getMutableTraitDependencies() {
         return this.mutableTraits;
     }

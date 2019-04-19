@@ -5,19 +5,19 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import engine.starsheep.space.xml.StarReader;
+
 /**
  * Manages all data pertaining to Traits.
  *
  */
 public class TraitManager {
-	private HashMap<Integer, BaseTrait> allTraits;
+	private HashMap<String, Trait> allTraits;
 	private List<DefensiveTrait> defensiveTraits;
 	private static TraitManager instance = null;
 
 	private TraitManager() {
-		/*
-		 * todo: read from Traits.xml and player save data.
-		 */
+	    allTraits = StarReader.readTraits();
 	}
 
 	static public TraitManager getInstance() {

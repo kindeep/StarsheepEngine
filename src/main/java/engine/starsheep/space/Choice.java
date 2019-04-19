@@ -21,7 +21,7 @@ public class Choice {
     public String getName() {
         return this.name;
     }
-
+    
     public List<TraitDependency> getTraitDependencies() {
         return Collections.unmodifiableList(this.traitDependencies);
     }

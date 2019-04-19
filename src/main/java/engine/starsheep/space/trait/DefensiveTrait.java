@@ -2,10 +2,10 @@ package engine.starsheep.space.trait;
 
 public class DefensiveTrait implements BaseTrait {
 	private String name;
-	private int id;
+	private String id;
 	private int baseLevel;
 
-	public DefensiveTrait(String name, int id, int baseLevel) {
+	public DefensiveTrait(String name, String id, int baseLevel) {
 		this.name = name;
 		this.id = id;
 		this.baseLevel = baseLevel;
@@ -17,7 +17,7 @@ public class DefensiveTrait implements BaseTrait {
 	}
 
 	@Override
-	public int getId() {
+	public String getId() {
 		return this.id;
 	}
 

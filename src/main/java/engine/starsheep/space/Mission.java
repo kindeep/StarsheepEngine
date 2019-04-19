@@ -26,7 +26,7 @@ public class Mission {
 		jobFlyers = new ArrayList<JobFlyer>();
 	}
 
-	public List<JobFlyer> getJobFlyers() {
+	public List<? extends JobFlyer> getJobFlyers() {
 		return this.jobFlyers;
 	}
 

@@ -8,7 +8,7 @@ interface BaseTrait {
 	
 	public String getName();
 	
-	public int getId();
+	public String getId();
 	
 	public int getLevel();
 	
