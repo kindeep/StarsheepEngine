@@ -35,6 +35,7 @@ public class ApplicationWindow {
 
 	MissionsPanel missionsPanel = null;
 	TraitsPanel traitsPanel = null;
+	ItemsPanel itemsPanel = null;
 
 	/**
 	 * Launch the application.
@@ -76,6 +77,9 @@ public class ApplicationWindow {
 
 		dataManager.setTraitsModel(DevStarReader.readEditableTraits());
 		traitsPanel.updateTraits();
+		
+		dataManager.setItemsModel(DevStarReader.readEditableItems());
+		itemsPanel.updateItems();
 
 		// TODO: update general panel. 
 	}
@@ -112,6 +116,9 @@ public class ApplicationWindow {
 		
 		traitsPanel = new TraitsPanel();
 		tabbedPane.addTab("Traits", null, traitsPanel, null);
+		
+		itemsPanel = new ItemsPanel();
+		tabbedPane.addTab("Items", null, itemsPanel, null);
 
 		JToolBar toolBar = new JToolBar();
 		mainFrame.getContentPane().add(toolBar, BorderLayout.NORTH);

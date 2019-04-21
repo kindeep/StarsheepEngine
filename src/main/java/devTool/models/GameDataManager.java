@@ -1,5 +1,7 @@
 package devTool.models;
 
+import devTool.models.item.ItemsModel;
+
 /**
  * 
  * @author peakyDicers
@@ -19,6 +21,7 @@ public class GameDataManager {
 	private GameModel gameModel;
 	private MissionsModel missionsModel;
 	private TraitsModel traitsModel;
+	private ItemsModel itemsModel;
 
 	// getters
 	public GameModel getGameModel() {
@@ -31,6 +34,10 @@ public class GameDataManager {
 
 	public TraitsModel getTraitsModel() {
 		return traitsModel;
+	}
+	
+	public ItemsModel getItemsModel() {
+	    return itemsModel;
 	}
 
 	// setters
@@ -45,5 +52,8 @@ public class GameDataManager {
 	public void setTraitsModel(TraitsModel traitsModel) {
 		this.traitsModel = traitsModel;
 	}
-
+	
+	public void setItemsModel(ItemsModel itemsModel) {
+	    this.itemsModel = itemsModel;
+	}
 }
