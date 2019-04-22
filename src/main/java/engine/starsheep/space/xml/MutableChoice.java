@@ -15,6 +15,7 @@ import engine.starsheep.space.Choice;
  * 
  * @author peakyDicers
  *
+ * @see MutableJob
  */
 @XmlRootElement(name = "choice")
 public class MutableChoice extends Choice {
