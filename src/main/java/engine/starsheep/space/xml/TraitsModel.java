@@ -1,8 +1,10 @@
 package engine.starsheep.space.xml;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -21,12 +23,15 @@ public class TraitsModel {
     private HashMap<String, Trait> traits = new HashMap<>();
     private List<MutableTrait> mutableTraits = new ArrayList<>();
     
-    public HashMap<String, Trait> getTraits(){
+    /**
+     * Returns the upcasted MutableTraits in the form of a HashMap.
+     */
+    public Map<String, Trait> getTraits(){
         HashMap<String, Trait> result = new HashMap<>();
         for (MutableTrait trait : mutableTraits) {
             traits.put(trait.getId(), trait);
         }
-        return result;
+        return Collections.unmodifiableMap(result);
     }
     
     @XmlElement(name = "trait")

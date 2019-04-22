@@ -37,7 +37,7 @@ public class MissionsModel {
 	 * Reading in the missions.xml, the data is unmarshalled into objects with
 	 * setters. In order to remove the setters, these objects are upcasted.
 	 * 
-	 * This is the list to be used within the Engine.
+	 * This is the list of Missions to be used within the Engine.
 	 * 
 	 * @return An Unmodifiable list of all Missions and JobFlyers.
 	 */

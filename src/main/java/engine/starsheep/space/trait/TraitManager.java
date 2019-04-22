@@ -2,8 +2,8 @@ package engine.starsheep.space.trait;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import engine.starsheep.space.xml.StarReader;
 
@@ -12,7 +12,7 @@ import engine.starsheep.space.xml.StarReader;
  *
  */
 public class TraitManager {
-	private HashMap<String, Trait> allTraits;
+	private Map<String, Trait> allTraits;
 	private List<DefensiveTrait> defensiveTraits;
 	private static TraitManager instance = null;
 

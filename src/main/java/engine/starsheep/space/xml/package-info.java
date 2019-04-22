@@ -1,7 +1,6 @@
 /**
+ * Provides the classes necessary for reading in StarSheep XML files.
  * 
- */
-/**
  * @author peakyDicers
  *
  */

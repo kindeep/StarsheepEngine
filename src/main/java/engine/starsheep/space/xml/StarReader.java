@@ -9,8 +9,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Used to read StarSheep XML files.
@@ -26,7 +26,10 @@ public class StarReader {
 		StarReader.fileManager = manager;
 	}
 	
-	public static HashMap<String, Trait> readTraits(){
+	/**
+	 * Reads the traits.xml file and returns a HashMap of Trait objects.
+	 */
+	public static Map<String, Trait> readTraits(){
 	    try {
             if (fileManager == null)
                 throw new Exception("Star file manager cannot be null in StarReader.");
@@ -41,14 +44,11 @@ public class StarReader {
             return traitsModel.getTraits();
 
         } catch (Exception e) {
-
             e.printStackTrace();
-
         }
         return null;
 	}
 	
-
 	/**
 	 * Reads the Missions.xml file and returns a list of Mission objects.
 	 */
@@ -76,7 +76,7 @@ public class StarReader {
 	}
 
 	/**
-	 * Reads the Job.xml file for a specific job and return the job object.
+	 * Reads the Job.xml file for a specific job and return the Job object.
 	 */
 	public static Job readJob(String jobId) { // this method needs to be worked on.
 	    try {

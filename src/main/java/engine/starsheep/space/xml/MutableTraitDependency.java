@@ -10,7 +10,8 @@ import engine.starsheep.space.job.TraitDependency;
  * Only to be used for unmarshalling xml.
  * 
  * @author peakyDicers
- *
+ * 
+ * @see MutableChoice
  */
 @XmlRootElement(name = "trait")
 public class MutableTraitDependency extends TraitDependency {

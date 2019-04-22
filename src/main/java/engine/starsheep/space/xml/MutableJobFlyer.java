@@ -11,11 +11,11 @@ import engine.starsheep.space.job.JobFlyer;
  * 
  * @author peakyDicers
  *
+ * @see MutableMission
  */
 @XmlRootElement(name = "job")
 public class MutableJobFlyer extends JobFlyer {
 
-	// setter
 	@XmlElement(name = "id")
 	public void setJobId(String jobId) {
 		this.jobId = jobId;

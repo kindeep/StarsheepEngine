@@ -15,14 +15,11 @@ import javax.xml.bind.annotation.XmlRootElement;
  * 
  * @author peakyDicers
  *
+ * @see MissionsModel
  */
 @XmlRootElement(name = "mission")
 public class MutableMission extends Mission{
-	private List<MutableJobFlyer> mutableJobFlyers;
-
-	public MutableMission() {
-		mutableJobFlyers = new ArrayList<MutableJobFlyer>(); //used for reading XML.
-	}
+	private List<MutableJobFlyer> mutableJobFlyers = new ArrayList<MutableJobFlyer>();
 	
 	/**
 	 * Upcasts the MutableJobFlyers to JobFlyers. The JobFlyers are then
@@ -37,7 +34,6 @@ public class MutableMission extends Mission{
 		}
 	}
 	
-	// setters -------------------------
 	@XmlElement(name = "name")
 	public void setName(String name) {
 		this.name = name;
@@ -57,8 +53,6 @@ public class MutableMission extends Mission{
 	public void setStaminaCost(int staminaCost) {
 		this.staminaCost = staminaCost;
 	}
-	
-	//getters -------------------------
 	
 	@XmlElementWrapper(name = "jobs")
 	@XmlElement(name = "job")

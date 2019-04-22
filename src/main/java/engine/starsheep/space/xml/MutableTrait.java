@@ -11,6 +11,7 @@ import engine.starsheep.space.trait.Trait;
  * 
  * @author peakyDicers
  *
+ * @see TraitsModel
  */
 
 @XmlRootElement(name = "trait")
