@@ -1,24 +1,22 @@
 package devApp;
 
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 
 import com.jgoodies.common.collect.ArrayListModel;
 
 import engine.starsheep.space.Mission;
 import engine.starsheep.space.job.JobFlyer;
-
-import java.awt.BorderLayout;
-import javax.swing.JList;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.util.ArrayList;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class JobScreen extends JFrame {
     private  JList<JobFlyer> jList_jobs;

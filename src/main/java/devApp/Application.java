@@ -1,16 +1,16 @@
 package devApp;
 
+import java.awt.CardLayout;
 import java.awt.EventQueue;
 import java.io.File;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
 
 import engine.starsheep.space.Mission;
 import engine.starsheep.space.StarGame;
 import engine.starsheep.space.StarGameView;
-import javax.swing.JTabbedPane;
-import java.awt.CardLayout;
 
 public class Application {
 
