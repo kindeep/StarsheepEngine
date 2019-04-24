@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "trait-dependency")
+import com.google.gson.annotations.SerializedName;
+
 public class EditableTraitDependency {
 	
-	@XmlElement(name = "id")
+    @SerializedName("id")
 	public String id;
 
-	@XmlElement(name = "weight")
+    @SerializedName("weight")
 	public String weight;
 	
 	

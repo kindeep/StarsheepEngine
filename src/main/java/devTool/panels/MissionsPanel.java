@@ -28,236 +28,227 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import devTool.models.EditableJobFlyer;
 import devTool.models.EditableMission;
+import devTool.models.GameDataManager;
 import devTool.models.MissionsModel;
 
 public class MissionsPanel extends JPanel {
-	private static final long serialVersionUID = -9215001740566008009L;
-	private MissionsModel missionsModel;
-	private EditableMission currMission;
-	private EditableJobFlyer selectedJob = null;
+    private static final long serialVersionUID = -9215001740566008009L;
+    private EditableMission currMission;
+    private EditableJobFlyer selectedJob = null;
 
-	private JTextField txtField_missionTitle;
-	private JTextField txtField_missionDescription;
-	private JTextField txtField_staminaCost;
-	private JTextField txtField_missionId;
-	private JButton btn_editJob;
-	private JButton btn_newJob;
-	private JButton btn_newMission;
+    private JTextField txtField_missionTitle;
+    private JTextField txtField_missionDescription;
+    private JTextField txtField_staminaCost;
+    private JTextField txtField_missionId;
+    private JButton btn_editJob;
+    private JButton btn_newJob;
+    private JButton btn_newMission;
 
-	private ArrayListModel<EditableJobFlyer> jobListModel;
-	private ArrayListModel<EditableMission> missionListModel = null;
-	private JList<EditableMission> jList_missionList;
-	private JList<EditableJobFlyer> jList_jobList;
+    private ArrayListModel<EditableJobFlyer> jobListModel;
+    private ArrayListModel<EditableMission> missionListModel = null;
+    private JList<EditableMission> jList_missionList;
+    private JList<EditableJobFlyer> jList_jobList;
 
-	/**
-	 * Create the panel.
-	 */
+    /**
+     * Create the panel.
+     */
 
-	public void updateMissions(MissionsModel missionsModel) {
-		this.missionsModel = missionsModel;
-		this.missionListModel = missionsModel.getMissions();
-		jList_missionList.setModel(missionListModel);
-	}
+    public void updateMissions() {
+        this.missionListModel = GameDataManager.getInstance().getMissionsModel().getMissions();
+        jList_missionList.setModel(missionListModel);
+    }
 
-	private void deleteMission() {
-		missionsModel.getMissions().remove(currMission); // remove mission.
+    private void deleteMission() {
+        GameDataManager.getInstance().getMissionsModel().removeMission(currMission);
 
-		// clear fields.
-		txtField_missionId.setText("");
-		txtField_missionTitle.setText("");
-		txtField_missionDescription.setText("");
-		txtField_staminaCost.setText("");
-		jobListModel = null;
-		btn_editJob.setEnabled(false);
-		btn_newJob.setEnabled(false);
-	}
+        // clear fields.
+        txtField_missionId.setText("");
+        txtField_missionTitle.setText("");
+        txtField_missionDescription.setText("");
+        txtField_staminaCost.setText("");
+        jobListModel = null;
+        btn_editJob.setEnabled(false);
+        btn_newJob.setEnabled(false);
+    }
 
-	public MissionsPanel() {
+    public MissionsPanel() {
 
-		setLayout(new BorderLayout(0, 0));
+        setLayout(new BorderLayout(0, 0));
 
-		JPanel listPanel = new JPanel();
-		listPanel.setBorder(new LineBorder(Color.MAGENTA));
-		add(listPanel, BorderLayout.WEST);
-		listPanel.setLayout(new BorderLayout(5, 0));
+        JPanel listPanel = new JPanel();
+        listPanel.setBorder(new LineBorder(Color.MAGENTA));
+        add(listPanel, BorderLayout.WEST);
+        listPanel.setLayout(new BorderLayout(5, 0));
 
-		JPanel missionBtns = new JPanel();
-		listPanel.add(missionBtns, BorderLayout.SOUTH);
-		missionBtns.setLayout(new BoxLayout(missionBtns, BoxLayout.Y_AXIS));
+        JPanel missionBtns = new JPanel();
+        listPanel.add(missionBtns, BorderLayout.SOUTH);
+        missionBtns.setLayout(new BoxLayout(missionBtns, BoxLayout.Y_AXIS));
 
-		JButton btn_newMission = new JButton("New Mission");
-		missionBtns.add(btn_newMission);
+        JButton btn_newMission = new JButton("New Mission");
+        missionBtns.add(btn_newMission);
 
-		JButton btn_deleteMission = new JButton("Delete Mission");
-		missionBtns.add(btn_deleteMission);
+        JButton btn_deleteMission = new JButton("Delete Mission");
+        missionBtns.add(btn_deleteMission);
 
-		// mission form labels + textfields.
-		JPanel missionEditor = new JPanel();
-		missionEditor.setBackground(Color.GREEN);
-		add(missionEditor, BorderLayout.CENTER);
-		missionEditor.setLayout(new BorderLayout(0, 0));
+        // mission form labels + textfields.
+        JPanel missionEditor = new JPanel();
+        missionEditor.setBackground(Color.GREEN);
+        add(missionEditor, BorderLayout.CENTER);
+        missionEditor.setLayout(new BorderLayout(0, 0));
 
-		JPanel centerPanel = new JPanel();
-		missionEditor.add(centerPanel, BorderLayout.CENTER);
-		centerPanel.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("left:50dlu"),
-				ColumnSpec.decode("center:53dlu:grow"),},
-			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("max(15dlu;default)"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
+        JPanel centerPanel = new JPanel();
+        missionEditor.add(centerPanel, BorderLayout.CENTER);
+        centerPanel.setLayout(new FormLayout(
+                new ColumnSpec[] { ColumnSpec.decode("left:50dlu"), ColumnSpec.decode("center:53dlu:grow"), },
+                new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("max(15dlu;default)"),
+                        FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+                        FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+                        FormSpecs.DEFAULT_ROWSPEC, }));
 
-		JLabel lbl_missionId = new JLabel("Mission id:");
-		centerPanel.add(lbl_missionId, "1, 2, left, default");
+        JLabel lbl_missionId = new JLabel("Mission id:");
+        centerPanel.add(lbl_missionId, "1, 2, left, default");
 
-		txtField_missionId = new JTextField();
-		txtField_missionId.setEnabled(false);
-		txtField_missionId.setEditable(false);
-		centerPanel.add(txtField_missionId, "2, 2, fill, default");
-		txtField_missionId.setColumns(10);
+        txtField_missionId = new JTextField();
+        txtField_missionId.setEnabled(false);
+        txtField_missionId.setEditable(false);
+        centerPanel.add(txtField_missionId, "2, 2, fill, default");
+        txtField_missionId.setColumns(10);
 
-		JLabel lbl_missionTitle = new JLabel("Mission title:");
-		centerPanel.add(lbl_missionTitle, "1, 3, left, default");
-		jList_missionList = new JList<EditableMission>();
-		txtField_missionTitle = new JTextField();
+        JLabel lbl_missionTitle = new JLabel("Mission title:");
+        centerPanel.add(lbl_missionTitle, "1, 3, left, default");
+        jList_missionList = new JList<EditableMission>();
+        txtField_missionTitle = new JTextField();
 
-		centerPanel.add(txtField_missionTitle, "2, 3, fill, default");
-		txtField_missionTitle.setColumns(10);
+        centerPanel.add(txtField_missionTitle, "2, 3, fill, default");
+        txtField_missionTitle.setColumns(10);
 
-		JLabel lbl_description = new JLabel("Description:");
-		centerPanel.add(lbl_description, "1, 5, left, default");
+        JLabel lbl_description = new JLabel("Description:");
+        centerPanel.add(lbl_description, "1, 5, left, default");
 
-		txtField_missionDescription = new JTextField();
-		centerPanel.add(txtField_missionDescription, "2, 5, fill, default");
-		txtField_missionDescription.setColumns(10);
+        txtField_missionDescription = new JTextField();
+        centerPanel.add(txtField_missionDescription, "2, 5, fill, default");
+        txtField_missionDescription.setColumns(10);
 
-		JLabel lbl_staminaCost = new JLabel("Stamina Cost:");
-		centerPanel.add(lbl_staminaCost, "1, 7, left, default");
+        JLabel lbl_staminaCost = new JLabel("Stamina Cost:");
+        centerPanel.add(lbl_staminaCost, "1, 7, left, default");
 
-		txtField_staminaCost = new JTextField();
-		centerPanel.add(txtField_staminaCost, "2, 7, fill, default");
-		txtField_staminaCost.setColumns(10);
+        txtField_staminaCost = new JTextField();
+        centerPanel.add(txtField_staminaCost, "2, 7, fill, default");
+        txtField_staminaCost.setColumns(10);
 
-		JLabel lblImage = new JLabel("Image:");
-		centerPanel.add(lblImage, "1, 9, left, default");
+        JLabel lblImage = new JLabel("Image:");
+        centerPanel.add(lblImage, "1, 9, left, default");
 
-		JButton btnBrowse = new JButton("Browse");
-		centerPanel.add(btnBrowse, "2, 9");
+        JButton btnBrowse = new JButton("Browse");
+        centerPanel.add(btnBrowse, "2, 9");
 
-		jobListModel = new ArrayListModel<EditableJobFlyer>();
+        jobListModel = new ArrayListModel<EditableJobFlyer>();
 
-		listPanel.add(jList_missionList);
-		jList_missionList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        listPanel.add(jList_missionList);
+        jList_missionList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		JPanel rightPanel = new JPanel();
-		add(rightPanel, BorderLayout.EAST);
-		rightPanel.setBorder(new LineBorder(Color.ORANGE));
-		rightPanel.setLayout(new BorderLayout(0, 0));
+        JPanel rightPanel = new JPanel();
+        add(rightPanel, BorderLayout.EAST);
+        rightPanel.setBorder(new LineBorder(Color.ORANGE));
+        rightPanel.setLayout(new BorderLayout(0, 0));
 
-		jList_jobList = new JList<EditableJobFlyer>();
-		jList_jobList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // only one item can be selected.
+        jList_jobList = new JList<EditableJobFlyer>();
+        jList_jobList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // only one item can be selected.
 
-		rightPanel.add(jList_jobList);
+        rightPanel.add(jList_jobList);
 
-		// job button panel --------------
-		JPanel jobBtns = new JPanel();
-		rightPanel.add(jobBtns, BorderLayout.SOUTH);
-		jobBtns.setLayout(new BoxLayout(jobBtns, BoxLayout.Y_AXIS));
+        // job button panel --------------
+        JPanel jobBtns = new JPanel();
+        rightPanel.add(jobBtns, BorderLayout.SOUTH);
+        jobBtns.setLayout(new BoxLayout(jobBtns, BoxLayout.Y_AXIS));
 
-		btn_editJob = new JButton("Edit Job");
-		jobBtns.add(btn_editJob);
+        btn_editJob = new JButton("Edit Job");
+        jobBtns.add(btn_editJob);
 
-		btn_newJob = new JButton("New Job");
-		jobBtns.add(btn_newJob);
+        btn_newJob = new JButton("New Job");
+        jobBtns.add(btn_newJob);
 
-		// ==================== listeners ====================
+        // ==================== listeners ====================
 
-		// clicked on a job.
-		jList_jobList.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				selectedJob = jList_jobList.getSelectedValue();
-			}
-		});
+        // clicked on a job.
+        jList_jobList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+                selectedJob = jList_jobList.getSelectedValue();
+            }
+        });
 
-		// edit job button pressed.
-		btn_editJob.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JobEditor jobEditor = new JobEditor(missionsModel, currMission, selectedJob.id);
-				jobEditor.setVisible(true);
-			}
-		});
+        // edit job button pressed.
+        btn_editJob.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JobEditor jobEditor = new JobEditor(currMission, selectedJob.id);
+                jobEditor.setVisible(true);
+            }
+        });
 
-		// new job button pressed.
-		btn_newJob.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JobEditor jobEditor = new JobEditor(missionsModel, currMission);
-				jobEditor.setVisible(true);
-			}
-		});
+        // new job button pressed.
+        btn_newJob.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JobEditor jobEditor = new JobEditor(currMission);
+                jobEditor.setVisible(true);
+            }
+        });
 
-		// delete a mission.
-		btn_deleteMission.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+        // delete a mission.
+        btn_deleteMission.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
 
-				int reply = JOptionPane.showConfirmDialog(null,
-						"Are you sure you want to delete mission: " + currMission.title, "ARE YOU SURE?",
-						JOptionPane.YES_NO_OPTION);
-				if (reply == JOptionPane.YES_OPTION) {
-					reply = JOptionPane.showConfirmDialog(null,
-							currMission.title + " and all its jobs and choices will be DELETED. Are you sure?",
-							"FINAL WARNING", JOptionPane.YES_NO_OPTION);
-					if (reply == JOptionPane.YES_OPTION)
-						deleteMission();
-				}
-			}
-		});
+                int reply = JOptionPane.showConfirmDialog(null,
+                        "Are you sure you want to delete mission: " + currMission.title, "ARE YOU SURE?",
+                        JOptionPane.YES_NO_OPTION);
+                if (reply == JOptionPane.YES_OPTION) {
+                    reply = JOptionPane.showConfirmDialog(null,
+                            currMission.title + " and all its jobs and choices will be DELETED. Are you sure?",
+                            "FINAL WARNING", JOptionPane.YES_NO_OPTION);
+                    if (reply == JOptionPane.YES_OPTION)
+                        deleteMission();
+                }
+            }
+        });
 
-		// clicked on a mission.
-		jList_missionList.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				selectedJob = null;
-				currMission = jList_missionList.getSelectedValue();
+        // clicked on a mission.
+        jList_missionList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                selectedJob = null;
+                currMission = jList_missionList.getSelectedValue();
 
-				// update data in fields.
-				txtField_missionTitle.setText(currMission.title);
-				txtField_missionDescription.setText(currMission.description);
-				txtField_staminaCost.setText(String.valueOf(currMission.staminaCost));
-				txtField_missionId.setText(currMission.id);
-				btn_editJob.setEnabled(true);
-				btn_newJob.setEnabled(true);
+                // update data in fields.
+                txtField_missionTitle.setText(currMission.title);
+                txtField_missionDescription.setText(currMission.description);
+                txtField_staminaCost.setText(String.valueOf(currMission.staminaCost));
+                txtField_missionId.setText(currMission.id);
+                btn_editJob.setEnabled(true);
+                btn_newJob.setEnabled(true);
 
-				// update job list.
-				jList_jobList.setModel(currMission.jobFlyers);
-			}
-		});
+                // update job list.
+                jList_jobList.setModel(currMission.jobFlyers);
+            }
+        });
 
-		// new mission button pressed.
-		btn_newMission.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				EditableMission mission = new EditableMission();
-				mission.title = "unnamed mission";
-				mission.id = UUID.randomUUID().toString();
-				missionListModel.add(mission);
+        // new mission button pressed.
+        btn_newMission.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                EditableMission mission = new EditableMission();
+                mission.title = "unnamed mission";
+                mission.id = UUID.randomUUID().toString();
+                GameDataManager.getInstance().getMissionsModel().addMission(mission);
+            }
+        });
 
-			}
-		});
-
-		txtField_missionTitle.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				currMission.title = txtField_missionTitle.getText();
-				jList_missionList.updateUI();
-			}
-		});
-	}
+        txtField_missionTitle.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                currMission.title = txtField_missionTitle.getText();
+                jList_missionList.updateUI();
+            }
+        });
+    }
 }

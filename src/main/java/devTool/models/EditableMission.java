@@ -1,9 +1,6 @@
 package devTool.models;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-
+import com.google.gson.annotations.SerializedName;
 import com.jgoodies.common.collect.ArrayListModel;
 
 /**
@@ -13,24 +10,21 @@ import com.jgoodies.common.collect.ArrayListModel;
  * @author peakyDicers
  *
  */
-
-@XmlRootElement(name = "mission")
 public class EditableMission {
 
-	@XmlElement(name = "name")
+    @SerializedName("name")
 	public String title;
 
-	@XmlElement(name = "description")
+    @SerializedName("description")
 	public String description;
 
-	@XmlElement(name = "id")
+    @SerializedName("id")
 	public String id;
 
-	@XmlElement(name = "stamina-cost")
+    @SerializedName("stamina-cost")
 	public String staminaCost;
 
-	@XmlElementWrapper(name = "jobs")
-	@XmlElement(name = "job")
+    @SerializedName("job")
 	public ArrayListModel<EditableJobFlyer> jobFlyers = null;
 
 	public EditableMission() {

@@ -19,11 +19,11 @@ import javax.xml.bind.JAXBException;
 import com.jgoodies.common.collect.ArrayListModel;
 
 import devTool.DevStarReader;
+import devTool.JsonBuilder;
 import devTool.models.EditableJob;
 import devTool.models.EditableJobFlyer;
 import devTool.models.EditableMission;
 import devTool.models.MissionsModel;
-import devTool.xml.XMLBuilder;
 
 /**
  * @author peakyDicers
@@ -34,14 +34,12 @@ public class JobEditor extends JFrame {
 
 	private EditableMission currMission;
 	private EditableJob currJob = null;
-	private MissionsModel missionsModel;
 	private JobInfoPanel jobInfoPanel;
 	private ChoicesGraph graph;
 
 	// common code for both constructors.
-	private void setup(MissionsModel mm, EditableMission currMission) {
+	private void setup(EditableMission currMission) {
 		this.currMission = currMission;
-		this.missionsModel = mm;
 	}
 
 	/**
@@ -51,8 +49,8 @@ public class JobEditor extends JFrame {
 	 *
 	 * 						Start JobEditor with a brand new job.
 	 */
-	public JobEditor(MissionsModel mm, EditableMission currMission) {
-		this.setup(mm, currMission);
+	public JobEditor(EditableMission currMission) {
+		this.setup(currMission);
 
 		currJob = new EditableJob();
 		currJob.id = UUID.randomUUID().toString();
@@ -65,8 +63,8 @@ public class JobEditor extends JFrame {
 	 * @param mm
 	 *            MissionsModel required to update missions.xml upon save.
 	 */
-	public JobEditor(MissionsModel mm, EditableMission currMission, String jobId) {
-		this.setup(mm, currMission);
+	public JobEditor(EditableMission currMission, String jobId) {
+		this.setup(currMission);
 
 		// read the job.xml file. load the data into a EditableJob object.
 		currJob = DevStarReader.readEditableJob(jobId);
@@ -76,7 +74,7 @@ public class JobEditor extends JFrame {
 	private void saveBtnPressed() {
 		jobInfoPanel.save();
 
-		XMLBuilder.getInstance().buildJobFile(currJob);
+		JsonBuilder.getInstance().buildJobFile(currJob);
 
 		/// create job flyer and add to job list.
 		EditableJobFlyer flyer = new EditableJobFlyer();
@@ -89,8 +87,8 @@ public class JobEditor extends JFrame {
 
 		// update Missions xml.
 		try {
-			XMLBuilder.getInstance().buildMissionsFile();
-		} catch (JAXBException e) {
+			JsonBuilder.getInstance().buildMissionsFile();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		JOptionPane.showMessageDialog(null, "This job has been saved.");
@@ -98,7 +96,7 @@ public class JobEditor extends JFrame {
 
 	private void deleteJob() {
 		// delete the job.xml file.
-		boolean success = XMLBuilder.getInstance().deleteJobFile(currJob.id);
+		boolean success = JsonBuilder.getInstance().deleteJobFile(currJob.id);
 		if (!success)
 			JOptionPane.showMessageDialog(null, "The job file: j_" + currJob.id + " could not be deleted.");
 
@@ -114,8 +112,8 @@ public class JobEditor extends JFrame {
 
 		// save missions.xml
 		try {
-			XMLBuilder.getInstance().buildMissionsFile();
-		} catch (JAXBException e) {
+			JsonBuilder.getInstance().buildMissionsFile();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		JOptionPane.showMessageDialog(null, "This job has been deleted.");

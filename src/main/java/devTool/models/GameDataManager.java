@@ -10,7 +10,12 @@ import devTool.models.item.ItemsModel;
 public class GameDataManager {
 	private static GameDataManager instance;
 	
-	private GameDataManager() {}
+	private GameDataManager() {
+	    this.gameModel = new GameModel();
+	    this.missionsModel = new MissionsModel();
+	    this.traitsModel = new TraitsModel();
+	    this.itemsModel = new ItemsModel();
+	}
 	
 	public static GameDataManager getInstance() {
 		if (instance == null)
@@ -42,18 +47,22 @@ public class GameDataManager {
 
 	// setters
 	public void setGameModel(GameModel gameModel) {
-		this.gameModel = gameModel;
+	    if (gameModel != null)
+	        this.gameModel = gameModel;
 	}
 
 	public void setMissionsModel(MissionsModel missionsModel) {
-		this.missionsModel = missionsModel;
+	    if (missionsModel != null)
+	        this.missionsModel = missionsModel;
 	}
 
 	public void setTraitsModel(TraitsModel traitsModel) {
-		this.traitsModel = traitsModel;
+	    if (traitsModel != null)
+	        this.traitsModel = traitsModel;
 	}
 	
 	public void setItemsModel(ItemsModel itemsModel) {
-	    this.itemsModel = itemsModel;
+	    if (itemsModel != null)
+	        this.itemsModel = itemsModel;
 	}
 }

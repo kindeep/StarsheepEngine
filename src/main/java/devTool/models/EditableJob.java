@@ -1,31 +1,27 @@
 package devTool.models;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
+import com.google.gson.annotations.SerializedName;
 
 import com.jgoodies.common.collect.LinkedListModel;
 
-@XmlRootElement(name = "job")
 public class EditableJob {
 
-	@XmlElement(name = "title")
+    @SerializedName("name")
 	public String name;
 
-	@XmlElement(name = "description")
+    @SerializedName("description")
 	public String description;
 
-	@XmlElement(name = "id")
+    @SerializedName("id")
 	public String id;
 
-	@XmlElement(name = "image-id")
+    @SerializedName("image-id")
 	public String imageID;
 
-	@XmlElement(name = "head-choice")
+    @SerializedName("head-choice")
 	public String headChoice;
 	
-	@XmlElementWrapper(name = "choices")
-	@XmlElement(name = "choice")
+    @SerializedName("choices")
 	public LinkedListModel<EditableChoice> choices = null;
 
 	public EditableJob() {

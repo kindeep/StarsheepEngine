@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.xml.bind.JAXBException;
 
 import com.jgoodies.common.collect.ArrayListModel;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -24,6 +23,7 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import devTool.DevStarReader;
+import devTool.JsonBuilder;
 import devTool.models.EditableChoice;
 import devTool.models.EditableJob;
 import devTool.models.EditableJobFlyer;
@@ -31,10 +31,10 @@ import devTool.models.EditableMission;
 import devTool.models.EditableTrait;
 import devTool.models.EditableTraitDependency;
 import devTool.models.GameDataManager;
-import devTool.xml.XMLBuilder;
 
 public class TraitsPanel extends JPanel implements ActionListener {
-	JTextField txtField_traitName;
+    private static final long serialVersionUID = 1L;
+    JTextField txtField_traitName;
 	JTextField txtField_traitId;
 	private JList<EditableTrait> list_traitList;
 	private ArrayListModel<EditableTrait> traitList;
@@ -53,9 +53,11 @@ public class TraitsPanel extends JPanel implements ActionListener {
 
 	public void updateTraits() {
 		GameDataManager dataManager = GameDataManager.getInstance();
-		traitList = dataManager.getTraitsModel().traits;
-		System.out.println("updating traits to: " + traitList.getSize());
-		list_traitList.setModel(traitList);
+		if (dataManager.getTraitsModel() != null)
+		{
+		    traitList = dataManager.getTraitsModel().traits;
+	        list_traitList.setModel(traitList);
+		}
 	}
 
 	public void initalize() {
@@ -157,9 +159,9 @@ public class TraitsPanel extends JPanel implements ActionListener {
 						
 						//save all files
 						try {
-							XMLBuilder.getInstance().buildJobFile(job);
-							XMLBuilder.getInstance().buildTraitsFile();
-						} catch (JAXBException e1) {
+							JsonBuilder.getInstance().buildJobFile(job);
+							JsonBuilder.getInstance().buildTraitsFile();
+						} catch (Exception e1) {
 							e1.printStackTrace();
 						}
 					}

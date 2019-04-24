@@ -7,7 +7,6 @@ import devTool.models.GameModel;
 import devTool.models.MissionsModel;
 import devTool.models.TraitsModel;
 import devTool.panels.*;
-import devTool.xml.XMLBuilder;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -31,7 +30,7 @@ public class ApplicationWindow {
 
 	private JFrame mainFrame;
 	private GameModel gameModel;
-	private XMLBuilder xml;
+	private JsonBuilder xml;
 
 	MissionsPanel missionsPanel = null;
 	TraitsPanel traitsPanel = null;
@@ -52,13 +51,13 @@ public class ApplicationWindow {
 			}
 		});
 	}
-
+	
 	/**
 	 * Create the application.
 	 */
 	public ApplicationWindow() {
 		// set default save location.
-		xml = XMLBuilder.getInstance();
+		xml = JsonBuilder.getInstance();
 		xml.setBaseDir(new File("."));
 
 		initialize();
@@ -73,7 +72,7 @@ public class ApplicationWindow {
 		wtf.setBaseDirectory(directory);
 		DevStarReader.setFileManager(wtf);
 		dataManager.setMissionsModel(DevStarReader.readEditableMissions());
-		missionsPanel.updateMissions(dataManager.getMissionsModel()); // update missions panel.
+		missionsPanel.updateMissions();
 
 		dataManager.setTraitsModel(DevStarReader.readEditableTraits());
 		traitsPanel.updateTraits();
@@ -130,14 +129,14 @@ public class ApplicationWindow {
 			public void mouseClicked(MouseEvent e) {
 
 				try {
-					XMLBuilder.getInstance().buildGameModelData(gameModel);
-					XMLBuilder.getInstance().buildMissionsFile();
-					XMLBuilder.getInstance().buildTraitsFile();
+					JsonBuilder.getInstance().buildGameModelData(gameModel);
+					JsonBuilder.getInstance().buildMissionsFile();
+					JsonBuilder.getInstance().buildTraitsFile();
 					JOptionPane.showMessageDialog(null, "Saved.");
-				} catch (JAXBException e1) {
+				} catch (Exception exception) {
 					JOptionPane.showMessageDialog(null,
 							"Save Unsuccessful. You should probably manually check the XML files.");
-					e1.printStackTrace();
+					exception.printStackTrace();
 				}
 			}
 		});

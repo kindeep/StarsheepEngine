@@ -46,7 +46,8 @@ public class ItemsPanel extends JPanel {
 
     public void updateItems() {
         ItemsModel itemsModel = GameDataManager.getInstance().getItemsModel();
-        jList_items.setModel(itemsModel.items);
+        if (itemsModel != null)
+            jList_items.setModel(itemsModel.items);
     }
 
     public void initalize() {

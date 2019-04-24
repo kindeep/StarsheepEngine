@@ -7,6 +7,8 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.google.gson.annotations.SerializedName;
+
 import engine.starsheep.space.Mission;
 
 /**
@@ -15,7 +17,6 @@ import engine.starsheep.space.Mission;
  * @author peakyDicers
  *
  */
-@XmlRootElement(name = "missions")
 public class MissionsModel {
 	private ArrayList<MutableMission> missions;
 
@@ -28,7 +29,7 @@ public class MissionsModel {
 	 * 
 	 * @return An ArrayList of mutable missions.
 	 */
-	@XmlElement(name = "mission")
+	 @SerializedName("missions")
 	public ArrayList<MutableMission> getMissions() {
 		return this.missions;
 	}

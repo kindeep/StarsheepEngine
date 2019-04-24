@@ -1,4 +1,4 @@
-package devTool.xml;
+package devTool.models;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;

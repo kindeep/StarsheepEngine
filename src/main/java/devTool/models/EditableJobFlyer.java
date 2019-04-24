@@ -1,25 +1,20 @@
 package devTool.models;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import com.google.gson.annotations.SerializedName;
 
-@XmlRootElement(name = "job")
 public class EditableJobFlyer {
 
-	@XmlElement(name = "id")
+    @SerializedName("id")
 	public String id;
 
-	@XmlElement(name = "name")
+	@SerializedName("name")
 	public String name;
 
-	@XmlElement(name = "description")
+	@SerializedName("description")
 	public String description;
 
-	@XmlElement(name = "stamina-cost")
+	@SerializedName("stamina-cost")
 	public Integer staminaCost;
-
-	public EditableJobFlyer() {
-	}
 
 	@Override
 	public String toString() {

@@ -1,32 +1,26 @@
 package devTool.models;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-
+import com.google.gson.annotations.SerializedName;
 import com.jgoodies.common.collect.ArrayListModel;
 
-@XmlRootElement(name = "choice")
 public class EditableChoice {
 
-	@XmlElement(name = "name")
+    @SerializedName("name")
 	public String name;
 
-	@XmlElement(name = "id")
+    @SerializedName("id")
 	public String id;
 
-	@XmlElement(name = "stamina-cost")
+    @SerializedName("stamina-cost")
 	public Integer staminaCost = 0;
 
-	@XmlElement(name = "description")
+    @SerializedName("description")
 	public String description = "choice description here.";
 
-	@XmlElementWrapper(name = "trait-dependencies")
-	@XmlElement(name = "trait")
+    @SerializedName("trait")
 	public ArrayListModel<EditableTraitDependency> traitDependencies = null;
 
-	@XmlElementWrapper(name = "children")
-	@XmlElement(name = "child")
+    @SerializedName("child")
 	public ArrayListModel<String> children = null;
 
 	public EditableChoice() {
