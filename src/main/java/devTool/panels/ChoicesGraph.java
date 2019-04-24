@@ -51,7 +51,7 @@ public class ChoicesGraph extends JFrame {
 			Node n = graph.addNode(c.id);
 			n.addAttribute("ui.label", c.name);
 
-			if (c.id.compareTo(headChoiceId) == 0)
+			if (headChoiceId != null && c.id.compareTo(headChoiceId) == 0)
 				n.addAttribute("ui.class", "start");
 			else
 				n.addAttribute("ui.class", "base");
