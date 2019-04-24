@@ -231,7 +231,7 @@ public class MissionsPanel extends JPanel {
                 jList_jobList.setModel(currMission.jobFlyers);
             }
         });
-
+        
         // new mission button pressed.
         btn_newMission.addMouseListener(new MouseAdapter() {
             @Override

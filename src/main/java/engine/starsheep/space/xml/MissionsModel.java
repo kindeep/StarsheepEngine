@@ -15,41 +15,17 @@ import engine.starsheep.space.Mission;
  * Mission model is the class that the missions.xml file is unmarshalled to.
  * 
  * @author peakyDicers
- *
  */
 public class MissionsModel {
-	private ArrayList<MutableMission> missions;
+    
+    @SerializedName("missions")
+    private ArrayList<Mission> missions;
 
-	public MissionsModel() {
-		missions = new ArrayList<MutableMission>();
-	}
+    public MissionsModel() {
+        missions = new ArrayList<>();
+    }
 
-	/**
-	 * This is ONLY to be used for unmarshalling from the missions.xml file.
-	 * 
-	 * @return An ArrayList of mutable missions.
-	 */
-	 @SerializedName("missions")
-	public ArrayList<MutableMission> getMissions() {
-		return this.missions;
-	}
-
-	/**
-	 * Reading in the missions.xml, the data is unmarshalled into objects with
-	 * setters. In order to remove the setters, these objects are upcasted.
-	 * 
-	 * This is the list of Missions to be used within the Engine.
-	 * 
-	 * @return An Unmodifiable list of all Missions and JobFlyers.
-	 */
-	public List<Mission> getImmutableMissions() {
-		ArrayList<Mission> result = new ArrayList<Mission>();
-
-		for (MutableMission mutableMission : missions) {
-			mutableMission.buildImmutableJobFlyers();
-			result.add(mutableMission);
-		}
-
-		return Collections.unmodifiableList(result);
-	}
+    public List<Mission> getMissions() {
+        return Collections.unmodifiableList(this.missions);
+    }
 }

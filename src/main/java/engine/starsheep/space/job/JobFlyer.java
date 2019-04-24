@@ -1,6 +1,6 @@
 package engine.starsheep.space.job;
 
-import engine.starsheep.space.xml.MutableJobFlyer;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * This class contains all metadata for a single job. 
@@ -13,10 +13,18 @@ import engine.starsheep.space.xml.MutableJobFlyer;
  */
 
 public class JobFlyer {
-	protected String jobId;
-	protected String name;
-	protected String description;
-	protected Integer staminaCost;
+    
+    @SerializedName("id")
+	private String jobId;
+    
+    @SerializedName("name")
+	private String name;
+    
+    @SerializedName("description")
+	private String description;
+    
+    @SerializedName("stamina-cost")
+	private Integer staminaCost;
 	
 	public String getJobId() {
 		return jobId;

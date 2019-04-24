@@ -8,7 +8,10 @@ import engine.starsheep.space.trait.Trait;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
+import com.google.gson.Gson;
+
 import java.io.File;
+import java.io.FileReader;
 import java.util.List;
 import java.util.Map;
 
@@ -31,17 +34,18 @@ public class StarReader {
 	 */
 	public static Map<String, Trait> readTraits(){
 	    try {
-            if (fileManager == null)
-                throw new Exception("Star file manager cannot be null in StarReader.");
-
-            String path = fileManager.getBaseDirectory().toString() + "/traits.xml";
-            File file = new File(path);
-
-            JAXBContext jContext = JAXBContext.newInstance(TraitsModel.class);
-            Unmarshaller unmarshallerObj = jContext.createUnmarshaller();
-
-            TraitsModel traitsModel = (TraitsModel) unmarshallerObj.unmarshal(file);
-            return traitsModel.getTraits();
+//            if (fileManager == null)
+//                throw new Exception("Star file manager cannot be null in StarReader.");
+//
+//            String path = fileManager.getBaseDirectory().toString() + "/traits.xml";
+//            File file = new File(path);
+//
+//            JAXBContext jContext = JAXBContext.newInstance(TraitsModel.class);
+//            Unmarshaller unmarshallerObj = jContext.createUnmarshaller();
+//
+//            TraitsModel traitsModel = (TraitsModel) unmarshallerObj.unmarshal(file);
+	        return null;
+            //return traitsModel.getTraits();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,20 +61,15 @@ public class StarReader {
 			if (fileManager == null)
 				throw new Exception("Star file manager cannot be null in StarReader.");
 
-			String path = fileManager.getBaseDirectory().toString() + "/missions.xml";
-			File file = new File(path);
-
-			JAXBContext jContext = JAXBContext.newInstance(MissionsModel.class);
-			Unmarshaller unmarshallerObj = jContext.createUnmarshaller();
-
-			MissionsModel mm = (MissionsModel) unmarshallerObj.unmarshal(file);
+			String path = fileManager.getBaseDirectory().toString() + "/missions.json";
+			FileReader reader = new FileReader(path);
+			Gson gson = new Gson();
 			
-			return mm.getImmutableMissions();
+			MissionsModel mm = gson.fromJson(reader, MissionsModel.class);
+			return mm.getMissions();
 
 		} catch (Exception e) {
-
 			e.printStackTrace();
-
 		}
 		return null;
 	}
@@ -83,16 +82,13 @@ public class StarReader {
             if (fileManager == null)
                 throw new Exception("Star file manager cannot be null in StarReader.");
 
-            String path = fileManager.getBaseDirectory().toString() + "/jobs/j_" + jobId + ".xml";
-            File file = new File(path);
+            String path = fileManager.getBaseDirectory().toString() + "/jobs/j_" + jobId + ".json";
+            FileReader reader = new FileReader(path);
 
-            JAXBContext jContext = JAXBContext.newInstance(MutableJob.class);
-            Unmarshaller unmarshallerObj = jContext.createUnmarshaller();
-
-            MutableJob mutableJob = (MutableJob) unmarshallerObj.unmarshal(file);
-            mutableJob.upcastChoices();
+            Gson gson = new Gson();
+            Job job = gson.fromJson(reader, Job.class);
             
-            return mutableJob;
+            return job;
 
         } catch (Exception e) {
             e.printStackTrace();

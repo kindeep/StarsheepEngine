@@ -33,7 +33,7 @@ public class AppFileManager extends StarFileManager {
 	@Override
 	public InputStream getMissionsStream() {
 		try {
-			File missionsFile = new File(instance.baseDirectory.getAbsolutePath() + "/missions.xml");
+			File missionsFile = new File(instance.baseDirectory.getAbsolutePath() + "/missions.json");
 			InputStream stream = new FileInputStream(missionsFile);
 			return stream;
 		} catch (FileNotFoundException e) {
@@ -45,7 +45,7 @@ public class AppFileManager extends StarFileManager {
 	@Override
 	public InputStream getJobStreamEdit(String jobId) {
 		try {
-			File missionsFile = new File(instance.baseDirectory.getAbsolutePath() + "/jobs/j_" + jobId + ".xml");
+			File missionsFile = new File(instance.baseDirectory.getAbsolutePath() + "/jobs/j_" + jobId + ".json");
 			InputStream stream = new FileInputStream(missionsFile);
 			return stream;
 		} catch (FileNotFoundException e) {

@@ -6,6 +6,8 @@ import engine.starsheep.space.xml.MutableMission;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * 
  * A Mission holds all data contained within a single mission.
@@ -15,18 +17,26 @@ import java.util.List;
  */
 
 public class Mission {
-	protected String name;
-	protected String description;
-	protected String id;
-	protected int staminaCost;
-	protected List<JobFlyer> jobFlyers;
+    @SerializedName("name")
+	private String name;
+    
+    @SerializedName("description")
+	private String description;
+    
+    @SerializedName("id")
+	private String id;
+    
+    @SerializedName("stamina-cost")
+	private int staminaCost;
+    
+    @SerializedName("job")
+	private List<JobFlyer> jobFlyers;
 
-	// no-arg constructor required for XML marshalling.
 	public Mission() {
 		jobFlyers = new ArrayList<JobFlyer>();
 	}
 
-	public List<? extends JobFlyer> getJobFlyers() {
+	public List<JobFlyer> getJobFlyers() {
 		return this.jobFlyers;
 	}
 

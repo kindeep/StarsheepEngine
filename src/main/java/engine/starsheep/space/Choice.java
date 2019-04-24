@@ -4,15 +4,29 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.gson.annotations.SerializedName;
+
 import engine.starsheep.space.job.TraitDependency;
 
 public class Choice {
-    protected ArrayList<String> children = new ArrayList<>();
-    protected ArrayList<TraitDependency> traitDependencies = new ArrayList<>();
-    protected Double staminaCost = 0.0;
-    protected String id;
-    protected String description = "fake description here";
-    protected String name;
+    
+    @SerializedName("id")
+    private String id;
+    
+    @SerializedName("name")
+    private String name;
+    
+    @SerializedName("description")
+    private String description;
+    
+    @SerializedName("children")
+    private ArrayList<String> children = new ArrayList<>();
+    
+    @SerializedName("trait")
+    private ArrayList<TraitDependency> traitDependencies = new ArrayList<>();
+    
+    @SerializedName("stamina-cost")
+    private Double staminaCost = 0.0;
 
     public String getID() {
         return this.id;
