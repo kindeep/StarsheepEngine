@@ -11,26 +11,35 @@ import engine.starsheep.space.Choice;
 
 public class Job {
     
-    @SerializedName("job")
-    protected String name;
+    private Map<String, Choice> choicesMap = new HashMap<>();
     
-    @SerializedName("job")
-    protected String description;
+    @SerializedName("name")
+    private String name;
     
-    @SerializedName("image-id")
-    protected String imageID;
+    @SerializedName("description")
+    private String description;
     
     @SerializedName("id")
-    protected String id;
+    private String id;
     
-    protected  HashMap<String, Choice> choices = new HashMap<>();
+    @SerializedName("image-id")
+    private String imageID;
+    
+    @SerializedName("head-choice-id")
+    private String headId;
     
     @SerializedName("choices")
-    private List<Choice> choices_readOnly;
-    
-    @SerializedName("head-id")
-    protected String headId;
+    private List<Choice> choicesList;
 
+    //moves all choices in List into the Map. 
+    //to be called after reading in a Job.
+    public void finalize() {
+        for (Choice c : choicesList) {
+            choicesMap.put(c.getID(), c);
+        }
+    }
+    
+    //setters and getters.
     public String getHeadId() {
         return headId;
     }
@@ -44,7 +53,7 @@ public class Job {
     }
 
     public Map<String, Choice> getChoices() {
-        return Collections.unmodifiableMap(choices);
+        return Collections.unmodifiableMap(choicesMap);
     }
 
     public String getImageID() {

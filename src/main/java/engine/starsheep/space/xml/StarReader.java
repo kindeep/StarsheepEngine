@@ -87,6 +87,7 @@ public class StarReader {
 
             Gson gson = new Gson();
             Job job = gson.fromJson(reader, Job.class);
+            job.finalize();
             
             return job;
 

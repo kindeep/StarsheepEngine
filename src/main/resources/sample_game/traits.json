@@ -1,1 +1,20 @@
-{"traits":[]}
+{
+  "traits": [
+    {
+      "name": "hunting",
+      "id": "8af7df5e-cbb1-4b90-9726-62ee5a75f938"
+    },
+    {
+      "name": "fishing",
+      "id": "6340577c-39b6-48ce-928e-ad592db5ae97"
+    },
+    {
+      "name": "cooking",
+      "id": "4f6d644c-9b65-484b-9d2b-c619006801fd"
+    },
+    {
+      "name": "tree cutting",
+      "id": "fde68cbc-7d5f-410d-adbf-24c80eeb8f83"
+    }
+  ]
+}

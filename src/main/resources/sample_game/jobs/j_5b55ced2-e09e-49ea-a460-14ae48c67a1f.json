@@ -1,0 +1,95 @@
+{
+  "name": "job-01",
+  "description": "job-01 description",
+  "id": "5b55ced2-e09e-49ea-a460-14ae48c67a1f",
+  "head-choice-id": "08895291-b71c-4d49-a75b-6f88a4f1a58b",
+  "choices": [
+    {
+      "name": "enter shop",
+      "id": "08895291-b71c-4d49-a75b-6f88a4f1a58b",
+      "stamina-cost": 2,
+      "description": "enter shop description",
+      "trait": [
+        {
+          "id": "8af7df5e-cbb1-4b90-9726-62ee5a75f938",
+          "weight": "5"
+        }
+      ],
+      "children": [
+        "f0a42adb-b799-4a94-be95-0920791a3238",
+        "3dab74f2-fd05-4108-9c9b-a7ebc8ff0635"
+      ]
+    },
+    {
+      "name": "order pizza",
+      "id": "f0a42adb-b799-4a94-be95-0920791a3238",
+      "stamina-cost": 7,
+      "description": "order pizza description",
+      "trait": [
+        {
+          "id": "4f6d644c-9b65-484b-9d2b-c619006801fd",
+          "weight": "222"
+        }
+      ],
+      "children": [
+        "c148765e-0504-46bf-b5c0-587bd2c87157",
+        "3dab74f2-fd05-4108-9c9b-a7ebc8ff0635"
+      ]
+    },
+    {
+      "name": "eat pizza",
+      "id": "c148765e-0504-46bf-b5c0-587bd2c87157",
+      "stamina-cost": 3,
+      "description": "eat pizza description",
+      "trait": [
+        {
+          "id": "8af7df5e-cbb1-4b90-9726-62ee5a75f938",
+          "weight": "1"
+        },
+        {
+          "id": "fde68cbc-7d5f-410d-adbf-24c80eeb8f83",
+          "weight": "67"
+        }
+      ],
+      "children": [
+        "3dab74f2-fd05-4108-9c9b-a7ebc8ff0635"
+      ]
+    },
+    {
+      "name": "leave shop",
+      "id": "3dab74f2-fd05-4108-9c9b-a7ebc8ff0635",
+      "stamina-cost": 5,
+      "description": "leave shop get hte heck outa hereeeeeee",
+      "trait": [
+        {
+          "id": "4f6d644c-9b65-484b-9d2b-c619006801fd",
+          "weight": "3"
+        },
+        {
+          "id": "8af7df5e-cbb1-4b90-9726-62ee5a75f938",
+          "weight": "6"
+        }
+      ],
+      "children": [
+        "229adb43-d8d2-4189-a06d-39ad5dfb91a3"
+      ]
+    },
+    {
+      "name": "go to bathroom",
+      "id": "229adb43-d8d2-4189-a06d-39ad5dfb91a3",
+      "stamina-cost": 4,
+      "description": "bathroom descriptionnnnn",
+      "trait": [
+        {
+          "id": "4f6d644c-9b65-484b-9d2b-c619006801fd",
+          "weight": "11"
+        },
+        {
+          "id": "6340577c-39b6-48ce-928e-ad592db5ae97",
+          "weight": "66"
+        }
+      ],
+      "children": []
+    }
+  ]
+}

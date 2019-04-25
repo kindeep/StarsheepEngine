@@ -18,7 +18,7 @@ public class EditableJob {
     @SerializedName("image-id")
 	public String imageID;
 
-    @SerializedName("head-choice")
+    @SerializedName("head-choice-id")
 	public String headChoice;
 	
     @SerializedName("choices")

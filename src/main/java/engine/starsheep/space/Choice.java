@@ -20,10 +20,10 @@ public class Choice {
     private String description;
     
     @SerializedName("children")
-    private ArrayList<String> children = new ArrayList<>();
+    private List<String> children = new ArrayList<>();
     
     @SerializedName("trait")
-    private ArrayList<TraitDependency> traitDependencies = new ArrayList<>();
+    private List<TraitDependency> traitDependencies = new ArrayList<>();
     
     @SerializedName("stamina-cost")
     private Double staminaCost = 0.0;

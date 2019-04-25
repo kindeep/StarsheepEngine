@@ -20,7 +20,7 @@ public class EditableChoice {
     @SerializedName("trait")
 	public ArrayListModel<EditableTraitDependency> traitDependencies = null;
 
-    @SerializedName("child")
+    @SerializedName("children")
 	public ArrayListModel<String> children = null;
 
 	public EditableChoice() {
