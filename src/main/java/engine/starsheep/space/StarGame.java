@@ -2,8 +2,8 @@ package engine.starsheep.space;
 
 import engine.starsheep.space.controller.MissionsController;
 import engine.starsheep.space.job.TraitDependency;
+import engine.starsheep.space.json.StarReader;
 import engine.starsheep.space.trait.TraitManager;
-import engine.starsheep.space.xml.StarReader;
 
 import java.util.List;
 

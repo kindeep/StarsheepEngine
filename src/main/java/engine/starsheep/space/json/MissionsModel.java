@@ -1,4 +1,4 @@
-package engine.starsheep.space.xml;
+package engine.starsheep.space.json;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,7 +12,7 @@ import com.google.gson.annotations.SerializedName;
 import engine.starsheep.space.Mission;
 
 /**
- * Mission model is the class that the missions.xml file is unmarshalled to.
+ * Mission model is the class that the missions.json file is unmarshalled to.
  * 
  * @author peakyDicers
  */

@@ -9,7 +9,7 @@ import devTool.models.EditableJob;
 import devTool.models.MissionsModel;
 import devTool.models.TraitsModel;
 import devTool.models.item.ItemsModel;
-import engine.starsheep.space.xml.StarReader;
+import engine.starsheep.space.json.StarReader;
 
 public class DevStarReader extends StarReader {
     

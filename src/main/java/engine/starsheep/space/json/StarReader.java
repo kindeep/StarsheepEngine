@@ -1,4 +1,4 @@
-package engine.starsheep.space.xml;
+package engine.starsheep.space.json;
 
 import engine.starsheep.space.Mission;
 import engine.starsheep.space.StarFileManager;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Used to read StarSheep XML files.
+ * Used to read StarSheep JSON files.
  * 
  * @author peakyDicers
  *
@@ -34,18 +34,7 @@ public class StarReader {
 	 */
 	public static Map<String, Trait> readTraits(){
 	    try {
-//            if (fileManager == null)
-//                throw new Exception("Star file manager cannot be null in StarReader.");
-//
-//            String path = fileManager.getBaseDirectory().toString() + "/traits.xml";
-//            File file = new File(path);
-//
-//            JAXBContext jContext = JAXBContext.newInstance(TraitsModel.class);
-//            Unmarshaller unmarshallerObj = jContext.createUnmarshaller();
-//
-//            TraitsModel traitsModel = (TraitsModel) unmarshallerObj.unmarshal(file);
-	        return null;
-            //return traitsModel.getTraits();
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,7 +64,7 @@ public class StarReader {
 	}
 
 	/**
-	 * Reads the Job.xml file for a specific job and return the Job object.
+	 * Reads the Job.json file for a specific job and return the Job object.
 	 */
 	public static Job readJob(String jobId) { // this method needs to be worked on.
 	    try {

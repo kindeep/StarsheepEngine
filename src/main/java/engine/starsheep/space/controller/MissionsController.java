@@ -5,7 +5,7 @@ import java.util.List;
 import engine.starsheep.space.Choice;
 import engine.starsheep.space.Mission;
 import engine.starsheep.space.job.Job;
-import engine.starsheep.space.xml.StarReader;
+import engine.starsheep.space.json.StarReader;
 
 /**
  * Controls all data around the current Mission, Job and Choice. 

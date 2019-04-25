@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import engine.starsheep.space.xml.StarReader;
+import engine.starsheep.space.json.StarReader;
 
 /**
  * Manages all data pertaining to Traits.

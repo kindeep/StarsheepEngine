@@ -1,4 +1,4 @@
-package engine.starsheep.space.xml;
+package engine.starsheep.space.json;
 
 import java.util.HashMap;
 import java.util.List;
