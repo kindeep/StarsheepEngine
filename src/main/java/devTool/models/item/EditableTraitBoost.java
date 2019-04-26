@@ -2,31 +2,26 @@ package devTool.models.item;
 
 import java.util.ArrayList;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import com.google.gson.annotations.SerializedName;
 
 import devTool.models.EditableTrait;
 import devTool.models.GameDataManager;
 
-@XmlRootElement(name = "trait")
 public class EditableTraitBoost {
     
-    @XmlElement(name = "id")
+    @SerializedName("trait-id")
     public String traitId; 
     
-    @XmlElement(name = "effect")
+    @SerializedName("effect")
     public Integer effect;
     
     @Override
     public String toString() {
-        System.out.print(this.traitId);
-        System.out.print(this.effect);
         ArrayList<EditableTrait> list = GameDataManager.getInstance().getTraitsModel().traits;
         for (EditableTrait trait: list) {
             if (trait.id.compareTo(this.traitId) == 0)
-                return trait.name;
+                return trait.name + " Effect: " + this.effect;
         }
-        
-        return "INVALID";
+        return "INVALID: Trait does not exist.";
     }
 }

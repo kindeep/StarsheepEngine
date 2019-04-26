@@ -129,9 +129,11 @@ public class ApplicationWindow {
 			public void mouseClicked(MouseEvent e) {
 
 				try {
-					JsonBuilder.getInstance().buildGameModelData(gameModel);
-					JsonBuilder.getInstance().buildMissionsFile();
-					JsonBuilder.getInstance().buildTraitsFile();
+				    JsonBuilder builder = JsonBuilder.getInstance();
+				    builder.buildGameModelData(gameModel);
+				    builder.buildMissionsFile();
+				    builder.buildTraitsFile();
+				    builder.buildItemsFile();
 					JOptionPane.showMessageDialog(null, "Saved.");
 				} catch (Exception exception) {
 					JOptionPane.showMessageDialog(null,

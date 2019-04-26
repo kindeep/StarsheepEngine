@@ -29,7 +29,7 @@ public class JsonBuilder {
     private JsonBuilder() {
         gson = new GsonBuilder().setPrettyPrinting().create();
     }
-
+    
     public static JsonBuilder getInstance() {
         if (instance == null)
             instance = new JsonBuilder();
@@ -84,6 +84,16 @@ public class JsonBuilder {
         
     }
 
+    public void buildItemsFile() {
+        try {
+            FileWriter writer = new FileWriter(this.baseDir + this.ITEMS_SUFFIX);
+            gson.toJson(GameDataManager.getInstance().getItemsModel(), writer);
+            writer.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void buildJobFile(EditableJob job) {
         try {
             String fileName = "j_" + job.id + ".json";

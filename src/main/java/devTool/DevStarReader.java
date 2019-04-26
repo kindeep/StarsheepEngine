@@ -32,7 +32,7 @@ public class DevStarReader extends StarReader {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return new ItemsModel();
     }
     
 	/**

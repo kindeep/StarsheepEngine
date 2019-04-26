@@ -1,13 +1,10 @@
 package devTool.models.item;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
+import com.google.gson.annotations.SerializedName;
 import com.jgoodies.common.collect.ArrayListModel;
 
-@XmlRootElement(name = "items")
 public class ItemsModel {
     
-    @XmlElement(name = "item")
+    @SerializedName("items")
     public ArrayListModel<EditableItem> items = new ArrayListModel<>();
 }
