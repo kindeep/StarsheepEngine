@@ -1,14 +1,53 @@
 package engine.starsheep.space.item;
 
-public interface Item {
-	
-	public String getName();
-	
-	public String getDescription();
-	
-	public String getImageId();
-	
-	public String getId();
+import java.util.List;
 
-	public int getCost();
+import com.google.gson.annotations.SerializedName;
+
+public class Item {
+    
+    @SerializedName("name")
+    private String name;
+    
+    @SerializedName("id")
+    private String id;
+    
+    @SerializedName("description")
+    private String description;
+    
+    @SerializedName("price")
+    private int price;
+    
+    @SerializedName("image-id")
+    private String imageId;
+    
+    @SerializedName("trait-boosts")
+    private List<TraitBoost> traitBoosts;
+
+    
+    //getters.
+    public String getName() {
+        return name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String getImageId() {
+        return imageId;
+    }
+
+    public List<TraitBoost> getTraitBoosts() {
+        return traitBoosts;
+    }
+    
 }

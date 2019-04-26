@@ -1,23 +1,24 @@
 package engine.starsheep.space.item;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * 
  * Holds info on the trait boosts for items.
  */
 public class TraitBoost {
-	private String traitName;
-	private int boost;
-	
-	public TraitBoost(String traitName, int boost) {
-		this.traitName = traitName;
-		this.boost = boost;
-	}
-	
-	public String getName() {
-		return this.traitName;
-	}
-	
-	public int getBoost() {
-		return this.boost;
-	}
+    
+    @SerializedName("trait-id")
+	private String traitId;
+    
+    @SerializedName("effect")
+	private int effect;
+
+    public String getTraitId() {
+        return traitId;
+    }
+
+    public int getEffect() {
+        return effect;
+    }
 }

@@ -30,6 +30,7 @@ public class StarGame {
         StarController.setGame(this);
         this.soundManager = soundManager;
         this.traitManager = TraitManager.getInstance();
+        ItemsManager.getInstance();
         MissionsController.getInstance();
         this.currentMission = null;
         this.currentChoice = null;

@@ -2,15 +2,12 @@ package engine.starsheep.space.json;
 
 import engine.starsheep.space.Mission;
 import engine.starsheep.space.StarFileManager;
+import engine.starsheep.space.item.Item;
 import engine.starsheep.space.job.Job;
 import engine.starsheep.space.trait.Trait;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
-
 import com.google.gson.Gson;
 
-import java.io.File;
 import java.io.FileReader;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +40,28 @@ public class StarReader {
 	}
 	
 	/**
-	 * Reads the Missions.xml file and returns a list of Mission objects.
+     * Reads the Items.json file and returns a list of Items.
+     */
+	public static List<Item> readItems(){
+	    try {
+            if (fileManager == null)
+                throw new Exception("Star file manager cannot be null in StarReader.");
+
+            String path = fileManager.getBaseDirectory().toString() + "/items.json";
+            FileReader reader = new FileReader(path);
+            Gson gson = new Gson();
+            
+            ItemsModel itemsModel = gson.fromJson(reader, ItemsModel.class);
+            return itemsModel.getItems();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+	}
+	
+	/**
+	 * Reads the Mission.json and returns a list of missions.
 	 */
 	public static List<Mission> readMissions() {
 		try {

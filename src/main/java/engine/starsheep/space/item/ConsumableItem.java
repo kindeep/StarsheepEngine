@@ -1,10 +1,6 @@
 package engine.starsheep.space.item;
 
-class ConsumableItem implements Item {
-	
-	public ConsumableItem(ItemBuilder builder) {
-		
-	}
+class ConsumableItem extends Item {
 
 	@Override
 	public String getName() {
@@ -19,11 +15,6 @@ class ConsumableItem implements Item {
 	@Override
 	public String getImageId() {
 		return null;
-	}
-
-	@Override
-	public int getCost() {
-		return 0;
 	}
 
 	@Override
