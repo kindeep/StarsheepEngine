@@ -54,4 +54,8 @@ public class Item {
         return traitBoosts;
     }
     
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

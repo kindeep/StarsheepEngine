@@ -1,32 +1,39 @@
 package engine.starsheep.space.trait;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
- * 
  * Holds data for a single trait.
  *
  */
-public class Trait implements BaseTrait{
-	protected String name;
-	protected String id;
-	protected int baseLevel;
+public class Trait {
+    
+    @SerializedName("name")
+	private String name;
+    
+    @SerializedName("id")
+	private String id;
+    
+	private int level;
 
-	@Override
 	public String getName() {
 		return this.name;
 	}
 
-	@Override
 	public String getId() {
 		return this.id;
 	}
 
-	@Override
 	public int getLevel() {
-		return this.baseLevel;
+		return this.level;
 	}
 
-	@Override
 	public void addLevels(int levels) {
-		this.baseLevel += levels;
+		this.level += levels;
+	}
+	
+	@Override
+	public String toString() {
+	    return this.name + " Level: " + this.level;
 	}
 }

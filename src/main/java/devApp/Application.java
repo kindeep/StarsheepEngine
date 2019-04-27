@@ -37,9 +37,6 @@ public class Application {
         return game;
     }
 
-    /**
-     * Create the application.
-     */
     public Application() {
         StarGameView view = new AppView();
         AppFileManager.getInstance().setBaseDirectory(new File("./src/main/resources/sample_game"));
@@ -60,11 +57,11 @@ public class Application {
         MissionsScreen missionsScreen = new MissionsScreen();
         tabbedPane.addTab("Missions", null, missionsScreen, null);
         
-        ShopScreen shopScreen = new ShopScreen();
-        tabbedPane.addTab("Shop", null, shopScreen, null);
+        InventoryScreen playerScreen = new InventoryScreen();
+        tabbedPane.addTab("Player", null, playerScreen, null);
         
-        InventoryScreen inventoryScreen = new InventoryScreen();
-        tabbedPane.addTab("Inventory", null, inventoryScreen, null);
+        ShopScreen shopScreen = new ShopScreen(playerScreen);
+        tabbedPane.addTab("Shop", null, shopScreen, null);
         
     }
 }

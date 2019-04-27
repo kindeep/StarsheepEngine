@@ -14,7 +14,7 @@ public class Player {
         return instance;
     }
     
-    public int getCash() {
+    public int getBalance() {
         return cash;
     }
     

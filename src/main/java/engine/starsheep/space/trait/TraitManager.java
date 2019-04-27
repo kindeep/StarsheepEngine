@@ -1,8 +1,5 @@
 package engine.starsheep.space.trait;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 import engine.starsheep.space.json.StarReader;
@@ -13,7 +10,6 @@ import engine.starsheep.space.json.StarReader;
  */
 public class TraitManager {
 	private Map<String, Trait> allTraits;
-	private List<DefensiveTrait> defensiveTraits;
 	private static TraitManager instance = null;
 
 	private TraitManager() {
@@ -26,19 +22,11 @@ public class TraitManager {
 		return instance;
 	}
 	
-	//returns an unmodifiable list of all traits.
-	public List<BaseTrait> getAllTraits(){
-		List<BaseTrait> list = new ArrayList<BaseTrait>(allTraits.values()); 
-		return Collections.unmodifiableList(list);
+	public Map<String,Trait> getAllTraits(){
+	    return this.allTraits;
 	}
 	
-	//returns an unmodifiable list of all defensive traits.
-	public List<DefensiveTrait> getAllDefensiveTraits(){
-		return Collections.unmodifiableList(this.defensiveTraits);
-	}
-	
-	//returns a single trait.
-	public BaseTrait getTrait(Integer id) {
-		return allTraits.get(id);
+	public void alterTraitLevel(String traitId, int val) {
+	    allTraits.get(traitId).addLevels(val);
 	}
 }

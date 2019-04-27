@@ -33,27 +33,34 @@ public class ItemsManager {
     }
     
 
-    public List<Item> getAllItems(){
-        return (List<Item>)items.values();
+    public Map<String, Item> getAllItems(){
+        return items;
     }
     
     public List<Item> getInventory(){
-        return Collections.unmodifiableList(this.inventory);
+        return this.inventory;
     }
     
     public List<Item> getEquippedItems(){
         return Collections.unmodifiableList(this.equippedItems);
     }
     
-    public void equipItem(Item item) {
-        if (equippedItems.size() >= maxEquipped) return;
+    public boolean equipItem(Item item) {
+        if (equippedItems.size() >= maxEquipped) return false;
         
-        if (inventory.remove(item))
+        if (inventory.remove(item)){
             equippedItems.add(item);
+            return true;
+        }
+        return false;
     }
     
-    public void unequipItem(Item item) {
-        equippedItems.remove(item);
+    public boolean unequipItem(Item item) {
+        if (equippedItems.remove(item)) {
+            inventory.add(item);
+            return true;
+        }
+        return false;
     }
     
     public void addToInventory(Item item) {

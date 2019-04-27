@@ -7,7 +7,7 @@ public class Transactions {
     // buy item from store.
     public static boolean buyItem(Item item) {
         Player player = Player.getInstance();
-        if (item.getPrice() > player.getCash()) return false;
+        if (item.getPrice() > player.getBalance()) return false;
         
         ItemsManager.getInstance().addToInventory(item);
         player.removeCash(item.getPrice());

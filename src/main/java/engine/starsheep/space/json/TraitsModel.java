@@ -16,13 +16,15 @@ import engine.starsheep.space.trait.Trait;
  *
  */
 public class TraitsModel {
-    private Map<String, Trait> traitsMap = new HashMap<>();
-    
     @SerializedName("traits")
     private List<Trait> traitsList;
     
-    @SerializedName("name")
     public Map<String, Trait> getTraits(){
-        return this.traitsMap;
+        Map<String, Trait> result = new HashMap<>();
+        
+        for (Trait trait: traitsList) {
+            result.put(trait.getId(), trait);
+        }
+        return result;
     }
 }
