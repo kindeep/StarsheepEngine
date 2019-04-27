@@ -1,16 +1,29 @@
 package engine.starsheep.space;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import engine.starsheep.space.item.Item;
+import engine.starsheep.space.json.ItemsModel;
 import engine.starsheep.space.json.StarReader;
 
 public class ItemsManager {
     private static ItemsManager instance;
+    private Map<String, Item> items;
+    private List<Item> equippedItems;
+    private List<Item> inventory; 
+    private int maxEquipped;
     
     private ItemsManager() {
-        List<Item> items = StarReader.readItems();
+        ItemsModel itemsModel = StarReader.readItems();
+        
+        items = itemsModel.getItems();
+        maxEquipped = itemsModel.getMaxEquipped();
+        
+        equippedItems = new ArrayList<>(10);
+        inventory = new ArrayList<>();
     }
     
     public static ItemsManager getInstance() {
@@ -18,22 +31,33 @@ public class ItemsManager {
             instance = new ItemsManager();
         return instance;
     }
+    
 
-    //id -> item.
-    Map<String, Item> items;
-    
-    // stores item ids. 
-    List<Item> equippedItems;
-    
-    List<Item> availableItems;
-    
-    public void equipItem(Item item) {
-       if (!isEquipped(item))
-           equippedItems.add(item);
+    public List<Item> getAllItems(){
+        return (List<Item>)items.values();
     }
     
-    public void removeItem(Item item) {
+    public List<Item> getInventory(){
+        return Collections.unmodifiableList(this.inventory);
+    }
+    
+    public List<Item> getEquippedItems(){
+        return Collections.unmodifiableList(this.equippedItems);
+    }
+    
+    public void equipItem(Item item) {
+        if (equippedItems.size() >= maxEquipped) return;
+        
+        if (inventory.remove(item))
+            equippedItems.add(item);
+    }
+    
+    public void unequipItem(Item item) {
         equippedItems.remove(item);
+    }
+    
+    public void addToInventory(Item item) {
+        this.inventory.add(item);
     }
     
     private boolean isEquipped(Item i) {

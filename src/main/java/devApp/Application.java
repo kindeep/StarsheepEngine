@@ -60,5 +60,11 @@ public class Application {
         MissionsScreen missionsScreen = new MissionsScreen();
         tabbedPane.addTab("Missions", null, missionsScreen, null);
         
+        ShopScreen shopScreen = new ShopScreen();
+        tabbedPane.addTab("Shop", null, shopScreen, null);
+        
+        InventoryScreen inventoryScreen = new InventoryScreen();
+        tabbedPane.addTab("Inventory", null, inventoryScreen, null);
+        
     }
 }

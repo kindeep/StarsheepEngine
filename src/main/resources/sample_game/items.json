@@ -20,6 +20,19 @@
       "price": 10,
       "image-id": "",
       "trait-boosts": []
+    },
+    {
+      "name": "laptop",
+      "description": "very good laptop. ",
+      "id": "c8078386-92b5-4299-95ba-c49a6fdccf66",
+      "price": 200,
+      "image-id": "",
+      "trait-boosts": [
+        {
+          "trait-id": "6340577c-39b6-48ce-928e-ad592db5ae97",
+          "effect": 5
+        }
+      ]
     }
   ]
 }

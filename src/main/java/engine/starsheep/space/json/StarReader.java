@@ -42,7 +42,7 @@ public class StarReader {
 	/**
      * Reads the Items.json file and returns a list of Items.
      */
-	public static List<Item> readItems(){
+	public static ItemsModel readItems(){
 	    try {
             if (fileManager == null)
                 throw new Exception("Star file manager cannot be null in StarReader.");
@@ -51,8 +51,7 @@ public class StarReader {
             FileReader reader = new FileReader(path);
             Gson gson = new Gson();
             
-            ItemsModel itemsModel = gson.fromJson(reader, ItemsModel.class);
-            return itemsModel.getItems();
+            return gson.fromJson(reader, ItemsModel.class);
 
         } catch (Exception e) {
             e.printStackTrace();

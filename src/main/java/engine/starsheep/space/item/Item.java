@@ -45,6 +45,10 @@ public class Item {
     public String getImageId() {
         return imageId;
     }
+    
+    public int getRefundPrice() {
+        return price/3;
+    }
 
     public List<TraitBoost> getTraitBoosts() {
         return traitBoosts;

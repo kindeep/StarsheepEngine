@@ -1,5 +1,6 @@
 package engine.starsheep.space;
 
+import engine.starsheep.space.controller.ItemsController;
 import engine.starsheep.space.controller.MissionsController;
 import engine.starsheep.space.job.TraitDependency;
 import engine.starsheep.space.json.StarReader;
@@ -53,6 +54,10 @@ public class StarGame {
     //this method is used to expose the controller outside of the engine. to be connected with the view.
     public StarController getController() {
         return StarController.getInstance();
+    }
+    
+    public ItemsController getItemsController() {
+        return ItemsController.getInstance();
     }
 
 
