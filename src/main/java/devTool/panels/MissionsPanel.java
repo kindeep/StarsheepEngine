@@ -88,6 +88,7 @@ public class MissionsPanel extends JPanel {
 	}
 
 	private void updateCanvas() {
+		lbl_imageDisplay.setIcon(null);
 		if (currMission.imageId == null) return;
 		
 //		Toolkit t = Toolkit.getDefaultToolkit();
