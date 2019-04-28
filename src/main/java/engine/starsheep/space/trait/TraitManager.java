@@ -26,6 +26,10 @@ public class TraitManager {
 	    return this.allTraits;
 	}
 	
+	public Trait getTrait(String traitId) {
+		return allTraits.get(traitId);
+	}
+	
 	public void alterTraitLevel(String traitId, int val) {
 	    allTraits.get(traitId).addLevels(val);
 	}

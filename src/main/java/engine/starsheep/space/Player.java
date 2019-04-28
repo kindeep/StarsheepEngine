@@ -3,11 +3,13 @@ package engine.starsheep.space;
 public class Player {
     private static Player instance;
     private int cash;
+    private int stamina;
     
     private Player() {
         cash = 100;
+        stamina = 100;
     }
-    
+
     public static Player getInstance() {
         if (instance == null)
             instance = new Player();
@@ -30,5 +32,14 @@ public class Player {
         
         this.cash -= amount;
         return true;
+    }
+    
+    public int getStamina() {
+    	return this.stamina;
+    }
+    
+    public void reduceStamina(int change) {
+    	stamina -= change;
+    	if (stamina < 0) stamina = 0;
     }
 }

@@ -28,6 +28,9 @@ public class Job {
     @SerializedName("head-choice-id")
     private String headId;
     
+    @SerializedName("level")
+    private int level;
+    
     @SerializedName("choices")
     private List<Choice> choicesList;
 
@@ -39,13 +42,17 @@ public class Job {
         }
     }
     
-    //setters and getters.
+    //getters.
     public String getHeadId() {
         return headId;
     }
 
     public String getName() {
         return name;
+    }
+    
+    public int getLevel() {
+    	return this.level;
     }
 
     public String getDescription() {

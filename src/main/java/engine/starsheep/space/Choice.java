@@ -26,7 +26,7 @@ public class Choice {
     private List<TraitDependency> traitDependencies = new ArrayList<>();
     
     @SerializedName("stamina-cost")
-    private Double staminaCost = 0.0;
+    private int staminaCost = 0;
 
     public String getID() {
         return this.id;
@@ -44,7 +44,7 @@ public class Choice {
         return this.children;
     }
 
-    public double getStaminaCost() {
+    public int getStaminaCost() {
         return this.staminaCost;
     }
 

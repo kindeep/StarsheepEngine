@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -21,6 +22,7 @@ import com.jgoodies.common.collect.ArrayListModel;
 import engine.starsheep.space.Choice;
 import engine.starsheep.space.controller.MissionsController;
 import engine.starsheep.space.job.TraitDependency;
+import javax.swing.JTextField;
 
 public class ChoiceScreen extends JFrame {
 
@@ -29,6 +31,7 @@ public class ChoiceScreen extends JFrame {
     private Choice selectedChild;
     private ArrayListModel<Choice> choicesModel;
     private JPanel panel_dependency;
+    private JTextField txtField_stamina;
     /**
      * Launch the application.
      */
@@ -42,7 +45,10 @@ public class ChoiceScreen extends JFrame {
     }
     
     public void updateChoice() {
-        Application.getGameInstance().getMissionsController().setCurrentChoice(selectedChild);
+        MissionsController missionsController = Application.getGameInstance().getMissionsController();
+        boolean success = missionsController.makeChoice(selectedChild);
+        if (!success)
+        	JOptionPane.showMessageDialog(this, "Not even skillz, ): ");
         updateListModel();
     }
     
@@ -61,6 +67,7 @@ public class ChoiceScreen extends JFrame {
     
     public void updateListModel() {
         MissionsController missionsController =  Application.getGameInstance().getMissionsController();
+        txtField_stamina.setText(String.valueOf(missionsController.getPlayerStamina()));
         choicesModel.clear();
         List<String> choiceIds = missionsController.getCurrentChoice().getChildrenChoicesIds();
         for (int i = 0; i < choiceIds.size(); i++) {
@@ -106,6 +113,18 @@ public class ChoiceScreen extends JFrame {
         
         jList_choices = new JList();
         panel_list_and_dependency.add(jList_choices, BorderLayout.NORTH);
+        
+        JPanel panel_header = new JPanel();
+        panel_choiceData.add(panel_header, BorderLayout.NORTH);
+        
+        JLabel lbl_stamina = new JLabel("Stamina:");
+        lbl_stamina.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        panel_header.add(lbl_stamina);
+        
+        txtField_stamina = new JTextField();
+        txtField_stamina.setEditable(false);
+        panel_header.add(txtField_stamina);
+        txtField_stamina.setColumns(10);
         jList_choices.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -113,10 +132,6 @@ public class ChoiceScreen extends JFrame {
                 updateDependenciesPanel();
             }
         });
-        
-        JLabel lbl_screenName = new JLabel("Choice ");
-        lbl_screenName.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        contentPane.add(lbl_screenName, BorderLayout.NORTH);
     }
 
 }
