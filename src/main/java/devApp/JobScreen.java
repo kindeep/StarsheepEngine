@@ -23,14 +23,14 @@ public class JobScreen extends JFrame {
     private JobFlyer selectedJob;
     
     public JobScreen() {
-        initalize();
+        initialize();
         
         Mission currMission = Application.getGameInstance().getMissionsController().getCurrentMission();
         ArrayListModel<JobFlyer> listModel = new ArrayListModel<>(currMission.getJobFlyers());
         jList_jobs.setModel(listModel);
     }
     
-    public void initalize() {
+    public void initialize() {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setBounds(100, 100, 324, 505);
         getContentPane().setLayout(new BorderLayout(0, 0));

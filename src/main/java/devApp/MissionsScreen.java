@@ -22,7 +22,7 @@ public class MissionsScreen extends JPanel {
     Mission selectedMission;
 
     public MissionsScreen() {
-        initalize();
+        initialize();
         ArrayListModel<Mission> missionModel = new ArrayListModel<Mission>();
 
         List<Mission> missions = Application.getGameInstance().getMissionsController().getMissions();
@@ -42,7 +42,7 @@ public class MissionsScreen extends JPanel {
         add(btn_enterMission, BorderLayout.SOUTH);
     }
 
-    public void initalize() {
+    public void initialize() {
         setLayout(new BorderLayout(0, 0));
 
         jList_missions = new JList<>();

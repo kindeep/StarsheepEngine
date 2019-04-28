@@ -54,7 +54,7 @@ public class JobEditor extends JFrame {
 
 		currJob = new EditableJob();
 		currJob.id = UUID.randomUUID().toString();
-		initalize();
+		initialize();
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class JobEditor extends JFrame {
 
 		// read the job.xml file. load the data into a EditableJob object.
 		currJob = DevStarReader.readEditableJob(jobId);
-		initalize();
+		initialize();
 	}
 
 	private void saveBtnPressed() {
@@ -151,7 +151,7 @@ public class JobEditor extends JFrame {
 		}
 	}
 
-	private void initalize() {
+	private void initialize() {
 		// create graph.
 		graph = new ChoicesGraph(currJob.choices);
 		graph.setTitle(currJob.name);

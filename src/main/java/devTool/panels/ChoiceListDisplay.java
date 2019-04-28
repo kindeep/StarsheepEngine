@@ -42,7 +42,7 @@ public class ChoiceListDisplay extends JFrame {
 	 * @param graph The graph that displays the choices.
 	 */
 	public ChoiceListDisplay(LinkedListModel<EditableChoice> listModel, EditableJob currJob, JTextField panel, ChoicesGraph graph) {
-		initalize(listModel);
+		initialize(listModel);
 		
 		btnSelect.addMouseListener(new MouseAdapter() {
 			@Override
@@ -68,7 +68,7 @@ public class ChoiceListDisplay extends JFrame {
 	 */
 	public ChoiceListDisplay(LinkedListModel<EditableChoice> listModel, ArrayListModel<String> children,
 			ChoicesGraph graph) {
-		initalize(listModel);
+		initialize(listModel);
 		
 
 		btnSelect.addMouseListener(new MouseAdapter() {
@@ -92,7 +92,7 @@ public class ChoiceListDisplay extends JFrame {
 		});
 	}
 	
-	private void initalize(LinkedListModel<EditableChoice> listModel) {
+	private void initialize(LinkedListModel<EditableChoice> listModel) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 267, 406);
 		contentPane = new JPanel();

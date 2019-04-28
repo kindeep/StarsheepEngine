@@ -14,12 +14,12 @@ public class TraitDependencyNode extends JPanel {
     private JTextField txtField_weight;
    
     public TraitDependencyNode(String name, String weight) {
-        initalize();
+        initialize();
         txtField_traitName.setText(name);
         txtField_weight.setText(weight);
     }
     
-    public void initalize() {
+    public void initialize() {
         setSize(300, 70);
         setVisible(true);
         setLayout(new FormLayout(new ColumnSpec[] {

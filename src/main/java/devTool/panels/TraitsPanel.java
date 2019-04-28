@@ -43,7 +43,7 @@ public class TraitsPanel extends JPanel implements ActionListener {
 	MyDocumentListener docListener = new MyDocumentListener(this);
 
 	public TraitsPanel() {
-		initalize();
+		initialize();
 	}
 
 	public void reloadFields() {
@@ -60,7 +60,7 @@ public class TraitsPanel extends JPanel implements ActionListener {
 		}
 	}
 
-	public void initalize() {
+	public void initialize() {
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_traitInfo = new JPanel();

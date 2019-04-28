@@ -36,7 +36,7 @@ public class ChoiceScreen extends JFrame {
      * Launch the application.
      */
     public ChoiceScreen() {
-       initalize();
+       initialize();
        
        //adds all children choices to the List Model.
        choicesModel = new ArrayListModel<>();
@@ -77,7 +77,7 @@ public class ChoiceScreen extends JFrame {
         }
     }
     
-    public void initalize() {
+    public void initialize() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 299, 484);
         setVisible(true);

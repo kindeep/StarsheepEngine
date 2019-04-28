@@ -42,7 +42,7 @@ public class ItemsPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public ItemsPanel() {
-		initalize();
+		initialize();
 	}
 
 	public void updateItems() {
@@ -51,7 +51,7 @@ public class ItemsPanel extends JPanel {
 		txtField_maxEquip.setText(String.valueOf(itemsModel.maxEquipped));
 	}
 
-	public void initalize() {
+	public void initialize() {
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_itemList = new JPanel();

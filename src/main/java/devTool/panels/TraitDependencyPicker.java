@@ -41,13 +41,13 @@ public class TraitDependencyPicker extends JFrame {
 	private EditableChoice currChoice;
 
 	public TraitDependencyPicker(EditableChoice currChoice) {
-		initalize();
+		initialize();
 
 		this.currChoice = currChoice;
 		jList_traits.setModel(GameDataManager.getInstance().getTraitsModel().traits);
 	}
 
-	public void initalize() {
+	public void initialize() {
 		this.setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
