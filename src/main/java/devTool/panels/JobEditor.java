@@ -14,7 +14,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
-import javax.xml.bind.JAXBException;
 
 import com.jgoodies.common.collect.ArrayListModel;
 
@@ -23,7 +22,6 @@ import devTool.JsonBuilder;
 import devTool.models.EditableJob;
 import devTool.models.EditableJobFlyer;
 import devTool.models.EditableMission;
-import devTool.models.MissionsModel;
 
 /**
  * @author peakyDicers

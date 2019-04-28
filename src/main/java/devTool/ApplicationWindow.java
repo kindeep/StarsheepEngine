@@ -1,30 +1,29 @@
 package devTool;
 
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
+
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.JToolBar;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 import devTool.models.GameDataManager;
 import devTool.models.GameModel;
-import devTool.models.MissionsModel;
-import devTool.models.TraitsModel;
-import devTool.panels.*;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JPanel;
-import javax.swing.JToolBar;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.xml.bind.JAXBException;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import devTool.panels.GeneralPanel;
+import devTool.panels.ItemsPanel;
+import devTool.panels.MissionsPanel;
+import devTool.panels.TraitsPanel;
 
 public class ApplicationWindow {
 

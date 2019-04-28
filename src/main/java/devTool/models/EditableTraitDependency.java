@@ -2,9 +2,6 @@ package devTool.models;
 
 import java.util.ArrayList;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
 import com.google.gson.annotations.SerializedName;
 
 public class EditableTraitDependency {
@@ -14,7 +11,6 @@ public class EditableTraitDependency {
 
     @SerializedName("weight")
 	public String weight;
-	
 	
 	public EditableTraitDependency() {
 		

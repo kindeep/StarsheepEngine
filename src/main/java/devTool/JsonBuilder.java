@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -15,6 +16,8 @@ import devTool.models.GameModel;
 import devTool.models.MissionsModel;
 import devTool.models.TraitsModel;
 
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.FileUtils;
 
 public class JsonBuilder {
     private static JsonBuilder instance;
@@ -39,6 +42,10 @@ public class JsonBuilder {
     public void setBaseDir(File f) {
         this.baseDir = f.getAbsolutePath() + "/";
         validateFiles();
+    }
+    
+    public String getBaseDir() {
+    	return this.baseDir;
     }
     
     /*
@@ -73,6 +80,22 @@ public class JsonBuilder {
             e.printStackTrace();
         }
         }
+    }
+    
+    public String createImageFile(File f) {
+    	String suffix = FilenameUtils.getExtension(f.getAbsolutePath());
+    	String id = UUID.randomUUID().toString();
+    	
+    	String fileName = "img_" + id + "." + suffix;
+    	String path = this.baseDir + "/assets/" + fileName;
+    	
+    	try {
+			FileUtils.copyFile(f, new File(path));
+			return fileName;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
     }
 
     public boolean deleteJobFile(String id) {

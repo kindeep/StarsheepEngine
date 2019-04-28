@@ -1,20 +1,9 @@
 package devTool.models;
 
-import javax.xml.bind.annotation.*;
-
-@XmlRootElement(name = "gameModel")
 public class GameModel {
-
-	@XmlElement(name = "title")
 	private String title;
-
-	@XmlElement(name = "description")
 	private String description;
-
-	@XmlElement(name = "creator")
 	private String creator;
-
-	@XmlElement(name = "currency")
 	private String currency;
 
 	public GameModel() {

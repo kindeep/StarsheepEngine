@@ -1,11 +1,8 @@
 package devTool.models;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
 import com.jgoodies.common.collect.ArrayListModel;
 
-@XmlRootElement(name = "missions")
+
 public class MissionsModel {
 	private ArrayListModel<EditableMission> missions;
 
@@ -26,8 +23,6 @@ public class MissionsModel {
 		return String.valueOf(missions.size());
 	}
 
-	// getter
-	@XmlElement(name = "mission")
 	public ArrayListModel<EditableMission> getMissions() {
 		return this.missions;
 	}

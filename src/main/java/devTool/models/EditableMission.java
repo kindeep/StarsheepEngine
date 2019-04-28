@@ -23,6 +23,9 @@ public class EditableMission {
 
     @SerializedName("stamina-cost")
 	public String staminaCost;
+    
+    @SerializedName("image-id")
+	public String imageId;
 
     @SerializedName("job")
 	public ArrayListModel<EditableJobFlyer> jobFlyers = null;
