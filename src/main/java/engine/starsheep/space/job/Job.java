@@ -36,6 +36,7 @@ public class Job {
 
     //moves all choices in List into the Map. 
     //to be called after reading in a Job.
+    // and is deprecated so maaybe find something else?
     public void finalize() {
         for (Choice c : choicesList) {
             choicesMap.put(c.getID(), c);

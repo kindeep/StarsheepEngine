@@ -25,7 +25,6 @@ public class DevFileManager extends StarFileManager {
 		this.baseDirectory = baseDir;
 	}
 
-	@Override
 	public File getBaseDirectory() {
 		return instance.baseDirectory;
 	}
@@ -42,15 +41,4 @@ public class DevFileManager extends StarFileManager {
 		return null;
 	}
 
-	@Override
-	public InputStream getJobStreamEdit(String jobId) {
-		try {
-			File missionsFile = new File(instance.baseDirectory.getAbsolutePath() + "/jobs/j_" + jobId + ".xml");
-			InputStream stream = new FileInputStream(missionsFile);
-			return stream;
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 }
