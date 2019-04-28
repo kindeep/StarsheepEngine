@@ -20,6 +20,9 @@ public class EditableJob {
 
     @SerializedName("head-choice-id")
 	public String headChoice;
+    
+    @SerializedName("level")
+	public String level;
 	
     @SerializedName("choices")
 	public LinkedListModel<EditableChoice> choices = null;

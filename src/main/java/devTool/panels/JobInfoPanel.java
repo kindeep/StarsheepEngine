@@ -30,6 +30,7 @@ public class JobInfoPanel extends JPanel {
 	private JTextField txtField_reward;
 	private JTextField txtField_headChoiceId;
 	private ChoicesGraph graph;
+	private JTextField txtField_level;
 
 	/**
 	 * Create the panel.
@@ -41,6 +42,7 @@ public class JobInfoPanel extends JPanel {
 		String description = null;
 		String id = null;
 		String headChoice = null;
+		String level = null;
 
 		if (currJob != null) {
 			this.currJob = currJob;
@@ -48,30 +50,53 @@ public class JobInfoPanel extends JPanel {
 			description = currJob.description;
 			id = currJob.id;
 			headChoice = currJob.headChoice;
+			level = currJob.level;
 			graph.setHeadChoiceId(headChoice);
 		}
-		initalize();
+		initialize();
 
 		txtField_jobName.setText(jobName);
 		txtField_jobId.setText(id);
 		txtField_description.setText(description);
 		txtField_headChoiceId.setText(headChoice);
+		txtField_level.setText(level);
 	}
 
 	public void save() {
 		currJob.name = txtField_jobName.getText();
 		currJob.description = txtField_description.getText();
+		currJob.level = txtField_level.getText();
 	}
 
-	public void initalize() {
-		setLayout(new FormLayout(
-				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(63dlu;default)"),
-						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("default:grow"), },
-				new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
+	public void initialize() {
+		setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(63dlu;default)"),
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
 
+		JLabel lbl_level = new JLabel("Level");
+		add(lbl_level, "2, 14, left, default");
+		
+		txtField_level = new JTextField();
+		add(txtField_level, "4, 14, fill, default");
+		txtField_level.setColumns(10);
+		
 		JLabel lbl_jobName = new JLabel("Job Name");
 		add(lbl_jobName, "2, 2, left, default");
 

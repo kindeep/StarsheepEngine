@@ -11,11 +11,11 @@ import engine.starsheep.space.item.Item;
 
 public class ItemsModel {
     
+	@SerializedName("max-equipped")
+    private int maxEquipped;
+	
     @SerializedName("items")
     private List<Item> items;
-    
-    @SerializedName("max-equipped")
-    private int maxEquipped;
     
     //converts list of items into hashmap and returns the map.
     public Map<String, Item> getItems() {
