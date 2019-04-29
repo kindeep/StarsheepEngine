@@ -41,11 +41,8 @@ public class JobEditor extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
-	 * 
 	 * @wbp.parser.constructor
-	 *
-	 * 						Start JobEditor with a brand new job.
+	 * Start JobEditor with a brand new job.
 	 */
 	public JobEditor(EditableMission currMission) {
 		this.setup(currMission);
@@ -83,7 +80,7 @@ public class JobEditor extends JFrame {
 		// update jobFlyer in missionsModel.
 		this.updateJobList(flyer);
 
-		// update Missions xml.
+		// update Missions json.
 		try {
 			JsonBuilder.getInstance().buildMissionsFile();
 		} catch (Exception e) {
@@ -93,12 +90,12 @@ public class JobEditor extends JFrame {
 	}
 
 	private void deleteJob() {
-		// delete the job.xml file.
+		// delete the job.json file.
 		boolean success = JsonBuilder.getInstance().deleteJobFile(currJob.id);
 		if (!success)
 			JOptionPane.showMessageDialog(null, "The job file: j_" + currJob.id + " could not be deleted.");
 
-		// remove job from missions.xml
+		// remove job from missions.json
 		EditableJobFlyer toDelete = null;
 		for (EditableJobFlyer flyer : currMission.jobFlyers) {
 			if (flyer.id.compareTo(currJob.id) == 0) {
@@ -108,7 +105,7 @@ public class JobEditor extends JFrame {
 		}
 		currMission.jobFlyers.remove(toDelete);
 
-		// save missions.xml
+		// save missions.json
 		try {
 			JsonBuilder.getInstance().buildMissionsFile();
 		} catch (Exception e) {

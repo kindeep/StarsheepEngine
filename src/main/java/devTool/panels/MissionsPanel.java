@@ -91,21 +91,11 @@ public class MissionsPanel extends JPanel {
 		lbl_imageDisplay.setIcon(null);
 		if (currMission.imageId == null) return;
 		
-//		Toolkit t = Toolkit.getDefaultToolkit();
-//		Image img = t.getImage(JsonBuilder.getInstance().getBaseDir() + "/assets/" + currMission.imageId);
-//		System.out.println(img);
-//		canvas.setSize(1000,800);
-//		canvas.setVisible(true);
-//		canvas.getGraphics().drawImage(img, 0, 0, null);
-//		canvas.revalidate();
-//		canvas.repaint();
-		
 		String path = JsonBuilder.getInstance().getBaseDir() + "/assets/" + currMission.imageId;
 		Image image = null;
 		try {
 			image = ImageIO.read(new File(path));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -113,9 +103,6 @@ public class MissionsPanel extends JPanel {
 		image = image.getScaledInstance((int)(image.getWidth(null)*factor), (int)(image.getHeight(null)*factor), Image.SCALE_DEFAULT);
 		ImageIcon icon = new ImageIcon(image);
 		lbl_imageDisplay.setIcon(icon);
-		
-		repaint();
-		revalidate();
 	}
 
 	public MissionsPanel() {
@@ -238,8 +225,7 @@ public class MissionsPanel extends JPanel {
 				fc.addChoosableFileFilter(imageFilter);
 				int result = fc.showOpenDialog(null);
 				if (result == JFileChooser.APPROVE_OPTION) {
-					
-					String fileName = JsonBuilder.getInstance().createImageFile(fc.getSelectedFile());
+					String fileName = JsonBuilder.getInstance().createImageFile(fc.getSelectedFile(), currMission.id);
 					if (fileName != null) {
 						currMission.imageId = fileName;
 						JOptionPane.showMessageDialog(null, "Image saved successfully.");

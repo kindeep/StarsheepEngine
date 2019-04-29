@@ -16,6 +16,9 @@ public class EditableChoice {
 
     @SerializedName("description")
 	public String description = "choice description here.";
+    
+    @SerializedName("image-id")
+	public String imageId;
 
     @SerializedName("trait")
 	public ArrayListModel<EditableTraitDependency> traitDependencies = null;

@@ -2,15 +2,21 @@ package devTool.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -18,18 +24,19 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
+import devTool.JsonBuilder;
 import devTool.models.EditableChoice;
 import devTool.models.EditableJob;
 import devTool.models.EditableTraitDependency;
 
-//TODO: (MEDIUM PRIORITY) auto select a choice, don't let the fields be editable if no choice selected
-// TODO: Remove Select button for child, click=select
 public class ChoicesPanel extends JPanel {
 	private static final long serialVersionUID = -3584319698203595596L;
 	private JTextField txtField_choiceName;
@@ -37,6 +44,9 @@ public class ChoicesPanel extends JPanel {
 	private JTextField txtField_description;
 	private JTextField txtField_staminaCost;
 	private JTextField textField;
+	private JTextField txtField_trait_id;
+	private JTextField txtField_trait_weight;
+	private JLabel lbl_imageDisplay;
 	private JLabel lbl_viewer_choiceName;
 	private JList<String> jList_children;
 	private JList<EditableChoice> jList_choices;
@@ -48,8 +58,7 @@ public class ChoicesPanel extends JPanel {
 	private String selectedChild;
 
 	private ChoicesGraph graph;
-	private JTextField txtField_trait_id;
-	private JTextField txtField_trait_weight;
+	
 
 	/**
 	 * Create the panel.
@@ -58,6 +67,7 @@ public class ChoicesPanel extends JPanel {
 		this.currJob = currJob;
 		this.graph = graph;
 		initialize();
+		updateImage();
 	}
 
 	public void updateDisplay() {
@@ -68,6 +78,7 @@ public class ChoicesPanel extends JPanel {
 		txtField_staminaCost.setText(String.valueOf(selectedChoice.staminaCost));
 		jList_children.setModel(selectedChoice.children);
 		jList_traitDependencies.setModel(selectedChoice.traitDependencies);
+		updateImage();
 	}
 
 	private void save() {
@@ -102,6 +113,24 @@ public class ChoicesPanel extends JPanel {
 		txtField_staminaCost.setText("");
 		lbl_viewer_choiceName.setText("");
 	}
+	
+	private void updateImage() {
+		lbl_imageDisplay.setIcon(null);
+		if (selectedChoice == null || selectedChoice.imageId == null) return;
+		
+		String path = JsonBuilder.getInstance().getBaseDir() + "/assets/" + selectedChoice.imageId;
+		Image image = null;
+		try {
+			image = ImageIO.read(new File(path));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		Double factor = 200.0/image.getWidth(null);
+		image = image.getScaledInstance((int)(image.getWidth(null)*factor), (int)(image.getHeight(null)*factor), Image.SCALE_DEFAULT);
+		ImageIcon icon = new ImageIcon(image);
+		lbl_imageDisplay.setIcon(icon);
+	}
 
 	void updateGraph() {
 		graph.populateGraph();
@@ -132,13 +161,27 @@ public class ChoicesPanel extends JPanel {
 
 		JPanel panel_choiceData = new JPanel();
 		add(panel_choiceData, BorderLayout.CENTER);
-		panel_choiceData.setLayout(new FormLayout(
-				new ColumnSpec[] { ColumnSpec.decode("max(56dlu;default)"), ColumnSpec.decode("default:grow"), },
-				new RowSpec[] { FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						RowSpec.decode("top:default:grow"), FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("default:grow"), FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, }));
+		panel_choiceData.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("max(56dlu;default)"),
+				ColumnSpec.decode("default:grow"),},
+			new RowSpec[] {
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("top:default:grow"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(25dlu;default)"),}));
 
 		JLabel lbl_choiceName = new JLabel("Choice Name");
 		panel_choiceData.add(lbl_choiceName, "1, 1, left, default");
@@ -245,18 +288,48 @@ public class ChoicesPanel extends JPanel {
 		txtField_trait_weight.setEditable(false);
 		panel_traitSummary.add(txtField_trait_weight, "4, 4, fill, default");
 		txtField_trait_weight.setColumns(10);
+		
+		JLabel lblImage = new JLabel("Image");
+		panel_choiceData.add(lblImage, "1, 13");
+		
+		JButton btn_browseImage = new JButton("Browse");
+		
+		panel_choiceData.add(btn_browseImage, "2, 13, center, default");
+		
+		lbl_imageDisplay = new JLabel("");
+		panel_choiceData.add(lbl_imageDisplay, "2, 15");
 
 		JLabel lbl_reward = new JLabel("Reward:");
-		panel_choiceData.add(lbl_reward, "1, 13, left, default");
+		panel_choiceData.add(lbl_reward, "1, 17, left, default");
 
 		textField = new JTextField();
-		panel_choiceData.add(textField, "2, 13, fill, default");
+		panel_choiceData.add(textField, "2, 17, fill, default");
 		textField.setColumns(10);
 
 		JButton btn_saveChoice = new JButton("Save Choice");
 		add(btn_saveChoice, BorderLayout.NORTH);
 
 		// ================ LISTENERS ================
+		
+		// browse button pressed.
+		btn_browseImage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser fc = new JFileChooser();
+				FileFilter imageFilter = new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes());
+				fc.addChoosableFileFilter(imageFilter);
+				int result = fc.showOpenDialog(null);
+				if (result == JFileChooser.APPROVE_OPTION) {
+					String fileName = JsonBuilder.getInstance().createImageFile(fc.getSelectedFile(), selectedChoice.id);
+					if (fileName != null) {
+						selectedChoice.imageId = fileName;
+						JOptionPane.showMessageDialog(null, "Image saved successfully.");
+						updateImage();
+					} else {
+						JOptionPane.showMessageDialog(null, "Image save Error!!");
+					}
+				}
+			}
+		});
 
 		// adds a trait.
 		btn_addTrait.addMouseListener(new MouseAdapter() {

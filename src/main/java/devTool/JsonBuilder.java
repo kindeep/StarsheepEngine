@@ -82,10 +82,8 @@ public class JsonBuilder {
         }
     }
     
-    public String createImageFile(File f) {
+    public String createImageFile(File f, String id) {
     	String suffix = FilenameUtils.getExtension(f.getAbsolutePath());
-    	String id = UUID.randomUUID().toString();
-    	
     	String fileName = "img_" + id + "." + suffix;
     	String path = this.baseDir + "/assets/" + fileName;
     	

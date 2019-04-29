@@ -2,18 +2,30 @@ package devTool.panels;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
+import devTool.JsonBuilder;
 import devTool.models.EditableJob;
+import java.awt.event.ActionListener;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
 
 /**
  * 
@@ -29,8 +41,9 @@ public class JobInfoPanel extends JPanel {
 	private JTextField txtField_description;
 	private JTextField txtField_reward;
 	private JTextField txtField_headChoiceId;
-	private ChoicesGraph graph;
 	private JTextField txtField_level;
+	private ChoicesGraph graph;
+	private JLabel lbl_imageDisplay;
 
 	/**
 	 * Create the panel.
@@ -54,12 +67,31 @@ public class JobInfoPanel extends JPanel {
 			graph.setHeadChoiceId(headChoice);
 		}
 		initialize();
-
+		updateImage();
+		
 		txtField_jobName.setText(jobName);
 		txtField_jobId.setText(id);
 		txtField_description.setText(description);
 		txtField_headChoiceId.setText(headChoice);
 		txtField_level.setText(level);
+	}
+	
+	private void updateImage() {
+		lbl_imageDisplay.setIcon(null);
+		if (currJob.imageId == null) return;
+		
+		String path = JsonBuilder.getInstance().getBaseDir() + "/assets/" + currJob.imageId;
+		Image image = null;
+		try {
+			image = ImageIO.read(new File(path));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		Double factor = 200.0/image.getWidth(null);
+		image = image.getScaledInstance((int)(image.getWidth(null)*factor), (int)(image.getHeight(null)*factor), Image.SCALE_DEFAULT);
+		ImageIcon icon = new ImageIcon(image);
+		lbl_imageDisplay.setIcon(icon);
 	}
 
 	public void save() {
@@ -75,6 +107,10 @@ public class JobInfoPanel extends JPanel {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("default:grow"),},
 			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
@@ -133,6 +169,33 @@ public class JobInfoPanel extends JPanel {
 		
 		JLabel lbl_headChoice = new JLabel("Head Choice");
 		add(lbl_headChoice, "2, 10, left, default");
+		
+		JLabel lblImage = new JLabel("Image");
+		add(lblImage, "2, 16");
+		
+		JButton btnBrowse = new JButton("Browse");
+		btnBrowse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser fc = new JFileChooser();
+				FileFilter imageFilter = new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes());
+				fc.addChoosableFileFilter(imageFilter);
+				int result = fc.showOpenDialog(null);
+				if (result == JFileChooser.APPROVE_OPTION) {
+					String fileName = JsonBuilder.getInstance().createImageFile(fc.getSelectedFile(), currJob.id);
+					if (fileName != null) {
+						currJob.imageId = fileName;
+						JOptionPane.showMessageDialog(null, "Image saved successfully.");
+						updateImage();
+					} else {
+						JOptionPane.showMessageDialog(null, "Image save Error!!");
+					}
+				}
+			}
+		});
+		add(btnBrowse, "4, 16");
+		
+		lbl_imageDisplay = new JLabel("");
+		add(lbl_imageDisplay, "4, 18");
 
 		JButton btnSelectHeadChoice = new JButton("select head choice");
 		btnSelectHeadChoice.addMouseListener(new MouseAdapter() {
