@@ -64,6 +64,10 @@ public class StarFileManager {
         return getResourceStream("sample_game/traits.json");
     }
 
+    public InputStream getItemsStream() {
+        return getResourceStream("sample_game/items.json");
+    }
+
     /**
      * @param jobId
      * @return

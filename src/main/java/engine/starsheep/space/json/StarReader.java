@@ -55,7 +55,7 @@ public class StarReader {
             if (fileManager == null)
                 throw new Exception("Star file manager cannot be null in StarReader.");
 
-            InputStreamReader reader = new InputStreamReader(fileManager.getResourceStream("sample_game/items.json"));
+            InputStreamReader reader = new InputStreamReader(fileManager.getItemsStream());
             Gson gson = new Gson();
             
             return gson.fromJson(reader, ItemsModel.class);
