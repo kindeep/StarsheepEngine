@@ -29,7 +29,7 @@ public class ApplicationWindow {
 
 	private JFrame mainFrame;
 	private GameModel gameModel;
-	private JsonBuilder xml;
+	private JsonBuilder jsonBuilder;
 
 	MissionsPanel missionsPanel = null;
 	TraitsPanel traitsPanel = null;
@@ -56,20 +56,20 @@ public class ApplicationWindow {
 	 */
 	public ApplicationWindow() {
 		// set default save location.
-		xml = JsonBuilder.getInstance();
-		xml.setBaseDir(new File("."));
+		jsonBuilder = JsonBuilder.getInstance();
+		jsonBuilder.setBaseDir(new File("."));
 
 		initialize();
 	}
 
 	private void loadDirectory(File directory) {
 		GameDataManager dataManager = GameDataManager.getInstance();
-		// set as write location for xmlBuilder.
-		xml.setBaseDir(directory);
+		jsonBuilder.setBaseDir(directory);
 
-		DevFileManager wtf = DevFileManager.getInstance();
-		wtf.setBaseDirectory(directory);
-		DevStarReader.setFileManager(wtf);
+		DevFileManager fileManager = DevFileManager.getInstance();
+		fileManager.setBaseDirectory(directory);
+		
+		DevStarReader.setFileManager(fileManager);
 		dataManager.setMissionsModel(DevStarReader.readEditableMissions());
 		missionsPanel.updateMissions();
 
@@ -82,9 +82,6 @@ public class ApplicationWindow {
 		// TODO: update general panel. 
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

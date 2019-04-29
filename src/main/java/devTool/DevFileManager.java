@@ -2,13 +2,12 @@ package devTool;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 import engine.starsheep.space.StarFileManager;
 
-public class DevFileManager extends StarFileManager {
-
+public class DevFileManager implements StarFileManager {
 	private static DevFileManager instance;
 	private File baseDirectory;
 
@@ -26,19 +25,35 @@ public class DevFileManager extends StarFileManager {
 	}
 
 	public File getBaseDirectory() {
-		return instance.baseDirectory;
+		return this.baseDirectory;
+	}
+	
+	private InputStream getResourceStream(String resPath) {
+		try {
+			return new FileInputStream(resPath);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
 	public InputStream getMissionsStream() {
-		try {
-			File missionsFile = new File(instance.baseDirectory.getAbsolutePath() + "/missions.xml");
-			InputStream stream = new FileInputStream(missionsFile);
-			return stream;
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		return null;
+		return getResourceStream(baseDirectory.getAbsolutePath() + "/missions.json");
 	}
 
+	@Override
+	public InputStream getTraitsStream() {
+		return getResourceStream(baseDirectory.getAbsolutePath() + "/traits.json");
+	}
+
+	@Override
+	public InputStream getItemsStream() {
+		return getResourceStream(baseDirectory.getAbsolutePath() + "/items.json");
+	}
+
+	@Override
+	public InputStream getJobStream(String jobId) {
+		return getResourceStream(baseDirectory.getAbsolutePath() + "/jobs/j_" + jobId + ".json");
+	}
 }

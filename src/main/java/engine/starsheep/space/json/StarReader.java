@@ -2,20 +2,17 @@ package engine.starsheep.space.json;
 
 import engine.starsheep.space.Mission;
 import engine.starsheep.space.StarFileManager;
-import engine.starsheep.space.item.Item;
 import engine.starsheep.space.job.Job;
 import engine.starsheep.space.trait.Trait;
 
 import com.google.gson.Gson;
 
-import java.io.FileReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Used to read StarSheep JSON files.
+ * Used to parse StarSheep JSON files into StarSheep objects.
  * 
  * @author peakyDicers
  *
@@ -98,8 +95,7 @@ public class StarReader {
 
             Gson gson = new Gson();
             Job job = gson.fromJson(reader, Job.class);
-            // sooo apparently finalize() is deprecated.
-            job.finalize();
+            job.putChoicesInMap();
             
             return job;
 
