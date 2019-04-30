@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
@@ -40,9 +41,7 @@ import devTool.JsonBuilder;
 import devTool.models.EditableJobFlyer;
 import devTool.models.EditableMission;
 import devTool.models.GameDataManager;
-import devTool.models.MissionsModel;
-import java.awt.Canvas;
-import java.awt.Panel;
+import javax.swing.JFormattedTextField;
 
 public class MissionsPanel extends JPanel {
 
@@ -52,15 +51,13 @@ public class MissionsPanel extends JPanel {
 
 	private JTextField txtField_missionTitle;
 	private JTextField txtField_missionDescription;
-	private JTextField txtField_staminaCost;
 	private JTextField txtField_missionId;
 	private JButton btn_editJob;
 	private JButton btn_newJob;
-	private JButton btn_newMission;
 	private JLabel lbl_image;
 	private JLabel lbl_imageDisplay;
+	private JFormattedTextField txtField_staminaCost;
 
-	private ArrayListModel<EditableJobFlyer> jobListModel;
 	private ArrayListModel<EditableMission> missionListModel = null;
 	private JList<EditableMission> jList_missionList;
 	private JList<EditableJobFlyer> jList_jobList;
@@ -82,15 +79,15 @@ public class MissionsPanel extends JPanel {
 		txtField_missionTitle.setText("");
 		txtField_missionDescription.setText("");
 		txtField_staminaCost.setText("");
-		jobListModel = null;
 		btn_editJob.setEnabled(false);
 		btn_newJob.setEnabled(false);
 	}
 
 	private void updateCanvas() {
-        lbl_imageDisplay.setIcon(null);
-		if (currMission.imageId == null) return;
-		
+		lbl_imageDisplay.setIcon(null);
+		if (currMission.imageId == null)
+			return;
+
 		String path = JsonBuilder.getInstance().getBaseDir() + "/assets/" + currMission.imageId;
 		Image image = null;
 		try {
@@ -98,12 +95,13 @@ public class MissionsPanel extends JPanel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		Double factor = 200.0/image.getWidth(null);
-		image = image.getScaledInstance((int)(image.getWidth(null)*factor), (int)(image.getHeight(null)*factor), Image.SCALE_DEFAULT);
+
+		Double factor = 200.0 / image.getWidth(null);
+		image = image.getScaledInstance((int) (image.getWidth(null) * factor), (int) (image.getHeight(null) * factor),
+				Image.SCALE_DEFAULT);
 		ImageIcon icon = new ImageIcon(image);
 		lbl_imageDisplay.setIcon(icon);
-		
+
 		repaint();
 		revalidate();
 	}
@@ -133,6 +131,15 @@ public class MissionsPanel extends JPanel {
 		add(missionEditor, BorderLayout.CENTER);
 		missionEditor.setLayout(new BorderLayout(0, 0));
 		jList_missionList = new JList<EditableMission>();
+		
+		JPanel panel_saveBtn = new JPanel();
+		panel_saveBtn.setBackground(new Color(50, 205, 50));
+		missionEditor.add(panel_saveBtn, BorderLayout.NORTH);
+		
+		JButton btn_saveBtn = new JButton("Save Mission");
+		
+		btn_saveBtn.setBackground(new Color(255, 255, 255));
+		panel_saveBtn.add(btn_saveBtn);
 
 		JPanel panel_center = new JPanel();
 		missionEditor.add(panel_center, BorderLayout.CENTER);
@@ -173,9 +180,8 @@ public class MissionsPanel extends JPanel {
 		JLabel lbl_staminaCost = new JLabel("Stamina Cost:");
 		panel_form.add(lbl_staminaCost, "1, 7, left, default");
 
-		txtField_staminaCost = new JTextField();
+		txtField_staminaCost = new JFormattedTextField(NumberFormat.getIntegerInstance());
 		panel_form.add(txtField_staminaCost, "2, 7, fill, default");
-		txtField_staminaCost.setColumns(10);
 
 		lbl_image = new JLabel("Image:");
 		panel_form.add(lbl_image, "1, 9, left, default");
@@ -183,16 +189,14 @@ public class MissionsPanel extends JPanel {
 		JButton btnBrowse = new JButton("Browse");
 
 		panel_form.add(btnBrowse, "2, 9");
-		
+
 		JPanel panel_image = new JPanel();
 		missionEditor.add(panel_image, BorderLayout.SOUTH);
-		
+
 		lbl_imageDisplay = new JLabel("");
 		panel_image.add(lbl_imageDisplay);
-		Dimension d = new Dimension(100,100);
+		Dimension d = new Dimension(100, 100);
 		panel_image.setMaximumSize(d);
-
-		jobListModel = new ArrayListModel<EditableJobFlyer>();
 
 		listPanel.add(jList_missionList);
 		jList_missionList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -219,6 +223,14 @@ public class MissionsPanel extends JPanel {
 		jobBtns.add(btn_newJob);
 
 		// ==================== listeners ====================
+		
+		btn_saveBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				currMission.description = txtField_missionDescription.getText();
+				currMission.title = txtField_missionTitle.getText();
+				currMission.staminaCost = Integer.valueOf(txtField_staminaCost.getText());
+			}
+		});
 
 		// browse image.
 		btnBrowse.addActionListener(new ActionListener() {
@@ -237,14 +249,6 @@ public class MissionsPanel extends JPanel {
 						JOptionPane.showMessageDialog(null, "Image save Error!!");
 					}
 				}
-			}
-		});
-
-		txtField_missionTitle.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				currMission.title = txtField_missionTitle.getText();
-				jList_missionList.updateUI();
 			}
 		});
 
@@ -307,8 +311,8 @@ public class MissionsPanel extends JPanel {
 
 				// update job list.
 				jList_jobList.setModel(currMission.jobFlyers);
-				
-				//update canvas
+
+				// update canvas
 				updateCanvas();
 			}
 		});
