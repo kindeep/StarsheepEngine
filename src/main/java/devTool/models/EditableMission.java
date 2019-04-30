@@ -22,7 +22,7 @@ public class EditableMission {
 	public String id;
 
     @SerializedName("stamina-cost")
-	public String staminaCost;
+	public int staminaCost;
     
     @SerializedName("image-id")
 	public String imageId;

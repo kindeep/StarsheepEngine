@@ -88,7 +88,7 @@ public class MissionsPanel extends JPanel {
 	}
 
 	private void updateCanvas() {
-		lbl_imageDisplay.setIcon(null);
+        lbl_imageDisplay.setIcon(null);
 		if (currMission.imageId == null) return;
 		
 		String path = JsonBuilder.getInstance().getBaseDir() + "/assets/" + currMission.imageId;
@@ -103,6 +103,9 @@ public class MissionsPanel extends JPanel {
 		image = image.getScaledInstance((int)(image.getWidth(null)*factor), (int)(image.getHeight(null)*factor), Image.SCALE_DEFAULT);
 		ImageIcon icon = new ImageIcon(image);
 		lbl_imageDisplay.setIcon(icon);
+		
+		repaint();
+		revalidate();
 	}
 
 	public MissionsPanel() {
