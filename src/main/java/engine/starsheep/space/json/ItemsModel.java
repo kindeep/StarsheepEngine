@@ -20,7 +20,9 @@ public class ItemsModel {
     //converts list of items into hashmap and returns the map.
     public Map<String, Item> getItems() {
         Map<String, Item> result = new HashMap<>();
-        items.forEach( item -> result.put(item.getId(),  item));
+        for (Item item: items) {
+        	result.put(item.getId(), item);
+        }
         
         return Collections.unmodifiableMap(result);
     }
