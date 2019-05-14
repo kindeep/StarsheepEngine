@@ -94,6 +94,7 @@ public class MissionsPanel extends JPanel {
 			image = ImageIO.read(new File(path));
 		} catch (IOException e) {
 			e.printStackTrace();
+			return;
 		}
 
 		Double factor = 200.0 / image.getWidth(null);

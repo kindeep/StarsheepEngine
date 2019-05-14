@@ -2,25 +2,35 @@ package devTool.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.UUID;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
+import devTool.JsonBuilder;
 import devTool.models.GameDataManager;
 import devTool.models.item.EditableItem;
 import devTool.models.item.EditableTraitBoost;
@@ -37,6 +47,7 @@ public class ItemsPanel extends JPanel {
 	private JTextField txtField_itemId;
 	private EditableTraitBoost selectedTraitBoost;
 	private JTextField txtField_maxEquip;
+	private JLabel lbl_imageDisplay;
 
 	/**
 	 * Create the panel.
@@ -49,6 +60,30 @@ public class ItemsPanel extends JPanel {
 		ItemsModel itemsModel = GameDataManager.getInstance().getItemsModel();
 		jList_items.setModel(itemsModel.items);
 		txtField_maxEquip.setText(String.valueOf(itemsModel.maxEquipped));
+	}
+	
+	private void updateCanvas() {
+		lbl_imageDisplay.setIcon(null);
+		if (selectedItem.imageId == null)
+			return;
+
+		String path = JsonBuilder.getInstance().getBaseDir() + "/assets/" + selectedItem.imageId;
+		Image image = null;
+		try {
+			image = ImageIO.read(new File(path));
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
+
+		Double factor = 200.0 / image.getWidth(null);
+		image = image.getScaledInstance((int) (image.getWidth(null) * factor), (int) (image.getHeight(null) * factor),
+				Image.SCALE_DEFAULT);
+		ImageIcon icon = new ImageIcon(image);
+		lbl_imageDisplay.setIcon(icon);
+
+		repaint();
+		revalidate();
 	}
 
 	public void initialize() {
@@ -137,6 +172,7 @@ public class ItemsPanel extends JPanel {
 		txtField_itemId.setColumns(10);
 
 		JButton btn_selectImage = new JButton("Select Image");
+		
 		panel_info.add(btn_selectImage, "2, 8");
 
 		txtField_imgId = new JTextField();
@@ -150,6 +186,9 @@ public class ItemsPanel extends JPanel {
 		txtField_price = new JTextField();
 		panel_info.add(txtField_price, "6, 10, fill, default");
 		txtField_price.setColumns(10);
+		
+		lbl_imageDisplay = new JLabel("");
+		panel.add(lbl_imageDisplay);
 
 		JPanel panel_traitList = new JPanel();
 		panel.add(panel_traitList);
@@ -175,13 +214,34 @@ public class ItemsPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (selectedItem != null) {
 					selectedItem.name = txtField_itemName.getText();
-					selectedItem.imageId = txtField_imgId.getText();
 					selectedItem.description = txtField_description.getText();
 					selectedItem.price = Integer.valueOf(txtField_price.getText());
 				}
 				
 				GameDataManager.getInstance().getItemsModel().maxEquipped = Integer
 						.valueOf(txtField_maxEquip.getText());
+			}
+		});
+		
+		// selecting an image.
+		btn_selectImage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selectedItem == null) return;
+				
+				JFileChooser fc = new JFileChooser();
+				FileFilter imageFilter = new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes());
+				fc.addChoosableFileFilter(imageFilter);
+				int result = fc.showOpenDialog(null);
+				if (result == JFileChooser.APPROVE_OPTION) {
+					String fileName = JsonBuilder.getInstance().createImageFile(fc.getSelectedFile(), selectedItem.id);
+					if (fileName != null) {
+						selectedItem.imageId = fileName;
+						JOptionPane.showMessageDialog(null, "Image saved successfully.");
+						updateCanvas();
+					} else {
+						JOptionPane.showMessageDialog(null, "Image save Error!!");
+					}
+				}
 			}
 		});
 
@@ -219,6 +279,7 @@ public class ItemsPanel extends JPanel {
 				txtField_itemId.setText(selectedItem.id);
 				txtField_price.setText(String.valueOf(selectedItem.price));
 				jList_traits.setModel(selectedItem.traitBoosts);
+				updateCanvas();
 			}
 		});
 

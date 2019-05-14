@@ -1,11 +1,12 @@
 {
+  "max-equipped": 15,
   "items": [
     {
       "name": "fishing rod",
       "description": "fish fish with this fishing rod",
       "id": "a61af916-234e-4115-8d1d-1d15d854504e",
       "price": 5,
-      "image-id": "",
+      "image-id": "img_a61af916-234e-4115-8d1d-1d15d854504e.png",
       "trait-boosts": [
         {
           "trait-id": "8af7df5e-cbb1-4b90-9726-62ee5a75f938",
@@ -18,7 +19,7 @@
       "description": "grip things",
       "id": "a722a2ce-4249-4e61-8d5a-5459899229b9",
       "price": 10,
-      "image-id": "",
+      "image-id": "img_a722a2ce-4249-4e61-8d5a-5459899229b9.jpg",
       "trait-boosts": []
     },
     {
@@ -26,7 +27,7 @@
       "description": "very good laptop. ",
       "id": "c8078386-92b5-4299-95ba-c49a6fdccf66",
       "price": 200,
-      "image-id": "",
+      "image-id": "img_c8078386-92b5-4299-95ba-c49a6fdccf66.jpg",
       "trait-boosts": [
         {
           "trait-id": "6340577c-39b6-48ce-928e-ad592db5ae97",
@@ -34,6 +35,5 @@
         }
       ]
     }
-  ],
-  "max-equipped": 15
+  ]
 }

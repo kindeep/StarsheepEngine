@@ -2,7 +2,9 @@
   "missions": [
     {
       "name": "project zero",
+      "description": "21312312sdwadawfgsdfsd",
       "id": "50bb4ee6-42bb-4c60-ba3e-a5bae0ed358b",
+      "stamina-cost": 55,
       "job": [
         {
           "id": "5b55ced2-e09e-49ea-a460-14ae48c67a1f",
